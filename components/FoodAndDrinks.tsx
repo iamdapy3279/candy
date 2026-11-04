@@ -32,37 +32,6 @@ export default function FoodAndDrinks() {
   return (
     <section id="food-drinks" className="py-24 md:py-36 bg-[#f7f4f2] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-sans text-xs tracking-[0.25em] uppercase text-gold-700 font-bold block mb-3"
-          >
-            {websiteContent.foodAndDrinks.tag}
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="font-serif text-3xl sm:text-5xl font-bold text-navy-800 tracking-tight leading-tight mb-4"
-          >
-            {websiteContent.foodAndDrinks.title}
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="font-serif text-base sm:text-lg text-charcoal-800/80"
-          >
-            {websiteContent.foodAndDrinks.subtitle}
-          </motion.p>
-        </div>
-
         {/* 2-Column Stacked Carousel & Clean Editorial Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
