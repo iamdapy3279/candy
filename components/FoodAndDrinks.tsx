@@ -67,8 +67,8 @@ export default function FoodAndDrinks() {
         {/* 2-Column Stacked Carousel & Clean Editorial Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Interactive 3D Cinematic Card Deck */}
-          <div className="lg:col-span-7 flex flex-col items-center">
+          {/* Column 1: Interactive 3D Cinematic Card Deck (Order 2 on mobile, Order 1 on desktop) */}
+          <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center">
             
             {/* The 3D Stack Container (GPU-accelerated perspective) */}
             <div className="relative w-full max-w-[420px] aspect-[4/5] [perspective:1200px] select-none [transform:translateZ(0)]">
@@ -213,8 +213,8 @@ export default function FoodAndDrinks() {
 
           </div>
 
-          {/* Right Column: In-Sync Choreographed Editorial Text */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left min-h-[340px]">
+          {/* Column 2: In-Sync Choreographed Editorial Text (Order 1 on mobile, Order 2 on desktop) */}
+          <div className="order-1 lg:order-2 lg:col-span-5 flex flex-col items-start text-left min-h-[auto] lg:min-h-[340px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentDish.id}
