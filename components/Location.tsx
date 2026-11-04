@@ -296,22 +296,6 @@ export default function Location() {
                 </motion.div>
               )}
 
-              {/* Botanical Leaf Illustration Entrance (Doodle4.svg) */}
-              <motion.div
-                initial={{ opacity: 0, y: 20, rotate: -8 }}
-                whileInView={{ opacity: 0.9, y: 0, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -top-10 -left-8 sm:-left-12 w-28 sm:w-36 h-40 sm:h-52 pointer-events-none z-40"
-              >
-                <Image
-                  src="/artwork/Doodle4.svg"
-                  alt="Botanical Leaf Illustration"
-                  fill
-                  className="object-contain"
-                />
-              </motion.div>
-
             </div>
           </div>
 
