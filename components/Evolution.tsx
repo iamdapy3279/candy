@@ -35,7 +35,7 @@ export default function Evolution() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-serif text-3xl sm:text-5xl font-bold text-navy-800 tracking-wider uppercase mb-3"
+            className="font-serif italic text-3xl sm:text-5xl font-medium text-navy-800 tracking-normal mb-3"
           >
             {websiteContent.evolution.title}
           </motion.h2>
@@ -44,7 +44,7 @@ export default function Evolution() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-sans text-xs sm:text-sm tracking-[0.25em] uppercase text-navy-800/70 font-semibold"
+            className="font-sans text-xs sm:text-sm tracking-[0.22em] uppercase text-gold-700 font-semibold"
           >
             {websiteContent.evolution.tag}
           </motion.p>
@@ -86,17 +86,17 @@ export default function Evolution() {
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <span className="font-sans text-xs tracking-[0.2em] uppercase font-bold text-navy-800/70 block mb-1">
+                      <span className="font-sans text-xs tracking-[0.2em] uppercase font-semibold text-gold-700 block mb-1">
                         {milestone.title}
                       </span>
-                      <h3 className="font-serif text-lg sm:text-xl font-bold text-navy-800 mb-2">
+                      <h3 className="font-serif italic text-2xl sm:text-3xl font-medium text-navy-800 mb-2">
                         {milestone.subtitle}
                       </h3>
-                      <p className="font-serif text-sm sm:text-base text-charcoal-800/80 leading-relaxed">
+                      <p className="font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed">
                         {milestone.description}
                       </p>
                       {milestone.quote && (
-                        <p className="font-serif italic text-xs sm:text-sm text-gold-700 font-medium mt-3">
+                        <p className="font-serif italic text-base sm:text-lg text-gold-700 font-medium mt-3">
                           {milestone.quote}
                         </p>
                       )}
@@ -139,3 +139,4 @@ export default function Evolution() {
     </section>
   );
 }
+

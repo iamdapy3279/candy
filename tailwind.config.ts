@@ -10,31 +10,42 @@ const config: Config = {
     extend: {
       colors: {
         cream: {
-          50: "#fdfcfa",
-          100: "#fbf9f8",
-          200: "#f6f3f2",
-          300: "#f0eded",
-          400: "#eae8e7",
+          50: "#FCFAF7",
+          100: "#F8F3ED", // Warm ivory background
+          200: "#F2EBE1",
+          300: "#E8DCCB", // Soft beige image border
+          400: "#DECDB6",
         },
         navy: {
-          800: "#293170",
-          900: "#111a5a",
-          950: "#0b1038",
+          800: "#211714", // Deep espresso
+          900: "#1A1210",
+          950: "#150E0C", // Deep rich espresso for footer
+        },
+        espresso: {
+          800: "#2E221E",
+          900: "#211714", // Deep espresso
+          950: "#150E0C",
         },
         gold: {
-          400: "#ffdf9a",
-          500: "#fcc215",
-          600: "#f7be0c",
-          700: "#6d5200",
+          400: "#E5BE72",
+          500: "#D4A34A", // Warm champagne gold
+          600: "#C7943B",
+          700: "#B9853D", // Muted antique gold (eyebrows & labels)
         },
         charcoal: {
-          800: "#333333",
-          900: "#1b1c1c",
+          700: "#554942",
+          800: "#403630", // Soft dark brown body text
+          900: "#211714",
+        },
+        brown: {
+          700: "#554942",
+          800: "#403630",
+          900: "#211714",
         },
       },
       fontFamily: {
-        serif: ["Cinzel", "Georgia", "serif"],
-        sans: ["Inter", "-apple-system", "sans-serif"],
+        serif: ["'Cormorant Garamond'", "Georgia", "serif"],
+        sans: ["'Montserrat'", "-apple-system", "sans-serif"],
       },
       borderRadius: {
         pill: "1rem",

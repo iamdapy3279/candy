@@ -1,27 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #fbf9f8;
-  --foreground: #1b1c1c;
-  --primary-navy: #293170;
-  --accent-gold: #fcc215;
+  --background: #F8F3ED;
+  --foreground: #211714;
+  --primary-espresso: #211714;
+  --body-brown: #403630;
+  --accent-gold: #D4A34A;
+  --accent-eyebrow: #B9853D;
+  --image-border: #E8DCCB;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #fbf9f8;
-  color: #1b1c1c;
+  background-color: #F8F3ED;
+  color: #403630;
 }
 
 body {
-  background-color: #fbf9f8;
-  color: #1b1c1c;
+  background-color: #F8F3ED;
+  color: #403630;
   overflow-x: hidden;
-  font-family: 'Cinzel', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Luxury Editorial Typography Utilities */
+.philosophy-heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: #211714;
+}
+
+.philosophy-body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #403630;
+}
+
+.philosophy-label {
+  font-family: 'Montserrat', -apple-system, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #B9853D;
 }
 
 /* Custom Cathedral Arch Frame */
@@ -34,12 +65,12 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #fbf9f8;
+  background: #F8F3ED;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c7c5d1;
+  background: #E8DCCB;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #293170;
+  background: #B9853D;
 }

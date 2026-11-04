@@ -91,7 +91,7 @@ export default function LoadingScreen() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.7 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="font-serif text-xs tracking-[0.3em] uppercase text-navy-800 font-semibold mt-4"
+            className="font-sans text-[11px] tracking-[0.25em] uppercase text-navy-800 font-semibold mt-4"
           >
             Bakehouse & Bistro • Kolkata
           </motion.span>

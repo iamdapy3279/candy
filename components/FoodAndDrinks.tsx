@@ -95,7 +95,7 @@ export default function FoodAndDrinks() {
               </button>
 
               {/* Progress counter */}
-              <span className="font-serif text-sm font-semibold text-navy-800 tracking-widest px-2">
+              <span className="font-sans text-xs font-semibold text-navy-800 tracking-widest px-2">
                 0{currentIndex + 1} / 0{dishes.length}
               </span>
 
@@ -122,17 +122,17 @@ export default function FoodAndDrinks() {
                 className="flex flex-col items-center lg:items-start max-w-md"
               >
                 {/* Category Tagline */}
-                <span className="font-sans text-xs tracking-[0.25em] uppercase text-gold-700 font-bold block mb-2">
+                <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-3">
                   {currentDish.tagline}
                 </span>
 
                 {/* Dish Name */}
-                <h3 className="font-serif text-3xl sm:text-4xl font-bold text-navy-800 leading-tight mb-3">
+                <h3 className="font-serif italic text-3xl sm:text-4xl lg:text-5xl font-medium text-navy-800 leading-[1.05] tracking-[-0.02em] mb-4">
                   {currentDish.name}
                 </h3>
 
                 {/* Ingredients / Description */}
-                <p className="font-serif text-sm sm:text-base text-charcoal-800/85 mb-6">
+                <p className="font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed mb-6">
                   {currentDish.description}
                 </p>
 
@@ -141,12 +141,12 @@ export default function FoodAndDrinks() {
                   <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-auto lg:mx-0" />
 
                   {/* Editorial Highlight Quote */}
-                  <p className="font-serif text-sm sm:text-base font-semibold tracking-wider text-charcoal-800 leading-relaxed uppercase mb-3">
-                    {currentDish.doodleCaption ||
-                      "SET ON KOLKATA'S CORNERS, X&Y WELCOMES GUESTS FROM MORNING THROUGH TO LATE AFTERNOON."}
+                  <p className="font-serif italic text-base sm:text-lg font-medium text-navy-800 leading-relaxed mb-3">
+                    “{currentDish.doodleCaption ||
+                      "Set on Kolkata's corners, X&Y welcomes guests from morning through to late afternoon."}”
                   </p>
 
-                  <p className="font-sans text-xs tracking-wider text-charcoal-800/70 font-medium leading-relaxed">
+                  <p className="font-serif text-sm sm:text-base text-charcoal-800/80 leading-relaxed">
                     Every morning, our pastry and culinary team prepares each component from scratch using heirloom techniques and zero shortcuts.
                   </p>
                 </div>

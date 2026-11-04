@@ -31,7 +31,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#fbf9f8]/95 backdrop-blur-md py-4 shadow-subtle border-b border-[#eae8e7] text-navy-800"
+          ? "bg-[#F8F3ED]/95 backdrop-blur-md py-4 shadow-subtle border-b border-[#E8DCCB] text-navy-800"
           : "bg-transparent py-6 border-b border-transparent text-white"
       }`}
     >
@@ -91,7 +91,7 @@ export default function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden bg-[#fbf9f8] border-b border-cream-300 px-6 py-6 text-navy-800 shadow-xl"
+            className="md:hidden bg-[#F8F3ED] border-b border-[#E8DCCB] px-6 py-6 text-navy-800 shadow-xl"
           >
             <div className="flex flex-col gap-5">
               {navLinks.map((item) => (
@@ -101,7 +101,7 @@ export default function Header() {
                   target={item.isExternal ? "_blank" : undefined}
                   rel={item.isExternal ? "noopener noreferrer" : undefined}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`font-serif text-base tracking-widest uppercase py-2 border-b border-cream-200 ${
+                  className={`font-sans text-xs tracking-[0.2em] uppercase font-semibold py-2 border-b border-cream-200 ${
                     item.isHighlighted ? "text-gold-700 font-bold" : "text-navy-800"
                   }`}
                 >

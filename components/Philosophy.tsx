@@ -28,7 +28,7 @@ export default function Philosophy() {
                 innerBorderRadius="9999px 9999px 1.35rem 1.35rem"
                 duration={8}
                 glowIntensity="subtle"
-                beamColor="#FCC215"
+                beamColor="#D4A34A"
               >
                 <div className="relative w-full h-full overflow-hidden bg-cream-200">
                   <Image
@@ -75,23 +75,23 @@ export default function Philosophy() {
             className="lg:col-span-6 flex flex-col justify-center"
           >
             {/* Tag / Category */}
-            <span className="font-sans text-xs tracking-[0.25em] uppercase text-gold-700 font-bold mb-4">
+            <span className="philosophy-label block mb-4">
               {websiteContent.philosophy.tag}
             </span>
 
             {/* Section Headline */}
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-navy-800 leading-[1.2] mb-6">
+            <h2 className="philosophy-heading mb-6">
               {websiteContent.philosophy.title}
             </h2>
 
             {/* Philosophy Narrative */}
-            <p className="font-serif text-base sm:text-lg text-charcoal-800/85 leading-relaxed mb-8">
+            <p className="philosophy-body leading-relaxed mb-8">
               {websiteContent.philosophy.description}
             </p>
 
             <div className="h-[2px] w-16 bg-gold-500 mb-6" />
 
-            <p className="font-serif italic text-sm sm:text-base text-navy-800/80">
+            <p className="font-serif italic font-medium text-lg sm:text-xl text-[#211714]">
               “The best cafe is the one you never want to leave.”
             </p>
           </motion.div>

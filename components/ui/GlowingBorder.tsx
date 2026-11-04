@@ -21,7 +21,7 @@ export default function GlowingBorder({
   borderRadius = "1rem", // 1rem matches brand pill radius
   innerBorderRadius,
   duration = 8, // 8s calm luxury travel speed
-  beamColor = "#FCC215", // Brand Golden Yellow
+  beamColor = "#D4A34A", // Warm Champagne Gold
   glowIntensity = "subtle",
 }: GlowingBorderProps) {
   // Glow blur and opacity based on subtle brand styling
@@ -32,7 +32,7 @@ export default function GlowingBorder({
   }[glowIntensity];
 
   // Concentrated travelling beam: mostly transparent with a focused arc
-  const conicGradient = `conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(252, 194, 21, 0.25) 320deg, ${beamColor} 360deg)`;
+  const conicGradient = `conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(212, 163, 74, 0.25) 320deg, ${beamColor} 360deg)`;
 
   const effectiveInnerRadius =
     innerBorderRadius ||
@@ -88,9 +88,9 @@ export default function GlowingBorder({
         />
       </div>
 
-      {/* 3. Static Base Border Ring (Keeps a subtle outline when beam is elsewhere) */}
+      {/* 3. Static Base Border Ring (Soft beige #E8DCCB as specified in design direction) */}
       <div
-        className="absolute inset-0 border border-gold-500/15 pointer-events-none"
+        className="absolute inset-0 border border-[#E8DCCB] pointer-events-none"
         style={{ borderRadius }}
       />
 

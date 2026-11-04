@@ -22,10 +22,10 @@ export default function Location() {
         {/* Section Heading & Reusable Outlet Selector */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-navy-800/10">
           <div>
-            <span className="font-sans text-xs tracking-[0.25em] uppercase text-gold-700 font-bold block mb-3">
+            <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-3">
               FIND OUR BAKEHOUSES
             </span>
-            <h2 className="font-serif text-3xl sm:text-5xl font-bold text-navy-800 tracking-tight">
+            <h2 className="font-serif italic text-3xl sm:text-5xl font-medium text-navy-800 tracking-normal">
               Our Locations
             </h2>
           </div>
@@ -38,7 +38,7 @@ export default function Location() {
                 <button
                   key={loc.id}
                   onClick={() => setSelectedId(loc.id)}
-                  className={`font-serif text-sm sm:text-base px-5 py-2.5 rounded-full transition-all duration-300 font-semibold whitespace-nowrap ${
+                  className={`font-sans text-xs sm:text-sm tracking-wider uppercase px-6 py-2.5 rounded-full transition-all duration-300 font-semibold whitespace-nowrap ${
                     isActive
                       ? "bg-navy-800 text-gold-500 shadow-md scale-105"
                       : "bg-cream-200 text-charcoal-800/70 hover:bg-cream-300 hover:text-navy-800"
@@ -69,10 +69,10 @@ export default function Location() {
                   <span className="font-sans text-xs tracking-[0.2em] uppercase text-navy-800/60 font-semibold">
                     {activeLocation.area}
                   </span>
-                  <h3 className="font-serif text-3xl sm:text-4xl font-bold text-navy-800 mt-1 mb-4">
+                  <h3 className="font-serif italic text-3xl sm:text-4xl font-medium text-navy-800 mt-1 mb-4">
                     {activeLocation.name}
                   </h3>
-                  <p className="font-serif text-base text-charcoal-800/85 leading-relaxed">
+                  <p className="font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed">
                     {activeLocation.description}
                   </p>
                 </div>
