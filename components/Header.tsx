@@ -37,8 +37,8 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between">
         
-        {/* Left: Brand Text Logo (Reference Image Typography) */}
-        <Link href="/" className="group flex items-center">
+        {/* Left: Brand Text Logo (Hidden on Mobile, Visible on Desktop) */}
+        <Link href="/" className="hidden md:flex items-center group">
           <span
             className={`font-serif text-xl sm:text-2xl font-bold tracking-[0.18em] uppercase transition-colors duration-300 ${
               scrolled ? "text-navy-800" : "text-white drop-shadow-sm"
@@ -71,10 +71,10 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Mobile Hamburger Toggle */}
+        {/* Mobile Hamburger Toggle (Right-aligned on mobile) */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className={`md:hidden p-2 rounded-lg transition-colors ${
+          className={`md:hidden ml-auto p-2 rounded-lg transition-colors ${
             scrolled ? "text-navy-800 hover:bg-cream-200" : "text-white hover:bg-white/10"
           }`}
           aria-label="Toggle Navigation Menu"
