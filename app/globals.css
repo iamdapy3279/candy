@@ -55,6 +55,23 @@ body {
   color: #B9853D;
 }
 
+/* GPU-Composited Hardware Accelerated Light Beam Animation */
+@keyframes spinLightBeam {
+  from {
+    transform: rotate(0deg) translateZ(0);
+  }
+  to {
+    transform: rotate(360deg) translateZ(0);
+  }
+}
+
+.animate-spin-light-beam {
+  animation: spinLightBeam var(--beam-duration, 8s) linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 /* Custom Cathedral Arch Frame */
 .arch-frame {
   border-radius: 9999px 9999px 1.5rem 1.5rem;

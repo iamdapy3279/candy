@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 
 interface GlowingBorderProps {
   children: React.ReactNode;
@@ -46,49 +45,38 @@ export default function GlowingBorder({
       style={
         {
           "--border-width": `${borderWidth}px`,
+          "--beam-duration": `${duration}s`,
           borderRadius,
         } as React.CSSProperties
       }
     >
-      {/* 1. Ambient Soft Glow Layer (Blurred around the edge) */}
+      {/* 1. Ambient Soft Glow Layer (Hardware-accelerated) */}
       <div
         className={`absolute -inset-[1px] overflow-hidden pointer-events-none ${glowConfig.blur} ${glowConfig.opacity}`}
         style={{ borderRadius }}
       >
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{
-            repeat: Infinity,
-            duration,
-            ease: "linear",
-          }}
-          className="w-[200%] h-[200%] -left-[50%] -top-[50%] absolute origin-center pointer-events-none"
+        <div
+          className="w-[200%] h-[200%] -left-[50%] -top-[50%] absolute origin-center pointer-events-none animate-spin-light-beam"
           style={{
             background: conicGradient,
           }}
         />
       </div>
 
-      {/* 2. Sharp Travelling Light Beam Layer */}
+      {/* 2. Sharp Travelling Light Beam Layer (Hardware-accelerated) */}
       <div
         className="absolute inset-0 overflow-hidden pointer-events-none"
         style={{ borderRadius }}
       >
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{
-            repeat: Infinity,
-            duration,
-            ease: "linear",
-          }}
-          className="w-[200%] h-[200%] -left-[50%] -top-[50%] absolute origin-center pointer-events-none"
+        <div
+          className="w-[200%] h-[200%] -left-[50%] -top-[50%] absolute origin-center pointer-events-none animate-spin-light-beam"
           style={{
             background: conicGradient,
           }}
         />
       </div>
 
-      {/* 3. Static Base Border Ring (Soft beige #E8DCCB as specified in design direction) */}
+      {/* 3. Static Base Border Ring (Soft beige #E8DCCB) */}
       <div
         className="absolute inset-0 border border-[#E8DCCB] pointer-events-none"
         style={{ borderRadius }}
@@ -99,6 +87,7 @@ export default function GlowingBorder({
         className="relative z-10 w-full h-full overflow-hidden bg-cream-200 shadow-xl"
         style={{
           borderRadius: effectiveInnerRadius,
+          transform: "translateZ(0)",
         }}
       >
         {children}

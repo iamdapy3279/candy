@@ -23,7 +23,7 @@ export default function FoodAndDrinks() {
     setTimeout(() => {
       setExitingDish(null);
       setIsAnimating(false);
-    }, 750);
+    }, 450);
   };
 
   const handlePrev = () => {
@@ -35,13 +35,13 @@ export default function FoodAndDrinks() {
     setTimeout(() => {
       setExitingDish(null);
       setIsAnimating(false);
-    }, 750);
+    }, 450);
   };
 
   const handlePanEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (info.offset.x < -40) {
+    if (info.offset.x < -35) {
       handleNext();
-    } else if (info.offset.x > 40) {
+    } else if (info.offset.x > 35) {
       handlePrev();
     }
   };
@@ -52,6 +52,20 @@ export default function FoodAndDrinks() {
 
   return (
     <section id="food-drinks" className="py-24 md:py-36 bg-cream-100 relative overflow-hidden">
+      {/* Preload all 5 dish images in DOM cache for instant, zero-latency transitions */}
+      <div className="hidden pointer-events-none" aria-hidden="true">
+        {dishes.map((dish) => (
+          <Image
+            key={`preload-${dish.id}`}
+            src={dish.image}
+            alt="preload"
+            width={420}
+            height={525}
+            priority
+          />
+        ))}
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
         {/* 2-Column Stacked Carousel & Clean Editorial Content */}
@@ -60,17 +74,17 @@ export default function FoodAndDrinks() {
           {/* Left Column: Interactive 3D Cinematic Card Deck */}
           <div className="lg:col-span-7 flex flex-col items-center">
             
-            {/* The 3D Stack Container (1200px perspective) */}
-            <div className="relative w-full max-w-[420px] aspect-[4/5] [perspective:1200px] select-none">
+            {/* The 3D Stack Container (GPU-accelerated perspective) */}
+            <div className="relative w-full max-w-[420px] aspect-[4/5] [perspective:1200px] select-none [transform:translateZ(0)]">
               
               {/* Slot 2: Deepest Background Photograph (Third dish) */}
-              <motion.div
-                key={`back-${(currentIndex + 2) % dishes.length}`}
-                initial={{ opacity: 0, scale: 0.88, x: 26, y: 15 }}
-                animate={{ opacity: 0.65, scale: 0.925, x: 26, y: 15, rotate: 4.5 }}
-                transition={{ type: "spring", stiffness: 160, damping: 22 }}
-                className="absolute inset-0 rounded-2xl overflow-hidden border border-[#E8DCCB] shadow-md bg-cream-200 pointer-events-none"
-                style={{ zIndex: 10 }}
+              <div
+                className="absolute inset-0 rounded-2xl overflow-hidden border border-[#E8DCCB] shadow-md bg-cream-200 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                style={{
+                  zIndex: 10,
+                  transform: "translate3d(24px, 14px, 0) scale(0.925) rotate(4deg)",
+                  opacity: 0.65,
+                }}
               >
                 <Image
                   src={thirdDish.image}
@@ -80,16 +94,16 @@ export default function FoodAndDrinks() {
                   sizes="(max-width: 768px) 100vw, 420px"
                 />
                 <div className="absolute inset-0 bg-[#211714]/15" />
-              </motion.div>
+              </div>
 
               {/* Slot 1: Midground Background Photograph (Second dish) */}
-              <motion.div
-                key={`middle-${(currentIndex + 1) % dishes.length}`}
-                initial={{ opacity: 0.65, scale: 0.925, x: 26, y: 15, rotate: 4.5 }}
-                animate={{ opacity: 0.88, scale: 0.965, x: 14, y: 8, rotate: 2.5 }}
-                transition={{ type: "spring", stiffness: 160, damping: 22 }}
-                className="absolute inset-0 rounded-2xl overflow-hidden border border-[#E8DCCB] shadow-lg bg-cream-200 pointer-events-none"
-                style={{ zIndex: 20 }}
+              <div
+                className="absolute inset-0 rounded-2xl overflow-hidden border border-[#E8DCCB] shadow-lg bg-cream-200 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                style={{
+                  zIndex: 20,
+                  transform: "translate3d(12px, 7px, 0) scale(0.965) rotate(2deg)",
+                  opacity: 0.88,
+                }}
               >
                 <Image
                   src={secondDish.image}
@@ -99,17 +113,17 @@ export default function FoodAndDrinks() {
                   sizes="(max-width: 768px) 100vw, 420px"
                 />
                 <div className="absolute inset-0 bg-[#211714]/10" />
-              </motion.div>
+              </div>
 
               {/* Active Foreground Photograph with Spring Handling & Glowing Travelling Light Beam */}
               <motion.div
                 key={`front-${currentDish.id}`}
                 initial={{
-                  opacity: 0.88,
+                  opacity: 0.85,
                   scale: 0.965,
-                  x: direction > 0 ? 14 : -14,
-                  y: direction > 0 ? 8 : -8,
-                  rotate: direction > 0 ? 2.5 : -2.5,
+                  x: direction > 0 ? 12 : -12,
+                  y: direction > 0 ? 7 : -7,
+                  rotate: direction > 0 ? 2 : -2,
                 }}
                 animate={{
                   opacity: 1,
@@ -119,65 +133,51 @@ export default function FoodAndDrinks() {
                   rotate: 0,
                 }}
                 transition={{
-                  type: "spring",
-                  stiffness: 160,
-                  damping: 22,
-                  mass: 0.85,
+                  duration: 0.45,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
-                className="absolute inset-0 z-30 cursor-pointer"
+                className="absolute inset-0 z-30 cursor-pointer [transform:translateZ(0)] will-change-transform"
                 onClick={handleNext}
                 onPanEnd={handlePanEnd}
               >
-                {/* Subtle 3D Floating Idle Motion */}
-                <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{
-                    duration: 4.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="w-full h-full"
+                <GlowingBorder
+                  className="w-full h-full shadow-2xl"
+                  borderWidth={2}
+                  borderRadius="1rem"
+                  duration={8}
+                  glowIntensity="subtle"
+                  beamColor="#D4A34A"
                 >
-                  <GlowingBorder
-                    className="w-full h-full shadow-2xl"
-                    borderWidth={2}
-                    borderRadius="1rem"
-                    duration={8}
-                    glowIntensity="subtle"
-                    beamColor="#D4A34A"
-                  >
-                    <div className="relative w-full h-full overflow-hidden bg-cream-200">
-                      <Image
-                        src={currentDish.image}
-                        alt={currentDish.name}
-                        fill
-                        className="object-cover select-none pointer-events-none transition-transform duration-700 hover:scale-105"
-                        priority
-                        sizes="(max-width: 768px) 100vw, 420px"
-                      />
-                    </div>
-                  </GlowingBorder>
-                </motion.div>
+                  <div className="relative w-full h-full overflow-hidden bg-cream-200">
+                    <Image
+                      src={currentDish.image}
+                      alt={currentDish.name}
+                      fill
+                      className="object-cover select-none pointer-events-none transition-transform duration-500 hover:scale-105"
+                      priority
+                      sizes="(max-width: 768px) 100vw, 420px"
+                    />
+                  </div>
+                </GlowingBorder>
               </motion.div>
 
-              {/* Exiting Card: Physically lifts, tilts, and sweeps behind the stack */}
+              {/* Exiting Card: Physically lifts, tilts, and sweeps smoothly away */}
               {exitingDish && (
                 <motion.div
                   key={`exiting-${exitingDish.id}`}
                   initial={{ scale: 1, x: 0, y: 0, rotate: 0, opacity: 1 }}
                   animate={{
-                    x: direction > 0 ? [0, 80, 26] : [0, -80, -26],
-                    y: [0, -25, 15],
-                    rotate: direction > 0 ? [0, 6, 4] : [0, -6, -4],
-                    scale: [1, 1.03, 0.92],
-                    opacity: [1, 0.95, 0],
+                    x: direction > 0 ? 70 : -70,
+                    y: -18,
+                    rotate: direction > 0 ? 5 : -5,
+                    scale: 0.94,
+                    opacity: 0,
                   }}
                   transition={{
-                    duration: 0.75,
-                    times: [0, 0.35, 1],
-                    ease: [0.32, 0.72, 0, 1],
+                    duration: 0.45,
+                    ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="absolute inset-0 z-40 pointer-events-none rounded-2xl overflow-hidden shadow-2xl bg-cream-200"
+                  className="absolute inset-0 z-40 pointer-events-none rounded-2xl overflow-hidden shadow-2xl bg-cream-200 [transform:translateZ(0)] will-change-transform"
                 >
                   <Image
                     src={exitingDish.image}
@@ -196,20 +196,20 @@ export default function FoodAndDrinks() {
               <button
                 onClick={handlePrev}
                 aria-label="Previous signature dish"
-                className="w-12 h-12 rounded-full border border-[#211714]/20 bg-white hover:bg-gold-500 hover:border-gold-500 text-navy-800 transition-all duration-300 flex items-center justify-center shadow-sm hover:shadow active:scale-90"
+                className="w-12 h-12 rounded-full border border-[#211714]/20 bg-white hover:bg-gold-500 hover:border-gold-500 text-navy-800 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow active:scale-95"
               >
                 <ArrowLeft size={18} />
               </button>
 
               {/* Progress counter */}
-              <span className="font-sans text-xs font-semibold text-navy-800 tracking-widest px-2">
+              <span className="font-sans text-xs font-semibold text-navy-800 tracking-widest px-2 select-none">
                 0{currentIndex + 1} / 0{dishes.length}
               </span>
 
               <button
                 onClick={handleNext}
                 aria-label="Next signature dish"
-                className="w-12 h-12 rounded-full border border-[#211714]/20 bg-white hover:bg-gold-500 hover:border-gold-500 text-navy-800 transition-all duration-300 flex items-center justify-center shadow-sm hover:shadow active:scale-90"
+                className="w-12 h-12 rounded-full border border-[#211714]/20 bg-white hover:bg-gold-500 hover:border-gold-500 text-navy-800 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow active:scale-95"
               >
                 <ArrowRight size={18} />
               </button>
@@ -218,14 +218,14 @@ export default function FoodAndDrinks() {
           </div>
 
           {/* Right Column: In-Sync Choreographed Editorial Text */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left min-h-[360px]">
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left min-h-[340px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentDish.id}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 className="flex flex-col items-center lg:items-start max-w-md w-full"
               >
                 {/* 1. Category Tagline */}
