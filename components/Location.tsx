@@ -1,25 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Clock, MapPin, Phone, ExternalLink } from "lucide-react";
 import { websiteContent, LocationItem } from "@/lib/content";
+import GlowingBorder from "@/components/ui/GlowingBorder";
 
 export default function Location() {
-  const [selectedId, setSelectedId] = useState<string>(websiteContent.locations[0].id);
+  const locations = websiteContent.locations;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [exitingLocation, setExitingLocation] = useState<LocationItem | null>(null);
 
-  const activeLocation =
-    websiteContent.locations.find((loc) => loc.id === selectedId) ||
-    websiteContent.locations[0];
+  // Auto-switch between the two locations every 4 seconds without pressing any buttons
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setExitingLocation(locations[currentIndex]);
+      setCurrentIndex((prev) => (prev + 1) % locations.length);
+      setTimeout(() => {
+        setExitingLocation(null);
+      }, 500);
+    }, 4500);
+
+    return () => clearInterval(timer);
+  }, [currentIndex, locations]);
+
+  const currentLocation = locations[currentIndex];
+  const otherLocation = locations[(currentIndex + 1) % locations.length];
 
   return (
     <section id="locations" className="py-24 md:py-36 bg-cream-100 relative overflow-hidden">
-      
-      {/* Background Decorative Subtle Texture / Element */}
+      {/* In-memory preload of both location images for instant, zero-latency switching */}
+      <div className="hidden pointer-events-none" aria-hidden="true">
+        {locations.map((loc) => (
+          <Image
+            key={`preload-${loc.id}`}
+            src={loc.image}
+            alt="preload"
+            width={480}
+            height={360}
+            priority
+          />
+        ))}
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
-        {/* Section Heading & Reusable Outlet Selector with Seamless Transparent Kolkata Illustration */}
+        {/* Section Heading & Status Labels with Seamless Transparent Kolkata Illustration */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 pb-6 border-b border-[#211714]/10 gap-6">
           <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-8">
             <div>
@@ -43,55 +70,57 @@ export default function Location() {
             </div>
           </div>
 
-          {/* Reusable Outlet Navigation Tabs */}
-          <div className="flex items-center gap-2 mt-4 lg:mt-0 overflow-x-auto pb-2 lg:pb-0 shrink-0">
-            {websiteContent.locations.map((loc) => {
-              const isActive = loc.id === selectedId;
+          {/* Clean Informational Labels (Auto-switches automatically — No button press required) */}
+          <div className="flex items-center gap-3 mt-4 lg:mt-0 pb-2 lg:pb-0 shrink-0">
+            {locations.map((loc, idx) => {
+              const isActive = idx === currentIndex;
               return (
-                <button
+                <div
                   key={loc.id}
-                  onClick={() => setSelectedId(loc.id)}
-                  className={`font-sans text-xs sm:text-sm tracking-wider uppercase px-6 py-2.5 rounded-full transition-all duration-300 font-semibold whitespace-nowrap ${
+                  className={`flex items-center gap-2 font-sans text-xs tracking-[0.2em] uppercase font-semibold px-5 py-2.5 rounded-full transition-all duration-500 select-none ${
                     isActive
                       ? "bg-navy-800 text-gold-500 shadow-md scale-105"
-                      : "bg-cream-200 text-charcoal-800/70 hover:bg-cream-300 hover:text-navy-800"
+                      : "bg-cream-200 text-charcoal-800/60"
                   }`}
                 >
-                  {loc.name}
-                </button>
+                  {isActive && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-gold-500 animate-pulse" />
+                  )}
+                  <span>{loc.name}</span>
+                </div>
               );
             })}
           </div>
         </div>
 
-        {/* Main 2-Column Content: Information on Left, Layered Image & Botanical Leaf on Right */}
+        {/* Main 2-Column Content: In-Sync Choreographed Information on Left, 3D Stacked Card on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Location Information */}
-          <div className="lg:col-span-6">
+          {/* Left Column: Location Information (Auto-updates smoothly in lockstep with the card) */}
+          <div className="lg:col-span-6 min-h-[380px]">
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeLocation.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.4 }}
+                key={currentLocation.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="space-y-6"
               >
                 <div>
                   <span className="font-sans text-xs tracking-[0.2em] uppercase text-navy-800/60 font-semibold">
-                    {activeLocation.area}
+                    {currentLocation.area}
                   </span>
                   <h3 className="font-serif italic text-3xl sm:text-4xl font-medium text-navy-800 mt-1 mb-4">
-                    {activeLocation.name}
+                    {currentLocation.name}
                   </h3>
                   {/* Desktop Description */}
                   <p className="hidden md:block font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed">
-                    {activeLocation.description}
+                    {currentLocation.description}
                   </p>
                   {/* Mobile Description: Maximum 2 lines */}
                   <p className="md:hidden font-serif text-sm text-charcoal-800 leading-snug line-clamp-2">
-                    {activeLocation.mobileDescription || activeLocation.description}
+                    {currentLocation.mobileDescription || currentLocation.description}
                   </p>
                 </div>
 
@@ -107,7 +136,7 @@ export default function Location() {
                         Address
                       </span>
                       <p className="font-serif text-sm sm:text-base text-navy-800 font-medium">
-                        {activeLocation.address}
+                        {currentLocation.address}
                       </p>
                     </div>
                   </div>
@@ -122,7 +151,7 @@ export default function Location() {
                         Opening Hours
                       </span>
                       <p className="font-serif text-sm sm:text-base text-navy-800 font-medium">
-                        {activeLocation.hours}
+                        {currentLocation.hours}
                       </p>
                     </div>
                   </div>
@@ -137,19 +166,19 @@ export default function Location() {
                         Telephone
                       </span>
                       <a
-                        href={`tel:${activeLocation.phone.replace(/\s+/g, "")}`}
+                        href={`tel:${currentLocation.phone.replace(/\s+/g, "")}`}
                         className="font-serif text-sm sm:text-base text-navy-800 font-medium hover:text-gold-700 transition-colors"
                       >
-                        {activeLocation.displayPhone}
+                        {currentLocation.displayPhone}
                       </a>
                     </div>
                   </div>
                 </div>
 
                 {/* CTAs */}
-                <div className="flex flex-wrap items-center gap-4 pt-6">
+                <div className="flex flex-wrap items-center gap-4 pt-4">
                   <a
-                    href={activeLocation.mapsUrl}
+                    href={currentLocation.mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-wider font-bold px-7 py-3.5 rounded-full bg-gold-500 text-navy-950 hover:bg-gold-600 transition-all duration-300 shadow-sm hover:shadow active:scale-95"
@@ -159,7 +188,7 @@ export default function Location() {
                   </a>
 
                   <a
-                    href={`tel:${activeLocation.phone.replace(/\s+/g, "")}`}
+                    href={`tel:${currentLocation.phone.replace(/\s+/g, "")}`}
                     className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-wider font-semibold px-7 py-3.5 rounded-full border border-navy-800/30 text-navy-800 hover:bg-navy-800 hover:text-white transition-all duration-300 active:scale-95"
                   >
                     <span>Call Outlet</span>
@@ -170,41 +199,110 @@ export default function Location() {
             </AnimatePresence>
           </div>
 
-          {/* Right Column: Layered Photograph & Botanical Leaf Illustration */}
+          {/* Right Column: 3D Stacked Card with Glowing Travelling Light Beam Border */}
           <div className="lg:col-span-6 relative flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[480px] aspect-[4/3] sm:aspect-[4/3]">
+            
+            {/* The 3D Stack Container (GPU-accelerated perspective) */}
+            <div className="relative w-full max-w-[480px] aspect-[4/3] [perspective:1200px] select-none [transform:translateZ(0)]">
               
-              {/* Layered Image Background Offset (approved design) */}
-              <div className="absolute -inset-3 sm:-inset-4 rounded-2xl bg-cream-300/80 -rotate-2 transform translate-x-3 translate-y-3 pointer-events-none" />
+              {/* Layered Background Photograph (The other location) */}
+              <div
+                className="absolute inset-0 rounded-2xl overflow-hidden border border-[#E8DCCB] shadow-lg bg-cream-200 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                style={{
+                  zIndex: 10,
+                  transform: "translate3d(14px, 8px, 0) scale(0.965) rotate(2deg)",
+                  opacity: 0.85,
+                }}
+              >
+                <Image
+                  src={otherLocation.image}
+                  alt={otherLocation.name}
+                  fill
+                  className="object-cover brightness-95"
+                  sizes="(max-width: 768px) 100vw, 480px"
+                />
+                <div className="absolute inset-0 bg-[#211714]/10" />
+              </div>
 
-              {/* Main Restaurant Photograph */}
-              <AnimatePresence mode="wait">
+              {/* Active Foreground Location Card with Continuous Glowing Travelling Light Beam Border */}
+              <motion.div
+                key={`front-${currentLocation.id}`}
+                initial={{
+                  opacity: 0.85,
+                  scale: 0.965,
+                  x: 12,
+                  y: 7,
+                  rotate: 2,
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  x: 0,
+                  y: 0,
+                  rotate: 0,
+                }}
+                transition={{
+                  duration: 0.45,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="absolute inset-0 z-20 [transform:translateZ(0)] will-change-transform"
+              >
+                <GlowingBorder
+                  className="w-full h-full shadow-2xl"
+                  borderWidth={2}
+                  borderRadius="1rem"
+                  duration={8}
+                  glowIntensity="subtle"
+                  beamColor="#D4A34A"
+                >
+                  <div className="relative w-full h-full overflow-hidden bg-cream-200">
+                    <Image
+                      src={currentLocation.image}
+                      alt={`${currentLocation.name} X&Y Bakehouse`}
+                      fill
+                      className="object-cover select-none pointer-events-none transition-transform duration-500 hover:scale-105"
+                      priority
+                      sizes="(max-width: 768px) 100vw, 480px"
+                    />
+                  </div>
+                </GlowingBorder>
+              </motion.div>
+
+              {/* Exiting Card: Physically lifts, tilts, and sweeps smoothly away */}
+              {exitingLocation && (
                 <motion.div
-                  key={activeLocation.id}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.6 }}
-                  className="relative w-full h-full rounded-2xl overflow-hidden shadow-elevated border-4 border-white bg-white z-10"
+                  key={`exiting-${exitingLocation.id}`}
+                  initial={{ scale: 1, x: 0, y: 0, rotate: 0, opacity: 1 }}
+                  animate={{
+                    x: 65,
+                    y: -18,
+                    rotate: 4,
+                    scale: 0.94,
+                    opacity: 0,
+                  }}
+                  transition={{
+                    duration: 0.45,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="absolute inset-0 z-30 pointer-events-none rounded-2xl overflow-hidden shadow-2xl bg-cream-200 [transform:translateZ(0)] will-change-transform"
                 >
                   <Image
-                    src={activeLocation.image}
-                    alt={`${activeLocation.name} X&Y Bakehouse`}
+                    src={exitingLocation.image}
+                    alt={exitingLocation.name}
                     fill
-                    className="object-cover object-center transition-transform duration-700 hover:scale-105"
-                    priority
+                    className="object-cover"
                     sizes="(max-width: 768px) 100vw, 480px"
                   />
                 </motion.div>
-              </AnimatePresence>
+              )}
 
               {/* Botanical Leaf Illustration Entrance (Doodle4.svg) */}
               <motion.div
-                initial={{ opacity: 0, y: 30, rotate: -10 }}
+                initial={{ opacity: 0, y: 20, rotate: -8 }}
                 whileInView={{ opacity: 0.9, y: 0, rotate: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -top-12 -left-10 sm:-left-16 w-32 sm:w-44 h-48 sm:h-64 pointer-events-none z-20"
+                transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute -top-10 -left-8 sm:-left-12 w-28 sm:w-36 h-40 sm:h-52 pointer-events-none z-40"
               >
                 <Image
                   src="/artwork/Doodle4.svg"
@@ -223,4 +321,3 @@ export default function Location() {
     </section>
   );
 }
-
