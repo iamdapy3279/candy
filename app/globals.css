@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #fbf9f8;
+  --foreground: #1b1c1c;
+  --primary-navy: #293170;
+  --accent-gold: #fcc215;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #fbf9f8;
+  color: #1b1c1c;
+}
+
+body {
+  background-color: #fbf9f8;
+  color: #1b1c1c;
+  overflow-x: hidden;
+  font-family: var(--font-cinzel), Georgia, serif;
+}
+
+/* Custom Cathedral Arch Frame */
+.arch-frame {
+  border-radius: 9999px 9999px 1.5rem 1.5rem;
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fbf9f8;
+}
+::-webkit-scrollbar-thumb {
+  background: #c7c5d1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #293170;
+}

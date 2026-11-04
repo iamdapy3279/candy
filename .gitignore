@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+.DS_Store
+*.log
+.env*.local
+
+# Root media files duplicated in public/
+/Desktop1.mp4
+/Mobile1-2.mp4
+
