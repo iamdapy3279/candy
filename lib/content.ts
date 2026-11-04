@@ -177,14 +177,6 @@ export const websiteContent = {
         subtitle: "Sector 2 — Salt Lake",
         description:
           "Bringing the beloved Alipore experience to Salt Lake without altering a single recipe. The same hollandaise, the same warmth, allowing more people across the city to find us.",
-      },
-      {
-        year: "2026",
-        badge: "26",
-        title: "JULY 2025 / 2026",
-        subtitle: "The Heart of the City — Hungerford Street",
-        description:
-          "Opening on Hungerford Street / Elgin Road — close to schools, colleges, and offices. The natural meeting spot to decompress after class, stretch a lunch break, or linger into the evening.",
         isLatest: true,
       },
     ],
@@ -217,19 +209,6 @@ export const websiteContent = {
       description: "An intimate, calm bistro corner in Salt Lake tailored for leisurely lunches, business catch-ups, and slow coffee.",
       mapsUrl: "https://maps.google.com/?q=CG-220+Sector+2+Salt+Lake+City+Kolkata+700091",
     },
-    {
-      id: "hungerford",
-      name: "Hungerford Street",
-      area: "Elgin Road",
-      address: "10E, Hungerford St, Elgin, Kolkata, West Bengal 700017",
-      hours: "8:00 AM – 10:00 PM",
-      phone: "+91 82403 94550",
-      displayPhone: "+91 82403 94550",
-      image: "/locations/Allipore_Location2.webp",
-      secondaryImage: "/locations/Allipore_Location.webp",
-      description: "Central Kolkata's favorite gathering spot. Grab a morning espresso or sink into a booth for an unhurried dinner.",
-      mapsUrl: "https://maps.google.com/?q=10E+Hungerford+St+Elgin+Kolkata+700017",
-    },
   ],
 
   footer: {
@@ -254,3 +233,4 @@ export const websiteContent = {
     ],
   },
 };
+
