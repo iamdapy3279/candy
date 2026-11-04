@@ -136,18 +136,20 @@ export default function FoodAndDrinks() {
                   {currentDish.description}
                 </p>
 
-                {/* Gold Accent Divider */}
-                <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-auto lg:mx-0" />
+                {/* Gold Accent Divider and Editorial Quotes - Hidden on mobile, visible on desktop/tablet */}
+                <div className="hidden md:block">
+                  <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-auto lg:mx-0" />
 
-                {/* Editorial Highlight Quote */}
-                <p className="font-serif text-sm sm:text-base font-semibold tracking-wider text-charcoal-800 leading-relaxed uppercase mb-3">
-                  {currentDish.doodleCaption ||
-                    "SET ON KOLKATA'S CORNERS, X&Y WELCOMES GUESTS FROM MORNING THROUGH TO LATE AFTERNOON."}
-                </p>
+                  {/* Editorial Highlight Quote */}
+                  <p className="font-serif text-sm sm:text-base font-semibold tracking-wider text-charcoal-800 leading-relaxed uppercase mb-3">
+                    {currentDish.doodleCaption ||
+                      "SET ON KOLKATA'S CORNERS, X&Y WELCOMES GUESTS FROM MORNING THROUGH TO LATE AFTERNOON."}
+                  </p>
 
-                <p className="font-sans text-xs tracking-wider text-charcoal-800/70 font-medium leading-relaxed">
-                  Every morning, our pastry and culinary team prepares each component from scratch using heirloom techniques and zero shortcuts.
-                </p>
+                  <p className="font-sans text-xs tracking-wider text-charcoal-800/70 font-medium leading-relaxed">
+                    Every morning, our pastry and culinary team prepares each component from scratch using heirloom techniques and zero shortcuts.
+                  </p>
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
