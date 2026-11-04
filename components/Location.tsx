@@ -44,15 +44,18 @@ export default function Location() {
         
         {/* Section Heading & Prominent Kolkata Architectural Illustration */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 md:mb-12 pb-6 border-b border-[#211714]/10 gap-6 lg:gap-8">
-          {/* Kolkata Architectural Illustration (Above header on mobile: order-1, on the right for desktop: lg:order-2) */}
-          <div className="order-1 lg:order-2 relative w-full max-w-[340px] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[620px] xl:max-w-[680px] aspect-[1024/436] shrink-0 pointer-events-none select-none mx-auto lg:mx-0 lg:ml-auto self-center lg:self-end">
-            <Image
-              src="/locations/KolkataMonumentTransparent.png"
-              alt="Two neighbourhoods in Kolkata — Salt Lake and Alipore"
-              fill
-              className="object-contain object-bottom lg:object-right-bottom"
-              priority
-            />
+          {/* Kolkata Architectural Illustration (Above header on mobile, spanning full width with breathing room, centered) */}
+          <div className="order-1 lg:order-2 w-full flex justify-center items-center my-3 mb-6 sm:my-5 sm:mb-8 lg:my-0 lg:w-auto lg:ml-auto shrink-0">
+            <div className="relative w-full max-w-[480px] sm:max-w-[560px] lg:max-w-[640px] xl:max-w-[680px] aspect-[1024/436] pointer-events-none select-none">
+              <Image
+                src="/locations/KolkataMonumentTransparent.png"
+                alt="Two neighbourhoods in Kolkata — Salt Lake and Alipore"
+                fill
+                className="object-contain object-center lg:object-right-bottom"
+                priority
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 560px, 680px"
+              />
+            </div>
           </div>
 
           {/* Editorial Typography (Below illustration on mobile: order-2, on the left for desktop: lg:order-1) */}
