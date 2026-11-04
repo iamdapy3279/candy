@@ -14,40 +14,75 @@ export default function Location() {
     websiteContent.locations[0];
 
   return (
-    <section id="locations" className="py-24 md:py-36 bg-[#fbf9f8] relative overflow-hidden">
+    <section id="locations" className="py-24 md:py-36 bg-cream-100 relative overflow-hidden">
       
       {/* Background Decorative Subtle Texture / Element */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
-        {/* Section Heading & Reusable Outlet Selector */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-navy-800/10">
-          <div>
-            <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-3">
-              FIND OUR BAKEHOUSES
-            </span>
-            <h2 className="font-serif italic text-3xl sm:text-5xl font-medium text-navy-800 tracking-normal">
-              Our Locations
-            </h2>
+        {/* Section Header: Interactive Kolkata Victoria Memorial & 2 Locations Banner */}
+        <div className="mb-14 pb-8 border-b border-[#211714]/10">
+          
+          {/* Top Architectural Banner Graphic with Clickable Pin Hotspots */}
+          <div className="relative w-full rounded-2xl overflow-hidden mb-8 border border-[#E8DCCB] shadow-sm bg-[#FAF7F2] p-2 sm:p-4">
+            <div className="relative w-full aspect-[1024/241] min-h-[140px] sm:min-h-[180px] md:min-h-[220px]">
+              <Image
+                src="/locations/KolkataLocationsBanner.jpg"
+                alt="Find Our Bakehouses in Kolkata — Salt Lake and Alipore"
+                fill
+                className="object-contain object-center select-none"
+                priority
+                sizes="(max-width: 768px) 100vw, 1200px"
+              />
+
+              {/* Clickable Hotspot over Salt Lake Pin */}
+              <button
+                onClick={() => setSelectedId("salt-lake")}
+                aria-label="Select Salt Lake Location"
+                className={`absolute top-0 bottom-0 left-[38%] w-[26%] z-10 cursor-pointer rounded-xl transition-all duration-300 focus:outline-none ${
+                  selectedId === "salt-lake" ? "ring-2 ring-gold-500/50 bg-gold-500/10" : "hover:bg-gold-500/5"
+                }`}
+              />
+
+              {/* Clickable Hotspot over Alipore Pin */}
+              <button
+                onClick={() => setSelectedId("alipore")}
+                aria-label="Select Alipore Location"
+                className={`absolute top-0 bottom-0 right-[4%] w-[26%] z-10 cursor-pointer rounded-xl transition-all duration-300 focus:outline-none ${
+                  selectedId === "alipore" ? "ring-2 ring-gold-500/50 bg-gold-500/10" : "hover:bg-gold-500/5"
+                }`}
+              />
+            </div>
           </div>
 
           {/* Reusable Outlet Navigation Tabs */}
-          <div className="flex items-center gap-2 mt-6 md:mt-0 overflow-x-auto pb-2 md:pb-0">
-            {websiteContent.locations.map((loc) => {
-              const isActive = loc.id === selectedId;
-              return (
-                <button
-                  key={loc.id}
-                  onClick={() => setSelectedId(loc.id)}
-                  className={`font-sans text-xs sm:text-sm tracking-wider uppercase px-6 py-2.5 rounded-full transition-all duration-300 font-semibold whitespace-nowrap ${
-                    isActive
-                      ? "bg-navy-800 text-gold-500 shadow-md scale-105"
-                      : "bg-cream-200 text-charcoal-800/70 hover:bg-cream-300 hover:text-navy-800"
-                  }`}
-                >
-                  {loc.name}
-                </button>
-              );
-            })}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-1">
+                SELECT BAKEHOUSE
+              </span>
+              <p className="font-serif italic text-base sm:text-lg text-charcoal-800">
+                Switch between our two Kolkata locations:
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3 overflow-x-auto pb-1">
+              {websiteContent.locations.map((loc) => {
+                const isActive = loc.id === selectedId;
+                return (
+                  <button
+                    key={loc.id}
+                    onClick={() => setSelectedId(loc.id)}
+                    className={`font-sans text-xs sm:text-sm tracking-wider uppercase px-7 py-3 rounded-full transition-all duration-300 font-semibold whitespace-nowrap shadow-sm ${
+                      isActive
+                        ? "bg-navy-800 text-gold-500 shadow-md scale-105"
+                        : "bg-cream-200 text-charcoal-800/80 hover:bg-cream-300 hover:text-navy-800"
+                    }`}
+                  >
+                    {loc.name}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
