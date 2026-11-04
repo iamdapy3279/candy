@@ -139,7 +139,7 @@ export default function FoodAndDrinks() {
 
           </div>
 
-          {/* Right Column: Hand-drawn Illustration & Artisanal Note (Reference Image 3) */}
+          {/* Right Column: Editorial Note & Culinary Story */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
             <AnimatePresence mode="wait">
               <motion.div
@@ -150,29 +150,16 @@ export default function FoodAndDrinks() {
                 transition={{ duration: 0.4 }}
                 className="flex flex-col items-center lg:items-start"
               >
-                {/* Hand-drawn Line Art Doodle from Artwork Folder */}
-                {currentDish.doodle && (
-                  <div className="w-40 h-40 sm:w-48 sm:h-48 mb-8 drop-shadow-sm shrink-0 flex items-center justify-center">
-                    <Image
-                      src={currentDish.doodle}
-                      alt="Artisanal Bistro Sketch"
-                      width={192}
-                      height={192}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                )}
-
-                {/* Editorial Caption Quote in Cinzel / Inter */}
+                {/* Editorial Caption Quote in Cinzel */}
                 <div className="max-w-md">
-                  <p className="font-serif text-sm sm:text-base font-semibold tracking-wider text-charcoal-800 leading-relaxed uppercase mb-4">
+                  <p className="font-serif text-base sm:text-xl font-semibold tracking-wider text-charcoal-800 leading-relaxed uppercase mb-6">
                     {currentDish.doodleCaption ||
                       "SET ON KOLKATA'S CORNERS, X&Y WELCOMES GUESTS FROM MORNING THROUGH TO LATE AFTERNOON."}
                   </p>
                   
-                  <div className="h-[2px] w-12 bg-gold-500 mb-4 mx-auto lg:mx-0" />
+                  <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-auto lg:mx-0" />
                   
-                  <p className="font-sans text-xs tracking-wider text-charcoal-800/70 font-medium leading-relaxed">
+                  <p className="font-sans text-sm tracking-wide text-charcoal-800/80 font-normal leading-relaxed">
                     Every morning, our pastry and culinary team prepares each component from scratch using heirloom techniques and zero shortcuts.
                   </p>
                 </div>
