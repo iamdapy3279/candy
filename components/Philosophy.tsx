@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { websiteContent } from "@/lib/content";
+import GlowingBorder from "@/components/ui/GlowingBorder";
 
 export default function Philosophy() {
   const [activeValueIndex, setActiveValueIndex] = useState(0);
@@ -13,7 +14,7 @@ export default function Philosophy() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Editorial Cathedral Arch Photo Frame */}
+          {/* Left Column: Editorial Cathedral Arch Photo Frame with Glowing Border */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -22,16 +23,27 @@ export default function Philosophy() {
             className="lg:col-span-6 relative flex justify-center lg:justify-start"
           >
             <div className="relative w-full max-w-[460px] aspect-[4/5]">
-              {/* Arched Window Image Container */}
-              <div className="relative w-full h-full arch-frame overflow-hidden shadow-elevated border-4 border-white bg-cream-200">
-                <Image
-                  src={websiteContent.philosophy.image}
-                  alt="X&Y Bakehouse Warm Interior"
-                  fill
-                  className="object-cover object-center transition-transform duration-700 hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 460px"
-                />
-              </div>
+              {/* Arched Window Image with Continuous Animated Glowing Border */}
+              <GlowingBorder
+                className="relative w-full h-full shadow-elevated"
+                borderWidth={3}
+                borderRadius="9999px 9999px 1.5rem 1.5rem"
+                innerBorderRadius="9999px 9999px 1.35rem 1.35rem"
+                duration={8}
+                glowIntensity="subtle"
+                beamColor="#FCC215"
+              >
+                <div className="relative w-full h-full overflow-hidden bg-cream-200">
+                  <Image
+                    src={websiteContent.philosophy.image}
+                    alt="X&Y Bakehouse Warm Interior"
+                    fill
+                    className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 460px"
+                  />
+                </div>
+              </GlowingBorder>
 
               {/* Floating Navy Seal Badge (Reference Image 2) */}
               <motion.div
@@ -135,4 +147,3 @@ export default function Philosophy() {
     </section>
   );
 }
-

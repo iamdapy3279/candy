@@ -8,6 +8,7 @@ interface GlowingBorderProps {
   className?: string;
   borderWidth?: number; // in pixels
   borderRadius?: string; // CSS border-radius value
+  innerBorderRadius?: string; // Optional explicit inner border-radius
   duration?: number; // animation duration in seconds
   beamColor?: string; // primary light beam color
   glowIntensity?: "subtle" | "soft" | "intense";
@@ -18,6 +19,7 @@ export default function GlowingBorder({
   className = "",
   borderWidth = 2,
   borderRadius = "1rem", // 1rem matches brand pill radius
+  innerBorderRadius,
   duration = 8, // 8s calm luxury travel speed
   beamColor = "#FCC215", // Brand Golden Yellow
   glowIntensity = "subtle",
@@ -31,6 +33,12 @@ export default function GlowingBorder({
 
   // Concentrated travelling beam: mostly transparent with a focused arc
   const conicGradient = `conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(252, 194, 21, 0.25) 320deg, ${beamColor} 360deg)`;
+
+  const effectiveInnerRadius =
+    innerBorderRadius ||
+    (borderRadius.includes(" ")
+      ? borderRadius
+      : `calc(${borderRadius} - ${borderWidth}px)`);
 
   return (
     <div
@@ -90,7 +98,7 @@ export default function GlowingBorder({
       <div
         className="relative z-10 w-full h-full overflow-hidden bg-cream-200 shadow-xl"
         style={{
-          borderRadius: `calc(${borderRadius} - ${borderWidth}px)`,
+          borderRadius: effectiveInnerRadius,
         }}
       >
         {children}
