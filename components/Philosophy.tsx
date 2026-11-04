@@ -1,14 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { websiteContent } from "@/lib/content";
 import GlowingBorder from "@/components/ui/GlowingBorder";
 
 export default function Philosophy() {
-  const [activeValueIndex, setActiveValueIndex] = useState(0);
-
   return (
     <section id="philosophy" className="py-24 md:py-36 bg-cream-100 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
@@ -69,7 +66,7 @@ export default function Philosophy() {
             </div>
           </motion.div>
 
-          {/* Right Column: Editorial Text & Values */}
+          {/* Right Column: Editorial Text (Clean, Classical Layout) */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -88,58 +85,15 @@ export default function Philosophy() {
             </h2>
 
             {/* Philosophy Narrative */}
-            <p className="font-serif text-base sm:text-lg text-charcoal-800/85 leading-relaxed mb-10">
+            <p className="font-serif text-base sm:text-lg text-charcoal-800/85 leading-relaxed mb-8">
               {websiteContent.philosophy.description}
             </p>
 
-            {/* Interactive X — & — Y Values Grid */}
-            <div className="border-t border-cream-300 pt-8">
-              <div className="flex items-center gap-3 mb-6">
-                {websiteContent.philosophy.values.map((val, idx) => (
-                  <button
-                    key={val.letter}
-                    onClick={() => setActiveValueIndex(idx)}
-                    className={`font-serif px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
-                      activeValueIndex === idx
-                        ? "bg-navy-800 text-gold-500 shadow-sm scale-105"
-                        : "bg-cream-200 text-charcoal-800/70 hover:bg-cream-300"
-                    }`}
-                  >
-                    <span className="mr-1">{val.letter}</span>
-                    <span className="text-xs font-sans font-normal opacity-80">
-                      ({val.identity})
-                    </span>
-                  </button>
-                ))}
-              </div>
+            <div className="h-[2px] w-16 bg-gold-500 mb-6" />
 
-              {/* Animated Value Detail Card */}
-              <div className="min-h-[90px] relative">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeValueIndex}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.35 }}
-                    className="p-5 rounded-2xl bg-white border border-cream-300 shadow-subtle"
-                  >
-                    <div className="flex items-baseline gap-2 mb-1">
-                      <span className="font-serif text-lg font-bold text-navy-800">
-                        {websiteContent.philosophy.values[activeValueIndex].letter}
-                      </span>
-                      <span className="font-sans text-xs tracking-wider uppercase font-semibold text-gold-700">
-                        — {websiteContent.philosophy.values[activeValueIndex].identity}
-                      </span>
-                    </div>
-                    <p className="font-serif text-sm sm:text-base text-charcoal-800 leading-normal">
-                      {websiteContent.philosophy.values[activeValueIndex].text}
-                    </p>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
-
+            <p className="font-serif italic text-sm sm:text-base text-navy-800/80">
+              “The best cafe is the one you never want to leave.”
+            </p>
           </motion.div>
 
         </div>
