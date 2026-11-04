@@ -12,14 +12,12 @@ export default function LoadingScreen() {
     {
       src: "/artwork/Doodle6.png",
       alt: "X&Y Bakehouse Welcome",
-      width: 140,
-      height: 140,
+      sizeClass: "w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80",
     },
     {
       src: "/LoadingImage.png",
       alt: "What's said on this table stays on this table - X&Y",
-      width: 220,
-      height: 220,
+      sizeClass: "w-72 h-72 sm:w-[380px] sm:h-[380px] md:w-[440px] md:h-[440px]",
     },
   ];
 
@@ -27,7 +25,7 @@ export default function LoadingScreen() {
     // Lock scroll during loading
     document.body.style.overflow = "hidden";
 
-    // Switch to second image at 1.8 seconds
+    // Switch to second image at 1.7 seconds
     const switchTimer = setTimeout(() => {
       setImageIndex(1);
     }, 1700);
@@ -55,31 +53,31 @@ export default function LoadingScreen() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="fixed inset-0 z-[9999] bg-[#fbf9f8] flex flex-col items-center justify-center p-6 select-none pointer-events-auto"
         >
-          {/* Centered Transparent Illustration Container */}
-          <div className="relative w-64 h-64 flex items-center justify-center">
+          {/* Centered Transparent Illustration Container (Significantly Enlarged) */}
+          <div className="relative w-full max-w-[500px] h-80 sm:h-[420px] md:h-[460px] flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={imageIndex}
-                initial={{ opacity: 0, scale: 0.92 }}
+                initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.05 }}
+                exit={{ opacity: 0, scale: 1.04 }}
                 transition={{ duration: 0.45, ease: "easeOut" }}
-                className="relative flex items-center justify-center"
+                className={`relative flex items-center justify-center ${loadingImages[imageIndex].sizeClass}`}
               >
                 <Image
                   src={loadingImages[imageIndex].src}
                   alt={loadingImages[imageIndex].alt}
-                  width={loadingImages[imageIndex].width}
-                  height={loadingImages[imageIndex].height}
+                  fill
                   priority
                   className="object-contain drop-shadow-sm"
+                  sizes="(max-width: 768px) 380px, 440px"
                 />
               </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Minimal Elegant Gold Progress Bar */}
-          <div className="w-36 h-[2px] bg-navy-800/10 rounded-full mt-6 overflow-hidden relative">
+          <div className="w-48 sm:w-60 h-[2.5px] bg-navy-800/10 rounded-full mt-4 sm:mt-6 overflow-hidden relative">
             <motion.div
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
@@ -91,9 +89,9 @@ export default function LoadingScreen() {
           {/* Subtle Bistro Tag */}
           <motion.span
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }}
+            animate={{ opacity: 0.7 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="font-serif text-[10px] tracking-[0.3em] uppercase text-navy-800 font-semibold mt-4"
+            className="font-serif text-xs tracking-[0.3em] uppercase text-navy-800 font-semibold mt-4"
           >
             Bakehouse & Bistro • Kolkata
           </motion.span>
