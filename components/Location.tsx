@@ -46,50 +46,30 @@ export default function Location() {
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
-        {/* Section Heading & Status Labels with Seamless Transparent Kolkata Illustration */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 pb-6 border-b border-[#211714]/10 gap-6">
-          <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-8">
-            <div>
-              <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-3">
-                FIND OUR BAKEHOUSES
-              </span>
-              <h2 className="font-serif italic text-3xl sm:text-5xl font-medium text-navy-800 tracking-normal">
-                Our Locations
-              </h2>
-            </div>
-
-            {/* Seamless Transparent Kolkata Victoria Memorial Illustration — NO CARD, NO BORDER */}
-            <div className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-[380px] aspect-[1024/436] shrink-0 pointer-events-none select-none">
-              <Image
-                src="/locations/KolkataMonumentTransparent.png"
-                alt="Two neighbourhoods in Kolkata — Salt Lake and Alipore"
-                fill
-                className="object-contain object-left-bottom"
-                priority
-              />
-            </div>
+        {/* Section Heading & Prominent Kolkata Architectural Illustration on Right */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 pb-6 border-b border-[#211714]/10 gap-8">
+          {/* Left: Editorial Typography */}
+          <div className="shrink-0 max-w-sm lg:max-w-md">
+            <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-3">
+              FIND OUR BAKEHOUSES
+            </span>
+            <h2 className="font-serif italic text-4xl sm:text-5xl lg:text-6xl font-medium text-navy-800 tracking-normal leading-[1.05]">
+              Our Locations
+            </h2>
+            <p className="font-serif text-base sm:text-lg text-charcoal-800/80 mt-3 leading-snug">
+              Two neighbourhoods in Kolkata. The same X&amp;Y experience.
+            </p>
           </div>
 
-          {/* Clean Informational Labels (Auto-switches automatically — No button press required) */}
-          <div className="flex items-center gap-3 mt-4 lg:mt-0 pb-2 lg:pb-0 shrink-0">
-            {locations.map((loc, idx) => {
-              const isActive = idx === currentIndex;
-              return (
-                <div
-                  key={loc.id}
-                  className={`flex items-center gap-2 font-sans text-xs tracking-[0.2em] uppercase font-semibold px-5 py-2.5 rounded-full transition-all duration-500 select-none ${
-                    isActive
-                      ? "bg-navy-800 text-gold-500 shadow-md scale-105"
-                      : "bg-cream-200 text-charcoal-800/60"
-                  }`}
-                >
-                  {isActive && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold-500 animate-pulse" />
-                  )}
-                  <span>{loc.name}</span>
-                </div>
-              );
-            })}
+          {/* Right: Large Kolkata Architectural Illustration (Seamless, integrated into layout) */}
+          <div className="relative w-full max-w-[380px] sm:max-w-[480px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-[680px] aspect-[1024/436] shrink-0 pointer-events-none select-none lg:ml-auto self-end">
+            <Image
+              src="/locations/KolkataMonumentTransparent.png"
+              alt="Two neighbourhoods in Kolkata — Salt Lake and Alipore"
+              fill
+              className="object-contain object-bottom lg:object-right-bottom"
+              priority
+            />
           </div>
         </div>
 
