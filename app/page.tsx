@@ -17,34 +17,22 @@ export default function Home() {
       <Header />
 
       {/* 2. Hero Section (100vh full-bleed video + fallback cover) */}
-      <div className="w-full order-1">
-        <Hero />
-      </div>
+      <Hero />
 
       {/* 3. Our Philosophy (Two-column layout, cathedral arch with continuous glowing light beam) */}
-      <div className="w-full order-2">
-        <Philosophy />
-      </div>
+      <Philosophy />
 
-      {/* 4. Our Location: On mobile placed right below Our Philosophy (order-3), on desktop placed after Evolution (md:order-5) */}
-      <div className="w-full order-3 md:order-5">
-        <Location />
-      </div>
+      {/* 4. Our Locations (Placed directly below Our Philosophy) */}
+      <Location />
 
-      {/* 5. Food & Drinks: order-4 on mobile, md:order-3 on desktop */}
-      <div className="w-full order-4 md:order-3">
-        <FoodAndDrinks />
-      </div>
+      {/* 5. Food & Drinks */}
+      <FoodAndDrinks />
 
-      {/* 6. Our Evolution: order-5 on mobile, md:order-4 on desktop */}
-      <div className="w-full order-5 md:order-4">
-        <Evolution />
-      </div>
+      {/* 6. Our Evolution */}
+      <Evolution />
 
-      {/* 7. Footer: order-6 on mobile, md:order-6 on desktop */}
-      <div className="w-full order-6 md:order-6">
-        <Footer />
-      </div>
+      {/* 7. Footer */}
+      <Footer />
     </main>
   );
 }
