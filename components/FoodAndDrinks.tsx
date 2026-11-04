@@ -11,11 +11,11 @@ export default function FoodAndDrinks() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const dishes = websiteContent.foodAndDrinks.dishes;
 
-  // Auto-change image and text every 2 seconds
+  // Auto-change image and text every 4 seconds (slowed down for relaxed viewing)
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % dishes.length);
-    }, 2000);
+    }, 4000);
     return () => clearInterval(timer);
   }, [dishes.length]);
 
@@ -87,19 +87,19 @@ export default function FoodAndDrinks() {
                 className="relative z-10 w-full h-full cursor-pointer shadow-2xl"
                 borderWidth={2}
                 borderRadius="1rem"
-                duration={4.5}
+                duration={8}
                 glowIntensity="subtle"
                 beamColor="#FCC215"
               >
                 <div className="relative w-full h-full group" onClick={handleNext}>
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence>
                     <motion.div
                       key={currentDish.id}
-                      initial={{ opacity: 0, scale: 0.98 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.02 }}
-                      transition={{ duration: 0.45, ease: "easeInOut" }}
-                      className="relative w-full h-full"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6, ease: "easeInOut" }}
+                      className="absolute inset-0 w-full h-full"
                     >
                       <Image
                         src={currentDish.image}
@@ -141,7 +141,7 @@ export default function FoodAndDrinks() {
 
           </div>
 
-          {/* Right Column: Dynamic Text That Changes In Sync Every 2 Seconds */}
+          {/* Right Column: Dynamic Text That Changes In Sync Every 4 Seconds */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
             <AnimatePresence mode="wait">
               <motion.div
@@ -149,7 +149,7 @@ export default function FoodAndDrinks() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.35 }}
+                transition={{ duration: 0.4 }}
                 className="flex flex-col items-center lg:items-start max-w-md"
               >
                 {/* Category Tagline */}

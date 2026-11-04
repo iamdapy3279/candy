@@ -18,7 +18,7 @@ export default function GlowingBorder({
   className = "",
   borderWidth = 2,
   borderRadius = "1rem", // 1rem matches brand pill radius
-  duration = 5, // 5s smooth luxury travel speed
+  duration = 8, // 8s calm luxury travel speed
   beamColor = "#FCC215", // Brand Golden Yellow
   glowIntensity = "subtle",
 }: GlowingBorderProps) {
@@ -30,7 +30,7 @@ export default function GlowingBorder({
   }[glowIntensity];
 
   // Concentrated travelling beam: mostly transparent with a focused arc
-  const conicGradient = `conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(252, 194, 21, 0.2) 320deg, ${beamColor} 360deg)`;
+  const conicGradient = `conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(252, 194, 21, 0.25) 320deg, ${beamColor} 360deg)`;
 
   return (
     <div
@@ -88,7 +88,7 @@ export default function GlowingBorder({
 
       {/* 4. Card Content (Unaffected by animation, perfectly masked inside) */}
       <div
-        className="relative z-10 w-full h-full overflow-hidden bg-white shadow-xl"
+        className="relative z-10 w-full h-full overflow-hidden bg-cream-200 shadow-xl"
         style={{
           borderRadius: `calc(${borderRadius} - ${borderWidth}px)`,
         }}
