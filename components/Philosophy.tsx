@@ -79,18 +79,25 @@ export default function Philosophy() {
               {websiteContent.philosophy.tag}
             </span>
 
-            {/* Section Headline */}
-            <h2 className="philosophy-heading mb-6">
+            {/* Section Headline: Desktop perfect original, Mobile max 5 words */}
+            <h2 className="hidden md:block philosophy-heading mb-6">
               {websiteContent.philosophy.title}
             </h2>
+            <h2 className="md:hidden philosophy-heading text-3xl leading-[1.08] mb-4">
+              {websiteContent.philosophy.mobileTitle || "Food Made With Pure Intention"}
+            </h2>
 
-            {/* Philosophy Narrative */}
-            <p className="philosophy-body leading-relaxed mb-8">
+            {/* Philosophy Narrative: Desktop perfect original, Mobile max 2 lines */}
+            <p className="hidden md:block philosophy-body leading-relaxed mb-8">
               {websiteContent.philosophy.description}
+            </p>
+            <p className="md:hidden philosophy-body text-base sm:text-lg leading-snug line-clamp-2 mb-6">
+              {websiteContent.philosophy.mobileDescription || "Authentic Italian cuisine crafted with passion, tradition, and the finest ingredients."}
             </p>
 
             <div className="h-[2px] w-16 bg-gold-500 mb-6" />
 
+            {/* Quote (kept identical for both mobile and desktop) */}
             <p className="font-serif italic font-medium text-lg sm:text-xl text-[#211714]">
               “The best cafe is the one you never want to leave.”
             </p>

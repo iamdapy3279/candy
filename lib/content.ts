@@ -14,6 +14,7 @@ export interface MilestoneItem {
   title: string;
   subtitle: string;
   description: string;
+  mobileDescription?: string;
   quote?: string;
   isLatest?: boolean;
 }
@@ -29,6 +30,7 @@ export interface LocationItem {
   image: string;
   secondaryImage?: string;
   description: string;
+  mobileDescription?: string;
   mapsUrl: string;
 }
 
@@ -71,8 +73,11 @@ export const websiteContent = {
   philosophy: {
     tag: "OUR PHILOSOPHY",
     title: "Food made with intention. A place built with love.",
+    mobileTitle: "Food Made With Pure Intention",
     description:
       "At the heart of our restaurant is a deep love for authentic Italian cuisine, crafted with passion, tradition, and the finest ingredients. We believe in creating more than just meals — we create experiences filled with warmth, soul, and the joy of sharing. Every dish tells a story, honoring culinary heritage while embracing the spirit of modern dining.",
+    mobileDescription:
+      "Authentic Italian cuisine crafted with passion, tradition, and the finest ingredients.",
     image: "/locations/Allipore_Location.webp",
     badgeLabel: "X&Y BAKEHOUSE",
     values: [
@@ -159,6 +164,8 @@ export const websiteContent = {
         subtitle: "The Foundation",
         description:
           "Vasudha graduates and returns home with an unrelenting vision. Months of rigorous recipe development, sourcing heritage grains, and training visionary bakers who refused to cut corners.",
+        mobileDescription:
+          "Rigorous recipe development, heritage grains, and visionary bakers refusing to cut corners.",
         quote: "“The difference between good and extraordinary is always time.”",
       },
       {
@@ -168,6 +175,8 @@ export const websiteContent = {
         subtitle: "The First Door — Alipore",
         description:
           "X&Y opens its very first door in Alipore. One warm room, hand-laminated croissants, and an 18-hour fermented sourdough starter. Within weeks, guests were lining up before opening.",
+        mobileDescription:
+          "X&Y opens its first door, serving warm hand-laminated croissants and sourdough.",
         quote: "“If it doesn't exist here, that's exactly why we must build it.”",
       },
       {
@@ -177,6 +186,8 @@ export const websiteContent = {
         subtitle: "Sector 2 — Salt Lake",
         description:
           "Bringing the beloved Alipore experience to Salt Lake without altering a single recipe. The same hollandaise, the same warmth, allowing more people across the city to find us.",
+        mobileDescription:
+          "Bringing our beloved bakehouse warmth and unchanged recipes to Salt Lake.",
         isLatest: true,
       },
     ],
@@ -194,6 +205,7 @@ export const websiteContent = {
       image: "/locations/Allipore_Location.webp",
       secondaryImage: "/locations/Allipore_Location2.webp",
       description: "Our flagship bakehouse featuring sunlit banquette seating, ambient lighting, and the scent of fresh morning bakes.",
+      mobileDescription: "Our flagship sunlit bakehouse filled with the aroma of fresh morning pastries.",
       mapsUrl: "https://maps.google.com/?q=6+Burdwan+Rd+Alipore+Kolkata+700027",
     },
     {
@@ -207,6 +219,7 @@ export const websiteContent = {
       image: "/locations/SALTLAKELOCATIONPIC.jpeg",
       secondaryImage: "/locations/Saltlake_Location2.jpeg",
       description: "An intimate, calm bistro corner in Salt Lake tailored for leisurely lunches, business catch-ups, and slow coffee.",
+      mobileDescription: "An intimate bistro corner crafted for slow coffee and leisurely lunches.",
       mapsUrl: "https://maps.google.com/?q=CG-220+Sector+2+Salt+Lake+City+Kolkata+700091",
     },
   ],

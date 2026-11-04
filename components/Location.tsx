@@ -72,8 +72,13 @@ export default function Location() {
                   <h3 className="font-serif italic text-3xl sm:text-4xl font-medium text-navy-800 mt-1 mb-4">
                     {activeLocation.name}
                   </h3>
-                  <p className="font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed">
+                  {/* Desktop Description */}
+                  <p className="hidden md:block font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed">
                     {activeLocation.description}
+                  </p>
+                  {/* Mobile Description: Maximum 2 lines */}
+                  <p className="md:hidden font-serif text-sm text-charcoal-800 leading-snug line-clamp-2">
+                    {activeLocation.mobileDescription || activeLocation.description}
                   </p>
                 </div>
 

@@ -92,9 +92,18 @@ export default function Evolution() {
                       <h3 className="font-serif italic text-2xl sm:text-3xl font-medium text-navy-800 mb-2">
                         {milestone.subtitle}
                       </h3>
-                      <p className="font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed">
+
+                      {/* Desktop Description: Full editorial text */}
+                      <p className="hidden md:block font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed">
                         {milestone.description}
                       </p>
+
+                      {/* Mobile Description: Maximum 2 lines */}
+                      <p className="md:hidden font-serif text-sm text-charcoal-800 leading-snug line-clamp-2">
+                        {milestone.mobileDescription || milestone.description}
+                      </p>
+
+                      {/* Quote (kept identical for both mobile and desktop) */}
                       {milestone.quote && (
                         <p className="font-serif italic text-base sm:text-lg text-gold-700 font-medium mt-3">
                           {milestone.quote}
