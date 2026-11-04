@@ -6,7 +6,7 @@ import { websiteContent } from "@/lib/content";
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-950 text-cream-100 pt-20 pb-12 border-t border-navy-800/40 relative overflow-hidden">
+    <footer className="bg-navy-950 text-cream-100 pt-14 md:pt-16 pb-12 border-t border-navy-800/40 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
         {/* Main Footer Row */}

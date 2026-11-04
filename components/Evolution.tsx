@@ -25,12 +25,12 @@ export default function Evolution() {
     <section
       id="evolution"
       ref={containerRef}
-      className="py-24 md:py-36 bg-cream-100 relative overflow-hidden"
+      className="py-12 md:py-16 bg-cream-100 relative overflow-hidden"
     >
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         
         {/* Section Header (Reference Image 1: Minimalist & Classical) */}
-        <div className="text-center mb-20 md:mb-28">
+        <div className="text-center mb-12 md:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}

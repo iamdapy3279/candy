@@ -7,7 +7,7 @@ import GlowingBorder from "@/components/ui/GlowingBorder";
 
 export default function Philosophy() {
   return (
-    <section id="philosophy" className="py-24 md:py-36 bg-cream-100 overflow-hidden relative">
+    <section id="philosophy" className="py-12 md:py-16 bg-cream-100 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           

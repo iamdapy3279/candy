@@ -51,7 +51,7 @@ export default function FoodAndDrinks() {
   const thirdDish = dishes[(currentIndex + 2) % dishes.length];
 
   return (
-    <section id="food-drinks" className="py-24 md:py-36 bg-cream-100 relative overflow-hidden">
+    <section id="food-drinks" className="py-12 md:py-16 bg-cream-100 relative overflow-hidden">
       {/* Preload all 5 dish images in DOM cache for instant, zero-latency transitions */}
       <div className="hidden pointer-events-none" aria-hidden="true">
         {dishes.map((dish) => (

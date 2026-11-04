@@ -29,7 +29,7 @@ export default function Location() {
   const otherLocation = locations[(currentIndex + 1) % locations.length];
 
   return (
-    <section id="locations" className="py-24 md:py-36 bg-cream-100 relative overflow-hidden">
+    <section id="locations" className="py-12 md:py-16 bg-cream-100 relative overflow-hidden">
       {/* In-memory preload of both location images for instant, zero-latency switching */}
       <div className="hidden pointer-events-none" aria-hidden="true">
         {locations.map((loc) => (
@@ -47,7 +47,7 @@ export default function Location() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
         {/* Section Heading & Prominent Kolkata Architectural Illustration on Right */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 pb-6 border-b border-[#211714]/10 gap-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 md:mb-12 pb-6 border-b border-[#211714]/10 gap-8">
           {/* Left: Editorial Typography */}
           <div className="shrink-0 max-w-sm lg:max-w-md">
             <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-3">
