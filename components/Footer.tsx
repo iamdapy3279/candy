@@ -117,9 +117,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom Credits & Copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-cream-300/60 font-sans tracking-wider gap-4">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-cream-200/80 font-sans tracking-wider gap-4">
           <p>{websiteContent.footer.copyright}</p>
-          <p className="font-serif italic text-cream-300/50">
+          <p className="font-serif italic text-cream-200/75">
             Crafted for mornings, lingering lunches, and slow evenings.
           </p>
         </div>

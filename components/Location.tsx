@@ -28,22 +28,18 @@ export default function Location() {
   const currentLocation = locations[currentIndex];
   const otherLocation = locations[(currentIndex + 1) % locations.length];
 
+  // In-memory pre-warm of location photography after initial render for zero-latency switching
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      locations.forEach((loc) => {
+        const img = new window.Image();
+        img.src = loc.image;
+      });
+    }
+  }, [locations]);
+
   return (
     <section id="locations" className="py-12 md:py-16 bg-cream-100 relative overflow-hidden">
-      {/* In-memory preload of both location images for instant, zero-latency switching */}
-      <div className="hidden pointer-events-none" aria-hidden="true">
-        {locations.map((loc) => (
-          <Image
-            key={`preload-${loc.id}`}
-            src={loc.image}
-            alt="preload"
-            width={480}
-            height={360}
-            priority
-          />
-        ))}
-      </div>
-
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
         {/* Section Heading & Prominent Kolkata Architectural Illustration on Right */}
@@ -88,7 +84,7 @@ export default function Location() {
                 className="space-y-6"
               >
                 <div>
-                  <span className="font-sans text-xs tracking-[0.2em] uppercase text-navy-800/60 font-semibold">
+                  <span className="font-sans text-xs tracking-[0.2em] uppercase text-navy-800/80 font-semibold">
                     {currentLocation.area}
                   </span>
                   <h3 className="font-serif italic text-3xl sm:text-4xl font-medium text-navy-800 mt-1 mb-4">
@@ -112,7 +108,7 @@ export default function Location() {
                       <MapPin size={18} />
                     </div>
                     <div>
-                      <span className="block font-sans text-xs uppercase tracking-wider text-charcoal-800/60 font-semibold mb-0.5">
+                      <span className="block font-sans text-xs uppercase tracking-wider text-charcoal-800/80 font-semibold mb-0.5">
                         Address
                       </span>
                       <p className="font-serif text-sm sm:text-base text-navy-800 font-medium">
@@ -127,7 +123,7 @@ export default function Location() {
                       <Clock size={18} />
                     </div>
                     <div>
-                      <span className="block font-sans text-xs uppercase tracking-wider text-charcoal-800/60 font-semibold mb-0.5">
+                      <span className="block font-sans text-xs uppercase tracking-wider text-charcoal-800/80 font-semibold mb-0.5">
                         Opening Hours
                       </span>
                       <p className="font-serif text-sm sm:text-base text-navy-800 font-medium">
@@ -142,7 +138,7 @@ export default function Location() {
                       <Phone size={18} />
                     </div>
                     <div>
-                      <span className="block font-sans text-xs uppercase tracking-wider text-charcoal-800/60 font-semibold mb-0.5">
+                      <span className="block font-sans text-xs uppercase tracking-wider text-charcoal-800/80 font-semibold mb-0.5">
                         Telephone
                       </span>
                       <a

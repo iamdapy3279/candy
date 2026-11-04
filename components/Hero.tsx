@@ -25,6 +25,7 @@ export default function Hero() {
           alt="X&Y Bakehouse ambiance"
           fill
           priority
+          sizes="100vw"
           className={`object-cover object-center transition-opacity duration-700 ${
             videoLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
           }`}
@@ -38,7 +39,7 @@ export default function Hero() {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         onLoadedData={() => setVideoLoaded(true)}
         className={`absolute inset-0 z-10 w-full h-full object-cover transition-opacity duration-700 ${
           videoLoaded ? "opacity-100" : "opacity-0"

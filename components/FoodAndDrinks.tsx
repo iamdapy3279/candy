@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -50,22 +50,18 @@ export default function FoodAndDrinks() {
   const secondDish = dishes[(currentIndex + 1) % dishes.length];
   const thirdDish = dishes[(currentIndex + 2) % dishes.length];
 
+  // Non-blocking in-memory pre-warm of carousel dishes for zero-latency card swaps
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      dishes.forEach((dish) => {
+        const img = new window.Image();
+        img.src = dish.image;
+      });
+    }
+  }, [dishes]);
+
   return (
     <section id="food-drinks" className="py-12 md:py-16 bg-cream-100 relative overflow-hidden">
-      {/* Preload all 5 dish images in DOM cache for instant, zero-latency transitions */}
-      <div className="hidden pointer-events-none" aria-hidden="true">
-        {dishes.map((dish) => (
-          <Image
-            key={`preload-${dish.id}`}
-            src={dish.image}
-            alt="preload"
-            width={420}
-            height={525}
-            priority
-          />
-        ))}
-      </div>
-
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
         {/* 2-Column Stacked Carousel & Clean Editorial Content */}

@@ -29,8 +29,8 @@ const config: Config = {
         gold: {
           400: "#E5BE72",
           500: "#D4A34A", // Warm champagne gold
-          600: "#C7943B",
-          700: "#B9853D", // Muted antique gold (eyebrows & labels)
+          600: "#B88435",
+          700: "#936327", // Rich antique gold (WCAG AA accessible > 4.5:1)
         },
         charcoal: {
           700: "#554942",
