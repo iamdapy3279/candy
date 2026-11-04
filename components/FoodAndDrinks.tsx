@@ -222,7 +222,7 @@ export default function FoodAndDrinks() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col items-center lg:items-start max-w-md w-full"
+                className="flex flex-col items-start max-w-md w-full text-left"
               >
                 {/* 1. Category Tagline */}
                 <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-3">
@@ -239,9 +239,9 @@ export default function FoodAndDrinks() {
                   {currentDish.description}
                 </p>
 
-                {/* 4. Gold Divider & Quotation (Desktop / Tablet only) */}
-                <div className="hidden md:block w-full">
-                  <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-auto lg:mx-0" />
+                {/* 4. Gold Divider & Quotation (Visible on both Mobile and Desktop) */}
+                <div className="w-full">
+                  <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-0" />
 
                   <p className="font-serif italic text-base sm:text-lg font-medium text-navy-800 leading-relaxed mb-3">
                     “{currentDish.doodleCaption ||
