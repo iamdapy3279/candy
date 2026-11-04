@@ -42,10 +42,21 @@ export default function Location() {
     <section id="locations" className="py-12 md:py-16 bg-cream-100 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
-        {/* Section Heading & Prominent Kolkata Architectural Illustration on Right */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 md:mb-12 pb-6 border-b border-[#211714]/10 gap-8">
-          {/* Left: Editorial Typography */}
-          <div className="shrink-0 max-w-sm lg:max-w-md">
+        {/* Section Heading & Prominent Kolkata Architectural Illustration */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 md:mb-12 pb-6 border-b border-[#211714]/10 gap-6 lg:gap-8">
+          {/* Kolkata Architectural Illustration (Above header on mobile: order-1, on the right for desktop: lg:order-2) */}
+          <div className="order-1 lg:order-2 relative w-full max-w-[340px] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[620px] xl:max-w-[680px] aspect-[1024/436] shrink-0 pointer-events-none select-none mx-auto lg:mx-0 lg:ml-auto self-center lg:self-end">
+            <Image
+              src="/locations/KolkataMonumentTransparent.png"
+              alt="Two neighbourhoods in Kolkata — Salt Lake and Alipore"
+              fill
+              className="object-contain object-bottom lg:object-right-bottom"
+              priority
+            />
+          </div>
+
+          {/* Editorial Typography (Below illustration on mobile: order-2, on the left for desktop: lg:order-1) */}
+          <div className="order-2 lg:order-1 shrink-0 max-w-sm lg:max-w-md">
             <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-3">
               FIND OUR BAKEHOUSES
             </span>
@@ -55,17 +66,6 @@ export default function Location() {
             <p className="font-serif text-base sm:text-lg text-charcoal-800/80 mt-3 leading-snug">
               Two neighbourhoods in Kolkata. The same X&amp;Y experience.
             </p>
-          </div>
-
-          {/* Right: Large Kolkata Architectural Illustration (Seamless, integrated into layout) */}
-          <div className="relative w-full max-w-[380px] sm:max-w-[480px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-[680px] aspect-[1024/436] shrink-0 pointer-events-none select-none lg:ml-auto self-end">
-            <Image
-              src="/locations/KolkataMonumentTransparent.png"
-              alt="Two neighbourhoods in Kolkata — Salt Lake and Alipore"
-              fill
-              className="object-contain object-bottom lg:object-right-bottom"
-              priority
-            />
           </div>
         </div>
 
