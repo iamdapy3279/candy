@@ -1,3 +1,4 @@
+import LoadingScreen from "@/components/LoadingScreen";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Philosophy from "@/components/Philosophy";
@@ -9,16 +10,19 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <main className="min-h-screen bg-cream-100 flex flex-col">
-      {/* 1. Header (Cream background, navy logo left, navigation right, scroll-state transition) */}
+      {/* 0. Introductory Game-Style Loading Screen (< 4 seconds, fades out to buffered video) */}
+      <LoadingScreen />
+
+      {/* 1. Header (Transparent over video, white text, 3 links: Menu, Journey, Location) */}
       <Header />
 
-      {/* 2. Hero Section (100vh full-bleed video + fallback cover + centered editorial typography) */}
+      {/* 2. Hero Section (100vh full-bleed video + fallback cover) */}
       <Hero />
 
-      {/* 3. Our Philosophy (Two-column layout, cathedral arch photo left, narrative & kinetic values right) */}
+      {/* 3. Our Philosophy (Two-column layout, cathedral arch with continuous glowing light beam) */}
       <Philosophy />
 
-      {/* 4. Food & Drinks (3D Stacked photography carousel + artisanal fine-line illustration & caption) */}
+      {/* 4. Food & Drinks (3D Stacked photography carousel with continuous glowing light beam) */}
       <FoodAndDrinks />
 
       {/* 5. Our Evolution (Central vertical timeline with scroll-drawn line & alternating milestone cards) */}
