@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { websiteContent } from "@/lib/content";
+import GlowingBorder from "@/components/ui/GlowingBorder";
 
 export default function FoodAndDrinks() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -65,7 +66,7 @@ export default function FoodAndDrinks() {
         {/* 2-Column Stacked Carousel & Clean Editorial Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Stacked 3D Photography Carousel (Clean, Zero Blue Tint) */}
+          {/* Left Column: Stacked 3D Photography Carousel with Continuous Glowing Light Beam Border */}
           <div className="lg:col-span-7 flex flex-col items-center">
             
             {/* The Stack Container */}
@@ -81,31 +82,37 @@ export default function FoodAndDrinks() {
                 className="absolute inset-0 rounded-2xl bg-[#f0ece9] border border-charcoal-800/15 shadow-md transform rotate-3 translate-x-2 translate-y-1.5 opacity-80 pointer-events-none"
               />
 
-              {/* Active Foreground Card with Spring Animation (Pure Image, No Tint) */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentDish.id}
-                  initial={{ opacity: 0, scale: 0.94, rotate: -2, x: -20 }}
-                  animate={{ opacity: 1, scale: 1, rotate: 0, x: 0 }}
-                  exit={{ opacity: 0, scale: 0.96, rotate: 2, x: 20 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 24,
-                  }}
-                  className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border-2 border-white bg-white group cursor-pointer"
-                  onClick={handleNext}
-                >
-                  <Image
-                    src={currentDish.image}
-                    alt={currentDish.name}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    priority
-                    sizes="(max-width: 768px) 100vw, 420px"
-                  />
-                </motion.div>
-              </AnimatePresence>
+              {/* Active Foreground Card with Continuous Glowing Light Beam Border */}
+              <GlowingBorder
+                className="relative z-10 w-full h-full cursor-pointer shadow-2xl"
+                borderWidth={2}
+                borderRadius="1rem"
+                duration={4.5}
+                glowIntensity="subtle"
+                beamColor="#FCC215"
+              >
+                <div className="relative w-full h-full group" onClick={handleNext}>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentDish.id}
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 1.02 }}
+                      transition={{ duration: 0.45, ease: "easeInOut" }}
+                      className="relative w-full h-full"
+                    >
+                      <Image
+                        src={currentDish.image}
+                        alt={currentDish.name}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        priority
+                        sizes="(max-width: 768px) 100vw, 420px"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </GlowingBorder>
             </div>
 
             {/* Carousel Controls (Left & Right circular buttons) */}
