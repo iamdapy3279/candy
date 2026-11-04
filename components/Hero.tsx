@@ -2,9 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { websiteContent } from "@/lib/content";
+import GlowingBorder from "@/components/ui/GlowingBorder";
 
 export default function Hero() {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -49,7 +51,50 @@ export default function Hero() {
         <source src={websiteContent.hero.videoMobile} type="video/mp4" />
       </video>
 
-      {/* 3. Floating Subtle Scroll Down Indicator */}
+      {/* 3. Top-Right Floating Action Buttons: MENU and LOCATION (Stacked Vertically with Animated Glowing Borders) */}
+      <div className="absolute top-5 right-5 sm:top-8 sm:right-10 z-30 flex flex-col items-end gap-3 select-none">
+        {/* Menu Button */}
+        <GlowingBorder
+          borderWidth={1.5}
+          borderRadius="9999px"
+          duration={6}
+          beamColor="#D4A34A"
+          glowIntensity="subtle"
+          className="rounded-full shadow-2xl"
+        >
+          <Link
+            href="/Menu.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-28 sm:w-32 py-2 sm:py-2.5 rounded-full bg-navy-950/80 backdrop-blur-md text-cream-100 font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase font-semibold flex items-center justify-center transition-all hover:bg-navy-900 hover:text-gold-400 active:scale-95 text-center"
+          >
+            Menu
+          </Link>
+        </GlowingBorder>
+
+        {/* Location Button */}
+        <GlowingBorder
+          borderWidth={1.5}
+          borderRadius="9999px"
+          duration={6}
+          beamColor="#D4A34A"
+          glowIntensity="subtle"
+          className="rounded-full shadow-2xl"
+        >
+          <a
+            href="#locations"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("locations")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="w-28 sm:w-32 py-2 sm:py-2.5 rounded-full bg-navy-950/80 backdrop-blur-md text-cream-100 font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase font-semibold flex items-center justify-center transition-all hover:bg-navy-900 hover:text-gold-400 active:scale-95 text-center"
+          >
+            Location
+          </a>
+        </GlowingBorder>
+      </div>
+
+      {/* 4. Floating Subtle Scroll Down Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
