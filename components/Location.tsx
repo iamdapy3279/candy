@@ -177,7 +177,6 @@ export default function Location() {
                     priority
                     sizes="(max-width: 768px) 100vw, 480px"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 via-transparent to-transparent pointer-events-none" />
                 </motion.div>
               </AnimatePresence>
 
@@ -206,3 +205,4 @@ export default function Location() {
     </section>
   );
 }
+

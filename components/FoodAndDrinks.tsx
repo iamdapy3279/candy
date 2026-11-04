@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -9,6 +9,14 @@ import { websiteContent } from "@/lib/content";
 export default function FoodAndDrinks() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const dishes = websiteContent.foodAndDrinks.dishes;
+
+  // Auto-change image and text every 2 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % dishes.length);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, [dishes.length]);
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % dishes.length);
@@ -54,10 +62,10 @@ export default function FoodAndDrinks() {
           </motion.p>
         </div>
 
-        {/* 2-Column Stacked Carousel & Artisanal Illustration */}
+        {/* 2-Column Stacked Carousel & Clean Editorial Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Stacked 3D Photography Carousel (Reference Image 3) */}
+          {/* Left Column: Stacked 3D Photography Carousel (Clean, Zero Blue Tint) */}
           <div className="lg:col-span-7 flex flex-col items-center">
             
             {/* The Stack Container */}
@@ -65,15 +73,15 @@ export default function FoodAndDrinks() {
               
               {/* Back Card 2 (Depth layer) */}
               <div
-                className="absolute inset-0 rounded-2xl bg-cream-300 border border-charcoal-800/10 shadow-md transform rotate-6 translate-x-4 translate-y-3 opacity-40 pointer-events-none"
+                className="absolute inset-0 rounded-2xl bg-[#eae6e3] border border-charcoal-800/10 shadow-sm transform rotate-6 translate-x-4 translate-y-3 opacity-50 pointer-events-none"
               />
 
               {/* Back Card 1 (Depth layer) */}
               <div
-                className="absolute inset-0 rounded-2xl bg-cream-400 border border-charcoal-800/15 shadow-md transform rotate-3 translate-x-2 translate-y-1.5 opacity-70 pointer-events-none"
+                className="absolute inset-0 rounded-2xl bg-[#f0ece9] border border-charcoal-800/15 shadow-md transform rotate-3 translate-x-2 translate-y-1.5 opacity-80 pointer-events-none"
               />
 
-              {/* Active Foreground Card with Framer Motion spring */}
+              {/* Active Foreground Card with Spring Animation (Pure Image, No Tint) */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentDish.id}
@@ -96,24 +104,11 @@ export default function FoodAndDrinks() {
                     priority
                     sizes="(max-width: 768px) 100vw, 420px"
                   />
-
-                  {/* Gradient banner with Dish details */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-navy-950/90 via-navy-950/60 to-transparent text-white">
-                    <span className="font-sans text-[11px] tracking-widest uppercase text-gold-500 font-semibold block mb-1">
-                      {currentDish.tagline}
-                    </span>
-                    <h3 className="font-serif text-2xl font-bold text-cream-50 leading-tight mb-1">
-                      {currentDish.name}
-                    </h3>
-                    <p className="font-serif text-xs sm:text-sm text-cream-200/90 line-clamp-2">
-                      {currentDish.description}
-                    </p>
-                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Carousel Controls (Reference Image 3: Left & Right circular buttons) */}
+            {/* Carousel Controls (Left & Right circular buttons) */}
             <div className="flex items-center gap-4 mt-8">
               <button
                 onClick={handlePrev}
@@ -139,7 +134,7 @@ export default function FoodAndDrinks() {
 
           </div>
 
-          {/* Right Column: Editorial Note & Culinary Story */}
+          {/* Right Column: Dynamic Text That Changes In Sync Every 2 Seconds */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
             <AnimatePresence mode="wait">
               <motion.div
@@ -147,22 +142,36 @@ export default function FoodAndDrinks() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.4 }}
-                className="flex flex-col items-center lg:items-start"
+                transition={{ duration: 0.35 }}
+                className="flex flex-col items-center lg:items-start max-w-md"
               >
-                {/* Editorial Caption Quote in Cinzel */}
-                <div className="max-w-md">
-                  <p className="font-serif text-base sm:text-xl font-semibold tracking-wider text-charcoal-800 leading-relaxed uppercase mb-6">
-                    {currentDish.doodleCaption ||
-                      "SET ON KOLKATA'S CORNERS, X&Y WELCOMES GUESTS FROM MORNING THROUGH TO LATE AFTERNOON."}
-                  </p>
-                  
-                  <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-auto lg:mx-0" />
-                  
-                  <p className="font-sans text-sm tracking-wide text-charcoal-800/80 font-normal leading-relaxed">
-                    Every morning, our pastry and culinary team prepares each component from scratch using heirloom techniques and zero shortcuts.
-                  </p>
-                </div>
+                {/* Category Tagline */}
+                <span className="font-sans text-xs tracking-[0.25em] uppercase text-gold-700 font-bold block mb-2">
+                  {currentDish.tagline}
+                </span>
+
+                {/* Dish Name */}
+                <h3 className="font-serif text-3xl sm:text-4xl font-bold text-navy-800 leading-tight mb-3">
+                  {currentDish.name}
+                </h3>
+
+                {/* Ingredients / Description */}
+                <p className="font-serif text-sm sm:text-base text-charcoal-800/85 mb-6">
+                  {currentDish.description}
+                </p>
+
+                {/* Gold Accent Divider */}
+                <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-auto lg:mx-0" />
+
+                {/* Editorial Highlight Quote */}
+                <p className="font-serif text-sm sm:text-base font-semibold tracking-wider text-charcoal-800 leading-relaxed uppercase mb-3">
+                  {currentDish.doodleCaption ||
+                    "SET ON KOLKATA'S CORNERS, X&Y WELCOMES GUESTS FROM MORNING THROUGH TO LATE AFTERNOON."}
+                </p>
+
+                <p className="font-sans text-xs tracking-wider text-charcoal-800/70 font-medium leading-relaxed">
+                  Every morning, our pastry and culinary team prepares each component from scratch using heirloom techniques and zero shortcuts.
+                </p>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -173,4 +182,3 @@ export default function FoodAndDrinks() {
     </section>
   );
 }
-

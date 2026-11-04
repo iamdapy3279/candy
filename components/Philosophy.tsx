@@ -31,8 +31,6 @@ export default function Philosophy() {
                   className="object-cover object-center transition-transform duration-700 hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 460px"
                 />
-                {/* Subtle warm tint overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 via-transparent to-transparent pointer-events-none" />
               </div>
 
               {/* Floating Navy Seal Badge (Reference Image 2) */}
@@ -137,3 +135,4 @@ export default function Philosophy() {
     </section>
   );
 }
+
