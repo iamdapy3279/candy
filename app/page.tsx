@@ -1,5 +1,4 @@
 import LoadingScreen from "@/components/LoadingScreen";
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Philosophy from "@/components/Philosophy";
 import FoodAndDrinks from "@/components/FoodAndDrinks";
@@ -13,10 +12,7 @@ export default function Home() {
       {/* 0. Introductory Game-Style Loading Screen (< 4 seconds, fades out to buffered video) */}
       <LoadingScreen />
 
-      {/* 1. Header (Transparent over video, white text, 3 links: Menu, Journey, Location) */}
-      <Header />
-
-      {/* 2. Hero Section (100vh full-bleed video + fallback cover) */}
+      {/* 1. Hero Section (100vh full-bleed video + fallback cover) */}
       <Hero />
 
       {/* 3. Our Philosophy (Two-column layout, cathedral arch with continuous glowing light beam) */}
