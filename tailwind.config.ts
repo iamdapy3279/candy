@@ -33,8 +33,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ["var(--font-cinzel)", "Cinzel", "Georgia", "serif"],
-        sans: ["var(--font-inter)", "Inter", "sans-serif"],
+        serif: ["Cinzel", "Georgia", "serif"],
+        sans: ["Inter", "-apple-system", "sans-serif"],
       },
       borderRadius: {
         pill: "1rem",
@@ -49,3 +49,4 @@ const config: Config = {
   plugins: [],
 };
 export default config;
+

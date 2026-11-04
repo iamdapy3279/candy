@@ -15,12 +15,13 @@ export default function Footer() {
           {/* Brand Info & Tagline */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden border border-gold-500/40">
+              <div className="w-12 h-12 rounded-full overflow-hidden border border-gold-500/40 shrink-0 flex items-center justify-center bg-navy-900">
                 <Image
                   src="/Logo.png"
                   alt="X&Y Bakehouse"
-                  fill
-                  className="object-cover"
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div>
@@ -72,14 +73,13 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 transition-all duration-300 hover:scale-105"
                   >
-                    <div className="relative w-5 h-5">
-                      <Image
-                        src={partner.icon}
-                        alt={partner.name}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
+                    <Image
+                      src={partner.icon}
+                      alt={partner.name}
+                      width={20}
+                      height={20}
+                      className="w-5 h-5 object-contain shrink-0"
+                    />
                     <span className="font-sans text-xs font-semibold text-cream-100">
                       {partner.name}
                     </span>
@@ -98,12 +98,13 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 text-cream-200/80 hover:text-gold-500 transition-colors group"
               >
-                <div className="relative w-6 h-6 group-hover:scale-110 transition-transform">
+                <div className="w-6 h-6 shrink-0 group-hover:scale-110 transition-transform overflow-hidden">
                   <Image
                     src={websiteContent.footer.instagram.icon}
                     alt="Instagram"
-                    fill
-                    className="object-contain"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 object-contain"
                   />
                 </div>
                 <span className="font-sans text-xs font-semibold tracking-wider">
@@ -127,3 +128,4 @@ export default function Footer() {
     </footer>
   );
 }
+

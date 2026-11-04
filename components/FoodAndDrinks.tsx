@@ -152,12 +152,13 @@ export default function FoodAndDrinks() {
               >
                 {/* Hand-drawn Line Art Doodle from Artwork Folder */}
                 {currentDish.doodle && (
-                  <div className="relative w-40 h-40 sm:w-48 sm:h-48 mb-8 drop-shadow-sm">
+                  <div className="w-40 h-40 sm:w-48 sm:h-48 mb-8 drop-shadow-sm shrink-0 flex items-center justify-center">
                     <Image
                       src={currentDish.doodle}
                       alt="Artisanal Bistro Sketch"
-                      fill
-                      className="object-contain"
+                      width={192}
+                      height={192}
+                      className="w-full h-full object-contain"
                     />
                   </div>
                 )}
@@ -185,3 +186,4 @@ export default function FoodAndDrinks() {
     </section>
   );
 }
+

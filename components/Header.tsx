@@ -34,12 +34,13 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
         {/* Left: Brand Identity */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10 rounded-full overflow-hidden border border-navy-800/10 shadow-sm transition-transform duration-300 group-hover:scale-105">
+          <div className="w-10 h-10 rounded-full overflow-hidden border border-navy-800/10 shadow-sm transition-transform duration-300 group-hover:scale-105 shrink-0 flex items-center justify-center bg-cream-200">
             <Image
               src="/Logo.png"
               alt="X&Y Bakehouse"
-              fill
-              className="object-cover"
+              width={40}
+              height={40}
+              className="w-full h-full object-cover"
               priority
             />
           </div>
@@ -120,3 +121,4 @@ export default function Header() {
     </header>
   );
 }
+
