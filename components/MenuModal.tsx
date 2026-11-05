@@ -165,8 +165,8 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
           className="fixed inset-0 z-[100] flex flex-col bg-[#F8F3ED] text-[#211714]"
         >
           {/* Top Sticky Header */}
-          <header className="sticky top-0 z-50 bg-[#F8F3ED]/95 backdrop-blur-md pt-3.5 pb-2 border-b border-[#E8DCCB]/60 select-none">
-            {/* Top Row: Back button, Title & Subtitle, Close button */}
+          <header className="sticky top-0 z-50 bg-[#F8F3ED]/95 backdrop-blur-md pt-3 sm:pt-3.5 pb-2 border-b border-[#E8DCCB]/60 select-none">
+            {/* Top Row: Back button, Title "Menu", Close button */}
             <div className="px-4 sm:px-8 flex items-center justify-between">
               {/* Back Button */}
               <button
@@ -177,14 +177,11 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
                 <ArrowLeft size={19} className="text-[#3A2E28]" />
               </button>
 
-              {/* Center: Brand Title & Subtitle */}
-              <div className="text-center px-2 flex flex-col items-center">
-                <h1 className="font-serif text-2xl sm:text-3xl font-medium text-[#211714] tracking-normal leading-tight">
-                  X&amp;Y Bakehouse
+              {/* Center: Just the word "Menu" in bold font */}
+              <div className="text-center px-2 flex items-center justify-center">
+                <h1 className="font-sans text-lg sm:text-xl font-bold tracking-wider uppercase text-[#211714]">
+                  Menu
                 </h1>
-                <span className="font-sans text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-gold-700 font-semibold block mt-0.5">
-                  Food &amp; Beverage Menu
-                </span>
               </div>
 
               {/* Close Button */}
@@ -195,17 +192,6 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
               >
                 <X size={19} className="text-[#3A2E28]" />
               </button>
-            </div>
-
-            {/* Architectural Heritage Monument Illustration directly below title */}
-            <div className="w-48 sm:w-60 h-7 sm:h-9 relative mx-auto mt-1 pointer-events-none opacity-85">
-              <Image
-                src="/locations/KolkataMonumentTransparent.png"
-                alt="X&Y Kolkata Heritage"
-                fill
-                priority
-                className="object-contain object-center"
-              />
             </div>
 
             {/* Horizontal Scrollable Category Filter Pills */}
