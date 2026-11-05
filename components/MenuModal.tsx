@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, X } from "lucide-react";
+import { ArrowLeft, X, Images, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface MenuModalProps {
   isOpen: boolean;
@@ -38,17 +38,85 @@ const categories = [
   { label: "Drinks", page: 10 },
 ];
 
+// Signature dishes photo gallery with high-res photography
+const signatureDishes = [
+  {
+    id: "eggs-benedict",
+    name: "Eggs Benedict",
+    category: "Morning Classic",
+    image: "/dishes/Dish1.jpg",
+  },
+  {
+    id: "chilli-spaghetti",
+    name: "Burnt Chilli Oil Spaghetti",
+    category: "Bistro Signature",
+    image: "/dishes/Dish2.jpg",
+  },
+  {
+    id: "cheesecake",
+    name: "New York Cheesecake",
+    category: "Patisserie Pillar",
+    image: "/dishes/Dish3.jpg",
+  },
+  {
+    id: "croissant",
+    name: "Butter Croissant",
+    category: "Artisanal Bake",
+    image: "/dishes/Dish4.jpg",
+  },
+  {
+    id: "gourmet-burger",
+    name: "Gourmet Bistro Burger",
+    category: "Healthy Bites",
+    image: "/dishes/Dish5.jpg",
+  },
+  {
+    id: "truffle-pasta",
+    name: "Artisan Handcrafted Pasta",
+    category: "Chef's Special",
+    image: "/dishes/Dish7.jpg",
+  },
+  {
+    id: "fruit-tart",
+    name: "Seasonal Bakehouse Tart",
+    category: "Dessert Special",
+    image: "/dishes/Dish8.jpg",
+  },
+  {
+    id: "matcha-latte",
+    name: "Ceremonial Matcha Latte",
+    category: "Beverage",
+    image: "/dishes/Dish9.jpg",
+  },
+  {
+    id: "specialty-coffee",
+    name: "Specialty Espresso Roast",
+    category: "Coffee Bar",
+    image: "/dishes/Dish10.jpg",
+  },
+];
+
 export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const categoryBarRef = useRef<HTMLDivElement>(null);
+  const galleryCarouselRef = useRef<HTMLDivElement>(null);
+
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isGalleryOpen, setIsGalleryOpen] = useState<boolean>(false);
+  const [currentGalleryIndex, setCurrentGalleryIndex] = useState<number>(0);
 
   // Lock background scroll when open & handle Escape key
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
       const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") onClose();
+        if (e.key === "Escape") {
+          if (isGalleryOpen) {
+            setIsGalleryOpen(false);
+          } else {
+            onClose();
+          }
+        }
       };
       window.addEventListener("keydown", handleKeyDown);
       return () => {
@@ -58,7 +126,7 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
     } else {
       document.body.style.overflow = "unset";
     }
-  }, [isOpen, onClose]);
+  }, [isOpen, isGalleryOpen, onClose]);
 
   // Track currently visible page on scroll
   useEffect(() => {
@@ -98,6 +166,26 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
       });
     }
   }, [currentPage]);
+
+  // Track active index in gallery swipe carousel
+  const handleGalleryScroll = () => {
+    if (!galleryCarouselRef.current) return;
+    const { scrollLeft, clientWidth } = galleryCarouselRef.current;
+    if (clientWidth > 0) {
+      const newIndex = Math.round(scrollLeft / clientWidth);
+      setCurrentGalleryIndex(newIndex);
+    }
+  };
+
+  const scrollToGalleryIndex = (index: number) => {
+    if (!galleryCarouselRef.current) return;
+    const clientWidth = galleryCarouselRef.current.clientWidth;
+    galleryCarouselRef.current.scrollTo({
+      left: index * clientWidth,
+      behavior: "smooth",
+    });
+    setCurrentGalleryIndex(index);
+  };
 
   const scrollToPage = (pageNum: number) => {
     const target = document.getElementById(`menu-page-${pageNum}`);
@@ -240,7 +328,7 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
             ref={scrollContainerRef}
             className="flex-1 overflow-y-auto overscroll-contain px-4 sm:px-6 py-4 sm:py-6"
           >
-            <div className="max-w-md sm:max-w-xl md:max-w-2xl mx-auto flex flex-col items-center gap-5 sm:gap-6 pb-12">
+            <div className="max-w-md sm:max-w-xl md:max-w-2xl mx-auto flex flex-col items-center gap-5 sm:gap-6 pb-24">
               {menuPages.map((page, index) => (
                 <div
                   key={page.id}
@@ -265,6 +353,135 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
               ))}
             </div>
           </div>
+
+          {/* BOTTOM FLOATING "GALLERY" BUTTON */}
+          <div className="fixed bottom-5 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 select-none">
+            <button
+              onClick={() => setIsGalleryOpen(true)}
+              className="inline-flex items-center gap-2 px-6 sm:px-7 py-2.5 rounded-full bg-navy-950/90 hover:bg-gold-500 text-cream-100 hover:text-navy-950 border border-white/20 shadow-2xl font-sans text-xs uppercase tracking-[0.22em] font-semibold transition-all active:scale-95 cursor-pointer backdrop-blur-md group"
+              aria-label="Open Signature Dishes Gallery"
+            >
+              <Images size={16} className="text-gold-400 group-hover:text-navy-950 transition-colors" />
+              <span>Gallery</span>
+            </button>
+          </div>
+
+          {/* SMALLER POPUP: SIGNATURE DISHES ONLY PHOTO GALLERY WITH SWIPE-TO-SCROLL */}
+          <AnimatePresence>
+            {isGalleryOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 z-[120] bg-black/75 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+                onClick={() => setIsGalleryOpen(false)}
+              >
+                {/* Popup Card Container */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.92, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.92, y: 15 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative w-full max-w-sm sm:max-w-md bg-[#211714] rounded-3xl overflow-hidden shadow-2xl border border-white/15 flex flex-col text-white"
+                >
+                  {/* Gallery Header */}
+                  <div className="px-5 py-3.5 border-b border-white/10 flex items-center justify-between bg-navy-950/80 select-none">
+                    <div>
+                      <h2 className="font-serif text-lg font-medium tracking-wide text-cream-100 leading-tight">
+                        Signature Dishes
+                      </h2>
+                      <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-gold-400 font-semibold block">
+                        Swipe to Explore • {currentGalleryIndex + 1} of {signatureDishes.length}
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={() => setIsGalleryOpen(false)}
+                      className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+                      aria-label="Close gallery"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+
+                  {/* Swipe-to-Scroll Horizontal Carousel Container */}
+                  <div className="relative w-full aspect-[4/5] bg-black overflow-hidden group">
+                    <div
+                      ref={galleryCarouselRef}
+                      onScroll={handleGalleryScroll}
+                      className="w-full h-full flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth"
+                    >
+                      {signatureDishes.map((dish, idx) => (
+                        <div
+                          key={dish.id}
+                          className="w-full h-full shrink-0 snap-center relative"
+                        >
+                          <Image
+                            src={dish.image}
+                            alt={dish.name}
+                            fill
+                            priority={idx === 0}
+                            className="object-cover"
+                            sizes="(max-width: 640px) 92vw, 448px"
+                          />
+
+                          {/* Subtle Bottom Vignette Gradient with Dish Name */}
+                          <div className="absolute inset-x-0 bottom-0 pt-16 pb-4 px-5 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex flex-col justify-end">
+                            <span className="font-sans text-[10px] tracking-[0.22em] uppercase text-gold-400 font-semibold block mb-0.5">
+                              {dish.category}
+                            </span>
+                            <h3 className="font-serif text-xl sm:text-2xl font-medium text-white tracking-wide leading-tight">
+                              {dish.name}
+                            </h3>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Left Chevron Button (Desktop & Click Navigation) */}
+                    {currentGalleryIndex > 0 && (
+                      <button
+                        onClick={() => scrollToGalleryIndex(currentGalleryIndex - 1)}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white flex items-center justify-center backdrop-blur-xs transition-all active:scale-90 cursor-pointer shadow-lg z-10 hidden sm:flex"
+                        aria-label="Previous dish"
+                      >
+                        <ChevronLeft size={20} />
+                      </button>
+                    )}
+
+                    {/* Right Chevron Button (Desktop & Click Navigation) */}
+                    {currentGalleryIndex < signatureDishes.length - 1 && (
+                      <button
+                        onClick={() => scrollToGalleryIndex(currentGalleryIndex + 1)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white flex items-center justify-center backdrop-blur-xs transition-all active:scale-90 cursor-pointer shadow-lg z-10 hidden sm:flex"
+                        aria-label="Next dish"
+                      >
+                        <ChevronRight size={20} />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Carousel Dot Indicators */}
+                  <div className="py-3 px-4 bg-navy-950/90 flex items-center justify-center gap-1.5 select-none">
+                    {signatureDishes.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => scrollToGalleryIndex(idx)}
+                        className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                          currentGalleryIndex === idx
+                            ? "w-6 bg-gold-400"
+                            : "w-1.5 bg-white/30 hover:bg-white/50"
+                        }`}
+                        aria-label={`Go to photo ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>
