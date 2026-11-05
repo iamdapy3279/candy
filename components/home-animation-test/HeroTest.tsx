@@ -6,8 +6,6 @@ import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { websiteContent } from "@/lib/content";
 import GlowingBorder from "@/components/ui/GlowingBorder";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface HeroTestProps {
   onOpenMenu?: () => void;
@@ -16,41 +14,10 @@ interface HeroTestProps {
 export default function HeroTest({ onOpenMenu }: HeroTestProps = {}) {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const steamRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     if (videoRef.current && videoRef.current.readyState >= 3) {
       setVideoLoaded(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (steamRef.current) {
-      const paths = steamRef.current.querySelectorAll<SVGPathElement>("path");
-      paths.forEach((p) => {
-        const len = p.getTotalLength();
-        p.style.strokeDasharray = `${len} ${len}`;
-        p.style.strokeDashoffset = prefersReduced ? "0" : `${len}`;
-      });
-
-      if (!prefersReduced) {
-        gsap.to(paths, {
-          strokeDashoffset: 0,
-          duration: 1,
-          stagger: 0.15,
-          ease: "none",
-          scrollTrigger: {
-            trigger: steamRef.current,
-            start: "top 85%",
-            end: "bottom 30%",
-            scrub: 0.8,
-          },
-        });
-      }
     }
   }, []);
 
@@ -144,23 +111,7 @@ export default function HeroTest({ onOpenMenu }: HeroTestProps = {}) {
         </GlowingBorder>
       </div>
 
-      {/* 4. STEAM.SVG ASSET: Procedural Steam Rising at Bottom-Right of Hero */}
-      <div className="absolute -bottom-8 right-8 sm:right-16 lg:right-28 z-25 pointer-events-none select-none">
-        <svg
-          ref={steamRef}
-          viewBox="0 0 180 180"
-          fill="none"
-          className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 overflow-visible"
-        >
-          <g stroke="#171717" strokeWidth="2.4" strokeLinecap="round">
-            <path id="steam-1" d="M48 160 C22 130 65 109 44 78 C30 58 32 39 47 18" />
-            <path id="steam-2" d="M89 160 C62 129 105 105 83 73 C68 51 75 31 91 12" />
-            <path id="steam-3" d="M130 160 C105 132 145 111 126 83 C113 64 118 45 132 29" />
-          </g>
-        </svg>
-      </div>
-
-      {/* 5. Floating Subtle Scroll Down Indicator */}
+      {/* 4. Floating Subtle Scroll Down Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

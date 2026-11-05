@@ -1,109 +1,67 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, PanInfo } from "framer-motion";
+import { motion, PanInfo } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { websiteContent, DishItem } from "@/lib/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { RollingPinIllustration, WhiskIllustration } from "./FinalSvgIllustrations";
 
 export default function FoodAndDrinksTest() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [exitingDish, setExitingDish] = useState<DishItem | null>(null);
-  const [direction, setDirection] = useState<1 | -1>(1);
-  const [isAnimating, setIsAnimating] = useState(false);
   const dishes = websiteContent.foodAndDrinks.dishes;
 
   const lineRef = useRef<SVGPathElement>(null);
-  const whiskRef = useRef<SVGGElement>(null);
-  const rollingPinRef = useRef<SVGGElement>(null);
+  const mobileLineRef = useRef<SVGPathElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Helper to init paths
-    const initPaths = (el: Element | null) => {
-      if (!el) return [];
-      const paths = Array.from(el.querySelectorAll<SVGPathElement>("path"));
-      paths.forEach((p) => {
-        const len = p.getTotalLength();
-        p.style.strokeDasharray = `${len} ${len}`;
-        p.style.strokeDashoffset = prefersReduced ? "0" : `${len}`;
-      });
-      return paths;
-    };
-
-    const rollingPinPaths = initPaths(rollingPinRef.current);
-    const whiskPaths = initPaths(whiskRef.current);
-
-    if (lineRef.current) {
+    if (!prefersReduced && lineRef.current) {
       const len = lineRef.current.getTotalLength();
       lineRef.current.style.strokeDasharray = `${len} ${len}`;
-      lineRef.current.style.strokeDashoffset = prefersReduced ? "0" : `${len}`;
-    }
+      lineRef.current.style.strokeDashoffset = `${len}`;
 
-    if (!prefersReduced) {
-      const tl = gsap.timeline({
+      gsap.to(lineRef.current, {
+        strokeDashoffset: 0,
+        ease: "none",
         scrollTrigger: {
           trigger: "#food-drinks-test",
-          start: "top 80%",
+          start: "top 85%",
           end: "bottom 30%",
-          scrub: 0.8,
+          scrub: 1,
         },
       });
+    }
 
-      // 1. Draw Rolling Pin on left
-      if (rollingPinPaths.length > 0) {
-        tl.to(rollingPinPaths, {
-          strokeDashoffset: 0,
-          duration: 1.0,
-          stagger: 0.15,
-          ease: "none",
-        });
-      }
+    if (!prefersReduced && mobileLineRef.current) {
+      const len = mobileLineRef.current.getTotalLength();
+      mobileLineRef.current.style.strokeDasharray = `${len} ${len}`;
+      mobileLineRef.current.style.strokeDashoffset = `${len}`;
 
-      // 2. Draw sweeping connecting line
-      if (lineRef.current) {
-        tl.to(lineRef.current, { strokeDashoffset: 0, duration: 1.2, ease: "none" }, "-=0.3");
-      }
-
-      // 3. Draw Whisk on right
-      if (whiskPaths.length > 0) {
-        tl.to(whiskPaths, {
-          strokeDashoffset: 0,
-          duration: 1.0,
-          stagger: 0.12,
-          ease: "none",
-        }, "-=0.2");
-      }
+      gsap.to(mobileLineRef.current, {
+        strokeDashoffset: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#food-drinks-test",
+          start: "top 85%",
+          end: "bottom 30%",
+          scrub: 1,
+        },
+      });
     }
   }, []);
 
   const handleNext = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setDirection(1);
-    setExitingDish(dishes[currentIndex]);
     setCurrentIndex((prev) => (prev + 1) % dishes.length);
-    setTimeout(() => {
-      setExitingDish(null);
-      setIsAnimating(false);
-    }, 450);
   };
 
   const handlePrev = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setDirection(-1);
-    setExitingDish(dishes[currentIndex]);
     setCurrentIndex((prev) => (prev - 1 + dishes.length) % dishes.length);
-    setTimeout(() => {
-      setExitingDish(null);
-      setIsAnimating(false);
-    }, 450);
   };
 
   const handlePanEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
@@ -127,59 +85,33 @@ export default function FoodAndDrinksTest() {
       {/* 1. DEDICATED BACKGROUND SVG LAYER (BEHIND CONTENT, z-0)         */}
       {/* ============================================================== */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-visible select-none">
-        {/* Desktop Procedural Flowing Line + ROLLING PIN on left */}
+        {/* Desktop Procedural Flowing Line */}
         <svg
           className="hidden lg:block w-full h-full overflow-visible"
           viewBox="0 0 1440 650"
           fill="none"
         >
-          {/* ROLLING PIN (rolling-pin.svg) positioned on left framing card deck */}
-          <g
-            ref={rollingPinRef}
-            transform="translate(60, 60) scale(0.85) rotate(-16)"
-            stroke="#171717"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path id="barrel" d="M77 47 C94 33 223 33 240 47 L240 103 C222 117 95 117 77 103Z" />
-            <path id="left-neck" d="M77 57 C55 57 45 48 32 42 C21 37 12 44 14 55 L20 75 C22 83 34 87 45 81 L77 94" />
-            <path id="right-neck" d="M240 57 C262 57 272 48 285 42 C296 37 305 44 303 55 L297 75 C295 83 283 87 272 81 L240 94" />
-          </g>
-
           <path
             ref={lineRef}
-            d="M 280 180 C 380 230 440 380 580 410 C 720 440 880 370 1050 390 C 1180 410 1260 480 1380 510"
-            stroke="#171717"
-            strokeWidth="2.2"
+            d="M -20 180 C 180 230 340 380 480 410 C 620 440 880 370 1050 390 C 1180 410 1260 480 1380 510 C 1420 520 1450 530 1480 540"
+            stroke="#111111"
+            strokeWidth="1.9"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
         </svg>
 
-        {/* Mobile Flowing Line + Mobile Rolling Pin */}
+        {/* Mobile Flowing Line */}
         <svg
           className="block lg:hidden w-full h-full overflow-visible"
           viewBox="0 0 390 650"
           fill="none"
         >
-          {/* Mobile Rolling Pin */}
-          <g
-            transform="translate(20, 20) scale(0.55) rotate(-12)"
-            stroke="#171717"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M77 47 C94 33 223 33 240 47 L240 103 C222 117 95 117 77 103Z" />
-            <path d="M77 57 C55 57 45 48 32 42 C21 37 12 44 14 55 L20 75 C22 83 34 87 45 81 L77 94" />
-            <path d="M240 57 C262 57 272 48 285 42 C296 37 305 44 303 55 L297 75 C295 83 283 87 272 81 L240 94" />
-          </g>
-
           <path
-            d="M 180 70 C 190 200 130 360 210 430 C 270 480 320 540 340 610"
-            stroke="#171717"
-            strokeWidth="2.2"
+            ref={mobileLineRef}
+            d="M 10 70 C 90 200 130 360 210 430 C 270 480 320 540 340 610"
+            stroke="#111111"
+            strokeWidth="1.9"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
@@ -230,7 +162,7 @@ export default function FoodAndDrinksTest() {
                 />
               </div>
 
-              {/* Active Foreground Card (Opaque, occludes the background SVG line) */}
+              {/* Active Foreground Card */}
               <motion.div
                 key={currentDish.id}
                 drag="x"
@@ -250,7 +182,7 @@ export default function FoodAndDrinksTest() {
               </motion.div>
             </div>
 
-            {/* Navigation Controls & Prominent Rolling Pin Artwork */}
+            {/* Navigation Controls & Viewport-Led Rolling Pin Illustration from /final */}
             <div className="flex flex-col sm:flex-row items-center gap-6 mt-8">
               <div className="flex items-center gap-4">
                 <button
@@ -274,20 +206,20 @@ export default function FoodAndDrinksTest() {
                 </button>
               </div>
 
-              {/* Prominent Rolling Pin Artwork from Reference Pack */}
-              <div className="relative w-36 sm:w-44 lg:w-48 aspect-[188/56] pointer-events-none select-none -rotate-6">
-                <Image
-                  src="/illustrations/exact-artwork/rolling-pin.svg"
-                  alt="Rolling Pin"
-                  fill
-                  className="object-contain"
-                  priority
+              {/* Viewport-Led Procedural Rolling Pin Illustration from /final */}
+              <div className="select-none -rotate-6">
+                <RollingPinIllustration
+                  className="w-36 sm:w-44 lg:w-48 aspect-[187/82]"
+                  strokeColor="#111111"
+                  strokeWidth={1.9}
+                  startTrigger="top 85%"
+                  endTrigger="center 50%"
                 />
               </div>
             </div>
           </div>
 
-          {/* Column 2: Editorial Text & The WHISK Illustration on Right (Matching Mockup) */}
+          {/* Column 2: Editorial Text & The WHISK Illustration from /final (Matching Mockup) */}
           <div className="order-1 lg:order-2 lg:col-span-6 flex items-center justify-between gap-6">
             <div className="flex flex-col items-start max-w-md w-full text-left">
               <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-3">
@@ -308,17 +240,15 @@ export default function FoodAndDrinksTest() {
               </blockquote>
             </div>
 
-            {/* The Whisk Asset from Reference Pack */}
-            <div className="hidden sm:flex shrink-0 items-center justify-center select-none pointer-events-none">
-              <div className="relative w-28 h-36 lg:w-36 lg:h-44 aspect-[142/97] -rotate-12">
-                <Image
-                  src="/illustrations/exact-artwork/whisk.svg"
-                  alt="Whisk"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
+            {/* Viewport-Led Procedural Whisk Illustration from /final */}
+            <div className="hidden sm:flex shrink-0 items-center justify-center select-none -rotate-12">
+              <WhiskIllustration
+                className="w-28 sm:w-36 lg:w-40 aspect-[142/97]"
+                strokeColor="#111111"
+                strokeWidth={1.9}
+                startTrigger="top 85%"
+                endTrigger="center 50%"
+              />
             </div>
           </div>
         </div>
