@@ -38,11 +38,11 @@ export default function Home() {
       {/* 4. Food & Drinks */}
       <FoodAndDrinks />
 
-      {/* 5. Our Evolution */}
-      <Evolution />
-
-      {/* 6. In The Press (Infinite Auto-Scrolling Carousel) */}
+      {/* 5. In The Press (Infinite Auto-Scrolling Carousel) */}
       <Press />
+
+      {/* 6. Our Evolution */}
+      <Evolution />
 
       {/* 7. Footer */}
       <Footer />
