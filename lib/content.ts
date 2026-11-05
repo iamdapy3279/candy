@@ -23,6 +23,7 @@ export interface LocationItem {
   id: string;
   name: string;
   area: string;
+  landmark: string;
   address: string;
   hours: string;
   phone: string;
@@ -32,6 +33,7 @@ export interface LocationItem {
   description: string;
   mobileDescription?: string;
   mapsUrl: string;
+  amenity: "pet-friendly" | "valet-parking";
 }
 
 export const websiteContent = {
@@ -195,32 +197,36 @@ export const websiteContent = {
 
   locations: [
     {
-      id: "alipore",
-      name: "Alipore",
-      area: "South Kolkata",
-      address: "Ground Floor, 6, Burdwan Rd, Alipore, Kolkata, West Bengal 700027",
-      hours: "11:00 AM – 11:00 PM",
-      phone: "+91 92309 85229",
-      displayPhone: "+91 92309 85229",
-      image: "/locations/Allipore_Location.jpg",
-      secondaryImage: "/locations/Allipore_Location2.jpg",
-      description: "Our flagship bakehouse featuring sunlit banquette seating, ambient lighting, and the scent of fresh morning bakes.",
-      mobileDescription: "Our flagship sunlit bakehouse filled with the aroma of fresh morning pastries.",
-      mapsUrl: "https://maps.google.com/?q=6+Burdwan+Rd+Alipore+Kolkata+700027",
-    },
-    {
       id: "salt-lake",
       name: "Salt Lake",
-      area: "Sector 2",
+      area: "SALT LAKE — SECTOR II",
+      landmark: "Just a 6-minute drive from Central Park.",
       address: "CG-220, Ground Floor, Sector 2, Salt Lake City, Kolkata – 700091",
       hours: "12:00 PM – 11:30 PM",
       phone: "+91 82409 68898",
       displayPhone: "+91 82409 68898",
       image: "/locations/SALTLAKELOCATIONPIC.jpeg",
       secondaryImage: "/locations/Saltlake_Location2.jpeg",
-      description: "An intimate, calm bistro corner in Salt Lake tailored for leisurely lunches, business catch-ups, and slow coffee.",
-      mobileDescription: "An intimate bistro corner crafted for slow coffee and leisurely lunches.",
-      mapsUrl: "https://maps.google.com/?q=CG-220+Sector+2+Salt+Lake+City+Kolkata+700091",
+      description: "Just a 6-minute drive from Central Park.",
+      mobileDescription: "Just a 6-minute drive from Central Park.",
+      mapsUrl: "https://www.google.com/maps/search/?api=1&query=CG-220,+Ground+Floor,+Sector+2,+Salt+Lake+City,+Kolkata+700091",
+      amenity: "pet-friendly",
+    },
+    {
+      id: "alipore",
+      name: "Alipore",
+      area: "ALIPORE — SOUTH KOLKATA",
+      landmark: "Just a 4-minute drive from Alipore Court.",
+      address: "Ground Floor, 6, Burdwan Rd, Alipore, Kolkata, West Bengal 700027",
+      hours: "11:00 AM – 11:00 PM",
+      phone: "+91 92309 85229",
+      displayPhone: "+91 92309 85229",
+      image: "/locations/Allipore_Location.jpg",
+      secondaryImage: "/locations/Allipore_Location2.jpg",
+      description: "Just a 4-minute drive from Alipore Court.",
+      mobileDescription: "Just a 4-minute drive from Alipore Court.",
+      mapsUrl: "https://www.google.com/maps/search/?api=1&query=Ground+Floor,+6,+Burdwan+Rd,+Alipore,+Kolkata,+West+Bengal+700027",
+      amenity: "valet-parking",
     },
   ],
 
