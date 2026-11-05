@@ -42,23 +42,23 @@ export default function Philosophy() {
                 </div>
               </GlowingBorder>
 
-              {/* Floating Navy Seal Badge (Reference Image 2) */}
+              {/* Floating Seal Badge */}
               <motion.div
                 initial={{ scale: 0, rotate: -20 }}
                 whileInView={{ scale: 1, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="absolute -bottom-6 -right-4 sm:-right-6 w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-navy-800 text-white flex flex-col items-center justify-center border-4 border-cream-100 shadow-xl z-20"
+                className="absolute -bottom-6 -right-4 sm:-right-6 w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#293477] text-[#f2ba1e] flex flex-col items-center justify-center border-4 border-cream-100 shadow-xl z-20"
               >
                 <div className="text-center px-2">
-                  <span className="block font-serif text-[11px] sm:text-xs tracking-[0.25em] text-gold-500 font-bold uppercase">
-                    X&Y
+                  <span className="block font-serif text-[11px] sm:text-xs tracking-[0.25em] text-[#f2ba1e] font-bold uppercase">
+                    X &amp; Y
                   </span>
-                  <div className="w-8 h-[1px] bg-gold-500/50 my-1 mx-auto" />
-                  <span className="block font-sans text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-cream-100 font-medium">
+                  <div className="w-8 h-[1px] bg-[#f2ba1e]/50 my-1 mx-auto" />
+                  <span className="block font-sans text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#f2ba1e] font-semibold">
                     Bakehouse
                   </span>
-                  <span className="block font-sans text-[7px] tracking-[0.15em] uppercase text-cream-300/80 mt-0.5">
+                  <span className="block font-sans text-[7px] tracking-[0.15em] uppercase text-[#f2ba1e]/85 mt-0.5 font-medium">
                     Est. 2024
                   </span>
                 </div>
