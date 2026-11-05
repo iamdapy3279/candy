@@ -7,88 +7,180 @@ import { websiteContent } from "@/lib/content";
 import GlowingBorder from "@/components/ui/GlowingBorder";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CoffeeMugIllustration } from "./FinalSvgIllustrations";
+import { coffeeMugStrokes } from "./artworkStrokes";
 
 export default function PhilosophyTest() {
-  const lineRef = useRef<SVGPathElement>(null);
-  const mobileLineRef = useRef<SVGPathElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const lineInRef = useRef<SVGPathElement>(null);
+  const lineOutRef = useRef<SVGPathElement>(null);
+  const mugGroupRef = useRef<SVGGElement>(null);
+
+  // Mobile refs
+  const mobileLineInRef = useRef<SVGPathElement>(null);
+  const mobileLineOutRef = useRef<SVGPathElement>(null);
+  const mobileMugGroupRef = useRef<SVGGElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
 
-    if (!prefersReduced && lineRef.current) {
-      const len = lineRef.current.getTotalLength();
-      lineRef.current.style.strokeDasharray = `${len} ${len}`;
-      lineRef.current.style.strokeDashoffset = `${len}`;
+    const ctx = gsap.context(() => {
+      // 1. Helper to setup stroke dasharray/offset
+      const prepPath = (path: SVGPathElement | null) => {
+        if (!path) return 0;
+        const len = path.getTotalLength();
+        path.style.strokeDasharray = `${len} ${len}`;
+        path.style.strokeDashoffset = `${len}`;
+        return len;
+      };
 
-      gsap.to(lineRef.current, {
-        strokeDashoffset: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#philosophy-test",
-          start: "top 85%",
-          end: "bottom 30%",
-          scrub: 1,
-        },
-      });
-    }
+      // Desktop Setup
+      prepPath(lineInRef.current);
+      prepPath(lineOutRef.current);
+      const mugPaths = mugGroupRef.current
+        ? Array.from(mugGroupRef.current.querySelectorAll<SVGPathElement>("path"))
+        : [];
+      mugPaths.forEach(prepPath);
 
-    if (!prefersReduced && mobileLineRef.current) {
-      const len = mobileLineRef.current.getTotalLength();
-      mobileLineRef.current.style.strokeDasharray = `${len} ${len}`;
-      mobileLineRef.current.style.strokeDashoffset = `${len}`;
+      if (sectionRef.current && lineInRef.current && lineOutRef.current && mugPaths.length > 0) {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "center 45%",
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+          },
+        });
 
-      gsap.to(mobileLineRef.current, {
-        strokeDashoffset: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#philosophy-test",
-          start: "top 85%",
-          end: "bottom 30%",
-          scrub: 1,
-        },
-      });
-    }
+        // Step 1: The black ink line flows through whitespace toward the coffee mug
+        tl.to(lineInRef.current, { strokeDashoffset: 0, duration: 1.6, ease: "none" });
+
+        // Step 2: The ink line sequentially draws each stroke of the coffee mug
+        mugPaths.forEach((path) => {
+          tl.to(path, { strokeDashoffset: 0, duration: 0.45, ease: "none" });
+        });
+
+        // Step 3: The ink line exits the mug and continues its journey towards Locations
+        tl.to(lineOutRef.current, { strokeDashoffset: 0, duration: 1.4, ease: "none" });
+      }
+
+      // Mobile Setup
+      prepPath(mobileLineInRef.current);
+      prepPath(mobileLineOutRef.current);
+      const mobileMugPaths = mobileMugGroupRef.current
+        ? Array.from(mobileMugGroupRef.current.querySelectorAll<SVGPathElement>("path"))
+        : [];
+      mobileMugPaths.forEach(prepPath);
+
+      if (sectionRef.current && mobileLineInRef.current && mobileLineOutRef.current && mobileMugPaths.length > 0) {
+        const mobileTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+            end: "center 45%",
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        mobileTl.to(mobileLineInRef.current, { strokeDashoffset: 0, duration: 1.4, ease: "none" });
+        mobileMugPaths.forEach((path) => {
+          mobileTl.to(path, { strokeDashoffset: 0, duration: 0.4, ease: "none" });
+        });
+        mobileTl.to(mobileLineOutRef.current, { strokeDashoffset: 0, duration: 1.2, ease: "none" });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="philosophy-test"
       className="py-12 md:py-20 bg-cream-100 relative overflow-visible isolate"
     >
       {/* ============================================================== */}
-      {/* 1. DEDICATED BACKGROUND SVG LAYER (BEHIND CONTENT, z-0)         */}
+      {/* 1. DEDICATED CONTINUOUS INK STROKE CANVAS (BEHIND CONTENT, z-0)*/}
       {/* ============================================================== */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-visible select-none">
-        {/* Desktop Procedural Flowing Line */}
+        {/* Desktop Canvas: Continuous ink line drawing the Coffee Mug */}
         <svg
           className="hidden lg:block w-full h-full overflow-visible"
-          viewBox="0 0 1440 700"
+          viewBox="0 0 1440 720"
           fill="none"
         >
+          {/* A. Entrance Line: Sweeps through whitespace, flows directly into Mug rim */}
           <path
-            ref={lineRef}
-            d="M -30 110 C 140 100 130 280 180 390 C 230 500 320 570 480 560 C 620 550 670 440 820 410 C 960 380 1060 340 1160 320 C 1260 300 1350 350 1480 380"
+            ref={lineInRef}
+            d="M -20 110 C 140 100 130 280 180 390 C 230 500 320 570 480 560 C 620 550 670 440 820 410 C 940 380 990 260 1080 180 C 1110 150 1120 125 1142.9 108.8"
+            stroke="#111111"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* B. The Coffee Mug: Drawn sequentially stroke by stroke by the ink line */}
+          <g
+            ref={mugGroupRef}
+            transform="translate(1030, 80) scale(1.05)"
             stroke="#111111"
             strokeWidth="1.9"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {coffeeMugStrokes.map((d, i) => (
+              <path key={i} d={d} />
+            ))}
+          </g>
+
+          {/* C. Exit Line: Seamlessly flows out of saucer edge towards Locations */}
+          <path
+            ref={lineOutRef}
+            d="M 1151.8 146.2 C 1220 200 1300 320 1460 380"
+            stroke="#111111"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
         </svg>
 
-        {/* Mobile Procedural Flowing Line */}
+        {/* Mobile Canvas: Compact flowing line physically drawing the Coffee Mug */}
         <svg
           className="block lg:hidden w-full h-full overflow-visible"
-          viewBox="0 0 390 700"
+          viewBox="0 0 390 720"
           fill="none"
         >
           <path
-            ref={mobileLineRef}
-            d="M 15 30 C 35 150 25 280 85 360 C 135 440 200 480 240 500"
+            ref={mobileLineInRef}
+            d="M 10 30 C 35 120 25 240 75 320 C 110 375 160 410 208.5 423.8"
+            stroke="#111111"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          <g
+            ref={mobileMugGroupRef}
+            transform="translate(190, 405) scale(0.68)"
             stroke="#111111"
             strokeWidth="1.9"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {coffeeMugStrokes.map((d, i) => (
+              <path key={i} d={d} />
+            ))}
+          </g>
+
+          <path
+            ref={mobileLineOutRef}
+            d="M 268.8 449.2 C 290 490 320 560 350 660"
+            stroke="#111111"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
@@ -100,7 +192,7 @@ export default function PhilosophyTest() {
       {/* ============================================================== */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Cathedral Arch Photo Frame */}
+          {/* Left Column: Cathedral Arch Photo Frame (Opaque, occludes the line naturally) */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -162,17 +254,6 @@ export default function PhilosophyTest() {
             transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 flex flex-col justify-center"
           >
-            {/* Viewport-Led Procedural Coffee Mug Illustration from /final */}
-            <div className="flex items-center gap-3 mb-6 select-none">
-              <CoffeeMugIllustration
-                className="w-28 sm:w-36 lg:w-40 aspect-[139/95]"
-                strokeColor="#111111"
-                strokeWidth={1.9}
-                startTrigger="top 85%"
-                endTrigger="center 50%"
-              />
-            </div>
-
             <span className="philosophy-label block mb-4">
               {websiteContent.philosophy.tag}
             </span>

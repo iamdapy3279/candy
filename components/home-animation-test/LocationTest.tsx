@@ -6,89 +6,181 @@ import { Clock, MapPin, Phone, ExternalLink } from "lucide-react";
 import { websiteContent } from "@/lib/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CroissantIllustration } from "./FinalSvgIllustrations";
+import { croissantStrokes } from "./artworkStrokes";
 
 export default function LocationTest() {
   const locations = websiteContent.locations;
-  const lineRef = useRef<SVGPathElement>(null);
-  const mobileLineRef = useRef<SVGPathElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const lineInRef = useRef<SVGPathElement>(null);
+  const lineOutRef = useRef<SVGPathElement>(null);
+  const croissantGroupRef = useRef<SVGGElement>(null);
+
+  // Mobile refs
+  const mobileLineInRef = useRef<SVGPathElement>(null);
+  const mobileLineOutRef = useRef<SVGPathElement>(null);
+  const mobileCroissantGroupRef = useRef<SVGGElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
 
-    if (!prefersReduced && lineRef.current) {
-      const len = lineRef.current.getTotalLength();
-      lineRef.current.style.strokeDasharray = `${len} ${len}`;
-      lineRef.current.style.strokeDashoffset = `${len}`;
+    const ctx = gsap.context(() => {
+      // Helper to setup stroke dasharray/offset
+      const prepPath = (path: SVGPathElement | null) => {
+        if (!path) return 0;
+        const len = path.getTotalLength();
+        path.style.strokeDasharray = `${len} ${len}`;
+        path.style.strokeDashoffset = `${len}`;
+        return len;
+      };
 
-      gsap.to(lineRef.current, {
-        strokeDashoffset: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#locations-test",
-          start: "top 85%",
-          end: "bottom 30%",
-          scrub: 1,
-        },
-      });
-    }
+      // Desktop Setup
+      prepPath(lineInRef.current);
+      prepPath(lineOutRef.current);
+      const cPaths = croissantGroupRef.current
+        ? Array.from(croissantGroupRef.current.querySelectorAll<SVGPathElement>("path"))
+        : [];
+      cPaths.forEach(prepPath);
 
-    if (!prefersReduced && mobileLineRef.current) {
-      const len = mobileLineRef.current.getTotalLength();
-      mobileLineRef.current.style.strokeDasharray = `${len} ${len}`;
-      mobileLineRef.current.style.strokeDashoffset = `${len}`;
+      if (sectionRef.current && lineInRef.current && lineOutRef.current && cPaths.length > 0) {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "center 45%",
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+          },
+        });
 
-      gsap.to(mobileLineRef.current, {
-        strokeDashoffset: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#locations-test",
-          start: "top 85%",
-          end: "bottom 30%",
-          scrub: 1,
-        },
-      });
-    }
+        // Step 1: The black ink line enters Locations and travels toward the Croissant
+        tl.to(lineInRef.current, { strokeDashoffset: 0, duration: 1.5, ease: "none" });
+
+        // Step 2: The ink line sequentially constructs the Croissant stroke by stroke
+        cPaths.forEach((path) => {
+          tl.to(path, { strokeDashoffset: 0, duration: 0.35, ease: "none" });
+        });
+
+        // Step 3: The ink line exits the Croissant and travels behind the location cards
+        tl.to(lineOutRef.current, { strokeDashoffset: 0, duration: 1.6, ease: "none" });
+      }
+
+      // Mobile Setup
+      prepPath(mobileLineInRef.current);
+      prepPath(mobileLineOutRef.current);
+      const mobileCPaths = mobileCroissantGroupRef.current
+        ? Array.from(mobileCroissantGroupRef.current.querySelectorAll<SVGPathElement>("path"))
+        : [];
+      mobileCPaths.forEach(prepPath);
+
+      if (sectionRef.current && mobileLineInRef.current && mobileLineOutRef.current && mobileCPaths.length > 0) {
+        const mobileTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+            end: "center 45%",
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        mobileTl.to(mobileLineInRef.current, { strokeDashoffset: 0, duration: 1.4, ease: "none" });
+        mobileCPaths.forEach((path) => {
+          mobileTl.to(path, { strokeDashoffset: 0, duration: 0.3, ease: "none" });
+        });
+        mobileTl.to(mobileLineOutRef.current, { strokeDashoffset: 0, duration: 1.4, ease: "none" });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="locations-test"
       className="py-12 md:py-20 bg-cream-100 relative overflow-visible isolate"
     >
       {/* ============================================================== */}
-      {/* 1. DEDICATED BACKGROUND SVG LAYER (BEHIND CONTENT, z-0)         */}
+      {/* 1. DEDICATED CONTINUOUS INK STROKE CANVAS (BEHIND CONTENT, z-0)*/}
       {/* ============================================================== */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-visible select-none">
-        {/* Desktop Procedural Flowing Line */}
+        {/* Desktop Canvas: Continuous ink line drawing the Croissant */}
         <svg
           className="hidden lg:block w-full h-full overflow-visible"
           viewBox="0 0 1440 900"
           fill="none"
         >
+          {/* A. Entrance Line: Sweeps through whitespace, flows into Croissant */}
           <path
-            ref={lineRef}
-            d="M -20 160 C 250 170 520 110 780 110 C 1020 110 1200 160 1320 220 C 1400 290 1380 390 1280 440 C 1180 490 1020 460 920 520 C 800 590 740 680 770 760 C 800 840 920 860 1080 840 C 1240 820 1380 870 1480 890"
+            ref={lineInRef}
+            d="M -20 120 C 60 70 120 40 217.9 89.1"
+            stroke="#111111"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* B. The Croissant: Drawn sequentially stroke by stroke by the ink line */}
+          <g
+            ref={croissantGroupRef}
+            transform="translate(180, 50) scale(1.15)"
             stroke="#111111"
             strokeWidth="1.9"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {croissantStrokes.map((d, i) => (
+              <path key={i} d={d} />
+            ))}
+          </g>
+
+          {/* C. Exit Line: Continues from Croissant, weaves behind location cards */}
+          <path
+            ref={lineOutRef}
+            d="M 311.1 128.2 C 450 170 650 160 720 250 C 760 380 680 500 720 620 C 760 740 860 820 1020 840 C 1220 860 1350 870 1460 890"
+            stroke="#111111"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
         </svg>
 
-        {/* Mobile Procedural Flowing Line */}
+        {/* Mobile Canvas: Compact flowing line physically drawing the Croissant */}
         <svg
           className="block lg:hidden w-full h-full overflow-visible"
           viewBox="0 0 390 900"
           fill="none"
         >
           <path
-            ref={mobileLineRef}
-            d="M 10 120 C 80 160 180 220 210 300 C 240 390 190 440 150 520 C 110 610 120 720 180 790 C 230 840 310 880 340 940"
+            ref={mobileLineInRef}
+            d="M 10 60 C 25 40 45 35 60 48"
+            stroke="#111111"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          <g
+            ref={mobileCroissantGroupRef}
+            transform="translate(45, 30) scale(0.65)"
             stroke="#111111"
             strokeWidth="1.9"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {croissantStrokes.map((d, i) => (
+              <path key={i} d={d} />
+            ))}
+          </g>
+
+          <path
+            ref={mobileLineOutRef}
+            d="M 120 74 C 180 120 220 220 210 320 C 190 440 150 560 180 700 C 210 800 280 850 340 920"
+            stroke="#111111"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
@@ -129,19 +221,8 @@ export default function LocationTest() {
           </div>
         </div>
 
-        {/* Viewport-Led Procedural Croissant Illustration from /final */}
-        <div className="w-full flex justify-center lg:justify-start my-4 sm:my-6 select-none">
-          <CroissantIllustration
-            className="w-36 sm:w-48 lg:w-56 aspect-[178/83]"
-            strokeColor="#111111"
-            strokeWidth={1.9}
-            startTrigger="top 85%"
-            endTrigger="center 50%"
-          />
-        </div>
-
         {/* 2-Column Locations Layout: Side-by-Side on Desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mt-8">
           {locations.map((loc, index) => {
             const isFirst = index === 0;
 
