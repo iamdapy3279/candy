@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 205" fill="none">
+<g stroke="#35251D" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+  <path id="silhouette" d="M22 145 C36 111 57 77 88 55 C111 39 134 41 151 65 C163 40 188 17 218 15 C254 12 280 43 294 75 C308 108 326 132 342 150 C312 142 288 143 265 159 C241 176 220 192 195 188 C174 185 160 169 151 151 C135 176 111 187 88 177 C62 166 42 151 22 145Z"/>
+  <path id="fold-1" d="M88 55 C88 89 109 126 151 151"/>
+  <path id="fold-2" d="M126 47 C120 84 135 123 166 162"/>
+  <path id="fold-3" d="M163 65 C163 99 175 143 195 188"/>
+  <path id="fold-4" d="M218 15 C196 57 201 111 228 166"/>
+  <path id="fold-5" d="M264 43 C244 79 252 119 282 151"/>
+  <path id="fold-6" d="M294 75 C281 103 295 129 320 145"/>
+</g></svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 220" fill="none">
+<g stroke="#35251D" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+  <path id="steam-a" d="M91 65 C76 48 101 39 91 20 C87 12 82 8 79 5"/>
+  <path id="steam-b" d="M128 61 C114 44 139 34 128 15 C124 8 120 5 117 2"/>
+  <path id="steam-c" d="M164 65 C150 50 175 41 165 24"/>
+  <path id="rim" d="M54 82 C80 69 177 69 204 82 C178 96 80 96 54 82Z"/>
+  <path id="body" d="M58 84 C61 111 67 153 79 170 C89 184 110 190 129 190 C148 190 169 184 179 170 C191 153 197 111 200 84"/>
+  <path id="base" d="M89 190 C108 198 151 198 169 190"/>
+  <path id="handle" d="M199 103 C226 96 242 109 239 132 C236 153 220 165 185 157"/>
+  <path id="coffee" d="M76 84 C103 91 156 91 183 84"/>
+</g></svg>
