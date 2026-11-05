@@ -2,15 +2,14 @@
 
 import { useState, useEffect } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
-import Hero from "@/components/Hero";
-import Philosophy from "@/components/Philosophy";
-import FoodAndDrinks from "@/components/FoodAndDrinks";
-import Evolution from "@/components/Evolution";
-import Location from "@/components/Location";
+import HeroTest from "@/components/home-animation-test/HeroTest";
+import PhilosophyTest from "@/components/home-animation-test/PhilosophyTest";
+import LocationTest from "@/components/home-animation-test/LocationTest";
+import FoodAndDrinksTest from "@/components/home-animation-test/FoodAndDrinksTest";
 import Press from "@/components/Press";
+import Evolution from "@/components/Evolution";
 import Footer from "@/components/Footer";
 import MenuModal from "@/components/MenuModal";
-import ContinuousLineArt from "@/components/home-animation-test/ContinuousLineArt";
 
 export default function HomeAnimationTest() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,26 +22,23 @@ export default function HomeAnimationTest() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-cream-100 flex flex-col relative overflow-hidden">
-      {/* Experimental Continuous Line-Art Layer with GSAP ScrollTrigger stroke drawing */}
-      <ContinuousLineArt />
-
+    <main className="min-h-screen bg-cream-100 flex flex-col relative overflow-x-hidden">
       {/* 0. Introductory Game-Style Loading Screen */}
       <LoadingScreen />
 
-      {/* 1. Hero Section (100vh full-bleed video + fallback cover) */}
-      <Hero onOpenMenu={() => setIsMenuOpen(true)} />
+      {/* 1. Hero Section with steam.svg procedural stroke animation */}
+      <HeroTest onOpenMenu={() => setIsMenuOpen(true)} />
 
-      {/* 2. Our Philosophy (Two-column layout, cathedral arch with continuous glowing light beam) */}
-      <Philosophy />
+      {/* 2. Our Philosophy with dedicated background SVG layer behind content */}
+      <PhilosophyTest />
 
-      {/* 3. Our Locations (Placed directly below Our Philosophy) */}
-      <Location />
+      {/* 3. Our Locations with house.svg, car.svg and continuous line behind cards */}
+      <LocationTest />
 
-      {/* 4. Food & Drinks */}
-      <FoodAndDrinks />
+      {/* 4. Food & Drinks with whisk.svg and flowing line behind cards */}
+      <FoodAndDrinksTest />
 
-      {/* 5. In The Press (Infinite Auto-Scrolling Carousel) */}
+      {/* 5. In The Press (Infinite Auto-Scrolling Carousel - Clean) */}
       <Press />
 
       {/* 6. Our Evolution */}
@@ -51,7 +47,7 @@ export default function HomeAnimationTest() {
       {/* 7. Footer */}
       <Footer />
 
-      {/* 8. In-Page Interactive Menu Modal (Mobile-first, high-res fitted with back/close arrow) */}
+      {/* 8. In-Page Interactive Menu Modal */}
       <MenuModal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </main>
   );
