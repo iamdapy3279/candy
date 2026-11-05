@@ -55,8 +55,8 @@ export default function Hero({ onOpenMenu }: HeroProps = {}) {
         <source src={websiteContent.hero.videoMobile} type="video/mp4" />
       </video>
 
-      {/* 3. Top-Right Floating Action Buttons: MENU and LOCATION (Stacked Vertically with Animated Glowing Borders) */}
-      <div className="absolute top-5 right-5 sm:top-8 sm:right-10 z-30 flex flex-col items-end gap-3 select-none">
+      {/* 3. Top-Right Floating Action Buttons: MENU and LOCATION (Stacked Horizontally with Animated Glowing Borders) */}
+      <div className="absolute top-4 right-4 sm:top-8 sm:right-10 z-30 flex flex-row items-center gap-2 sm:gap-3.5 select-none">
         {/* Menu Button (Opens In-Page Modal) */}
         <GlowingBorder
           borderWidth={1.5}
@@ -74,7 +74,7 @@ export default function Hero({ onOpenMenu }: HeroProps = {}) {
                 window.dispatchEvent(new CustomEvent("open-menu-modal"));
               }
             }}
-            className="w-28 sm:w-32 py-2 sm:py-2.5 rounded-full bg-navy-950/80 backdrop-blur-md text-cream-100 font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase font-semibold flex items-center justify-center transition-all hover:bg-navy-900 hover:text-gold-400 active:scale-95 text-center cursor-pointer"
+            className="w-24 sm:w-32 py-2 sm:py-2.5 rounded-full bg-navy-950/80 backdrop-blur-md text-cream-100 font-sans text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.22em] uppercase font-semibold flex items-center justify-center transition-all hover:bg-navy-900 hover:text-gold-400 active:scale-95 text-center cursor-pointer"
           >
             Menu
           </button>
@@ -95,7 +95,7 @@ export default function Hero({ onOpenMenu }: HeroProps = {}) {
               e.preventDefault();
               document.getElementById("locations")?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="w-28 sm:w-32 py-2 sm:py-2.5 rounded-full bg-navy-950/80 backdrop-blur-md text-cream-100 font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase font-semibold flex items-center justify-center transition-all hover:bg-navy-900 hover:text-gold-400 active:scale-95 text-center"
+            className="w-24 sm:w-32 py-2 sm:py-2.5 rounded-full bg-navy-950/80 backdrop-blur-md text-cream-100 font-sans text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.22em] uppercase font-semibold flex items-center justify-center transition-all hover:bg-navy-900 hover:text-gold-400 active:scale-95 text-center"
           >
             Location
           </a>
