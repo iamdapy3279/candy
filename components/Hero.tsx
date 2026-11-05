@@ -8,7 +8,11 @@ import { ChevronDown } from "lucide-react";
 import { websiteContent } from "@/lib/content";
 import GlowingBorder from "@/components/ui/GlowingBorder";
 
-export default function Hero() {
+interface HeroProps {
+  onOpenMenu?: () => void;
+}
+
+export default function Hero({ onOpenMenu }: HeroProps = {}) {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -53,7 +57,7 @@ export default function Hero() {
 
       {/* 3. Top-Right Floating Action Buttons: MENU and LOCATION (Stacked Vertically with Animated Glowing Borders) */}
       <div className="absolute top-5 right-5 sm:top-8 sm:right-10 z-30 flex flex-col items-end gap-3 select-none">
-        {/* Menu Button */}
+        {/* Menu Button (Opens In-Page Modal) */}
         <GlowingBorder
           borderWidth={1.5}
           borderRadius="9999px"
@@ -62,14 +66,18 @@ export default function Hero() {
           glowIntensity="subtle"
           className="rounded-full shadow-2xl"
         >
-          <Link
-            href="/Menu.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-28 sm:w-32 py-2 sm:py-2.5 rounded-full bg-navy-950/80 backdrop-blur-md text-cream-100 font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase font-semibold flex items-center justify-center transition-all hover:bg-navy-900 hover:text-gold-400 active:scale-95 text-center"
+          <button
+            onClick={() => {
+              if (onOpenMenu) {
+                onOpenMenu();
+              } else if (typeof window !== "undefined") {
+                window.dispatchEvent(new CustomEvent("open-menu-modal"));
+              }
+            }}
+            className="w-28 sm:w-32 py-2 sm:py-2.5 rounded-full bg-navy-950/80 backdrop-blur-md text-cream-100 font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase font-semibold flex items-center justify-center transition-all hover:bg-navy-900 hover:text-gold-400 active:scale-95 text-center cursor-pointer"
           >
             Menu
-          </Link>
+          </button>
         </GlowingBorder>
 
         {/* Location Button */}
