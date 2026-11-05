@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { websiteContent } from "@/lib/content";
 
@@ -32,7 +33,15 @@ export default function Press() {
               <div className="hidden sm:inline-flex items-center gap-4 pl-1">
                 <div className="w-[1px] h-6 bg-[#211714]/20" />
                 {/* Zomato Rating */}
-                <div className="inline-flex items-center gap-1.5">
+                <div className="inline-flex items-center gap-2">
+                  <div className="relative w-5 h-5 shrink-0">
+                    <Image
+                      src="/icons/zomato.png"
+                      alt="Zomato"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                   <span className="font-sans font-black italic text-base tracking-tight text-[#E23744]">
                     zomato
                   </span>
@@ -44,7 +53,15 @@ export default function Press() {
                 <div className="w-[1px] h-5 bg-[#211714]/20" />
 
                 {/* Swiggy Rating */}
-                <div className="inline-flex items-center gap-1.5">
+                <div className="inline-flex items-center gap-2">
+                  <div className="relative w-5 h-5 shrink-0">
+                    <Image
+                      src="/icons/swiggy.png"
+                      alt="Swiggy"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                   <span className="font-sans font-bold text-[#FE5005] text-sm">
                     Swiggy
                   </span>
@@ -63,6 +80,14 @@ export default function Press() {
           {/* Mobile Ratings Badges (visible under 640px) */}
           <div className="flex sm:hidden items-center gap-3 pt-1 border-t border-[#211714]/10">
             <div className="flex items-center gap-1.5">
+              <div className="relative w-4 h-4 shrink-0">
+                <Image
+                  src="/icons/zomato.png"
+                  alt="Zomato"
+                  fill
+                  className="object-contain"
+                />
+              </div>
               <span className="font-sans font-black italic text-sm tracking-tight text-[#E23744]">
                 zomato
               </span>
@@ -74,6 +99,14 @@ export default function Press() {
             <div className="w-[1px] h-4 bg-[#211714]/20" />
 
             <div className="flex items-center gap-1.5">
+              <div className="relative w-4 h-4 shrink-0">
+                <Image
+                  src="/icons/swiggy.png"
+                  alt="Swiggy"
+                  fill
+                  className="object-contain"
+                />
+              </div>
               <span className="font-sans font-bold text-[#FE5005] text-xs">
                 Swiggy
               </span>

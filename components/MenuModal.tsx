@@ -252,47 +252,43 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
             </nav>
           </header>
 
-          {/* RIGHT FLOATING SQUIRCLE DELIVERY BUTTONS (SWIGGY & ZOMATO ONLY) */}
+          {/* RIGHT FLOATING DELIVERY BUTTONS (SWIGGY & ZOMATO ONLY - NO CONTAINER) */}
           <aside
             aria-label="Order Delivery"
             className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-3 select-none"
           >
-            {/* Swiggy Squircle Button */}
+            {/* Swiggy Button */}
             <a
               href="https://www.swiggy.com"
               target="_blank"
               rel="noopener noreferrer"
               title="Order on Swiggy"
               aria-label="Order on Swiggy"
-              className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white shadow-lg border border-[#FE5005]/20 flex items-center justify-center p-2 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+              className="relative w-11 h-11 sm:w-12 sm:h-12 drop-shadow-md hover:scale-110 active:scale-95 transition-transform duration-200 cursor-pointer block"
             >
-              <div className="relative w-full h-full">
-                <Image
-                  src="/icons/SwiggyAppIcon.png"
-                  alt="Order on Swiggy"
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src="/icons/swiggy.png"
+                alt="Order on Swiggy"
+                fill
+                className="object-contain"
+              />
             </a>
 
-            {/* Zomato Squircle Button */}
+            {/* Zomato Button */}
             <a
               href="https://www.zomato.com"
               target="_blank"
               rel="noopener noreferrer"
               title="Order on Zomato"
               aria-label="Order on Zomato"
-              className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#E23744] shadow-lg border border-white/20 flex items-center justify-center p-2.5 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+              className="relative w-11 h-11 sm:w-12 sm:h-12 drop-shadow-md hover:scale-110 active:scale-95 transition-transform duration-200 cursor-pointer block"
             >
-              <div className="relative w-full h-full">
-                <Image
-                  src="/icons/ZomatoAppIcon.png"
-                  alt="Order on Zomato"
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src="/icons/zomato.png"
+                alt="Order on Zomato"
+                fill
+                className="object-contain"
+              />
             </a>
           </aside>
 

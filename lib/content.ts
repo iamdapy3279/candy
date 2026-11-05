@@ -241,12 +241,13 @@ export const websiteContent = {
       {
         platform: "Zomato",
         score: "4.4 / 5",
+        logo: "/icons/zomato.png",
         color: "#E23744",
       },
       {
         platform: "Swiggy",
         score: "4.4 / 5",
-        logo: "/icons/SwiggyAppIcon.png",
+        logo: "/icons/swiggy.png",
         color: "#FE5005",
       },
     ],
@@ -290,17 +291,17 @@ export const websiteContent = {
     instagram: {
       handle: "@xybakehouse",
       url: "https://instagram.com",
-      icon: "/icons/InstagramIcon.png",
+      icon: "/icons/instagram.png",
     },
     deliveryPartners: [
       {
         name: "Swiggy",
-        icon: "/icons/SwiggyFooterIcon.svg",
+        icon: "/icons/swiggy.png",
         url: "https://www.swiggy.com",
       },
       {
         name: "Zomato",
-        icon: "/icons/ZomatoFooterIcon.svg",
+        icon: "/icons/zomato.png",
         url: "https://www.zomato.com",
       },
     ],
