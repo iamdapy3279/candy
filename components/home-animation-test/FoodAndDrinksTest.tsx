@@ -250,27 +250,40 @@ export default function FoodAndDrinksTest() {
               </motion.div>
             </div>
 
-            {/* Navigation Controls */}
-            <div className="flex items-center gap-4 mt-8">
-              <button
-                onClick={handlePrev}
-                aria-label="Previous signature dish"
-                className="w-12 h-12 rounded-full border border-[#211714]/20 bg-white hover:bg-gold-500 hover:border-gold-500 text-navy-800 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow active:scale-95 cursor-pointer"
-              >
-                <ArrowLeft size={18} />
-              </button>
+            {/* Navigation Controls & Prominent Rolling Pin Artwork */}
+            <div className="flex flex-col sm:flex-row items-center gap-6 mt-8">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={handlePrev}
+                  aria-label="Previous signature dish"
+                  className="w-12 h-12 rounded-full border border-[#211714]/20 bg-white hover:bg-gold-500 hover:border-gold-500 text-navy-800 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow active:scale-95 cursor-pointer"
+                >
+                  <ArrowLeft size={18} />
+                </button>
 
-              <span className="font-sans text-xs font-semibold text-navy-800 tracking-widest px-2 select-none">
-                0{currentIndex + 1} / 0{dishes.length}
-              </span>
+                <span className="font-sans text-xs font-semibold text-navy-800 tracking-widest px-2 select-none">
+                  0{currentIndex + 1} / 0{dishes.length}
+                </span>
 
-              <button
-                onClick={handleNext}
-                aria-label="Next signature dish"
-                className="w-12 h-12 rounded-full border border-[#211714]/20 bg-white hover:bg-gold-500 hover:border-gold-500 text-navy-800 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow active:scale-95 cursor-pointer"
-              >
-                <ArrowRight size={18} />
-              </button>
+                <button
+                  onClick={handleNext}
+                  aria-label="Next signature dish"
+                  className="w-12 h-12 rounded-full border border-[#211714]/20 bg-white hover:bg-gold-500 hover:border-gold-500 text-navy-800 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow active:scale-95 cursor-pointer"
+                >
+                  <ArrowRight size={18} />
+                </button>
+              </div>
+
+              {/* Prominent Rolling Pin Artwork from Reference Pack */}
+              <div className="relative w-36 sm:w-44 lg:w-48 aspect-[188/56] pointer-events-none select-none -rotate-6">
+                <Image
+                  src="/illustrations/exact-artwork/rolling-pin.svg"
+                  alt="Rolling Pin"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </div>
           </div>
 
@@ -295,27 +308,17 @@ export default function FoodAndDrinksTest() {
               </blockquote>
             </div>
 
-            {/* The Whisk Asset (Angled on right, matching reference mockup) */}
+            {/* The Whisk Asset from Reference Pack */}
             <div className="hidden sm:flex shrink-0 items-center justify-center select-none pointer-events-none">
-              <svg
-                viewBox="0 0 180 250"
-                fill="none"
-                className="w-24 h-36 lg:w-32 lg:h-48 transform -rotate-15 overflow-visible"
-              >
-                <g
-                  ref={whiskRef}
-                  stroke="#171717"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path id="handle" d="M79 116 C79 153 80 192 80 226 C80 238 88 244 97 237 C103 232 99 222 99 212 L97 116" />
-                  <path id="wire-a" d="M79 118 C33 94 25 51 44 23 C60 1 81 15 89 42 C106 13 130 4 144 29 C160 58 139 96 97 118" />
-                  <path id="wire-b" d="M89 118 C58 83 58 44 78 20 C86 10 92 23 89 42" />
-                  <path id="wire-c" d="M97 118 C128 83 129 44 109 20 C101 10 95 23 97 42" />
-                  <path id="wire-d" d="M79 118 C69 77 74 47 89 42 C104 47 109 77 97 118" />
-                </g>
-              </svg>
+              <div className="relative w-28 h-36 lg:w-36 lg:h-44 aspect-[142/97] -rotate-12">
+                <Image
+                  src="/illustrations/exact-artwork/whisk.svg"
+                  alt="Whisk"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>

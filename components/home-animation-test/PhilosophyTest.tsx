@@ -253,6 +253,19 @@ export default function PhilosophyTest() {
             transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 flex flex-col justify-center"
           >
+            {/* Prominent Artisanal Coffee Mug with Rising Steam from Reference Pack */}
+            <div className="flex items-center gap-3 mb-6 pointer-events-none select-none">
+              <div className="relative w-24 sm:w-32 lg:w-36 aspect-[139/95]">
+                <Image
+                  src="/illustrations/exact-artwork/coffee-mug.svg"
+                  alt="Artisanal Coffee Mug"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
+
             <span className="philosophy-label block mb-4">
               {websiteContent.philosophy.tag}
             </span>

@@ -251,6 +251,19 @@ export default function LocationTest() {
           </div>
         </div>
 
+        {/* Prominent Artisanal Croissant from Reference Pack */}
+        <div className="w-full flex justify-center lg:justify-start my-4 sm:my-6 pointer-events-none select-none">
+          <div className="relative w-32 sm:w-44 lg:w-48 aspect-[178/83]">
+            <Image
+              src="/illustrations/exact-artwork/croissant.svg"
+              alt="Artisanal Croissant"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+        </div>
+
         {/* 2-Column Locations Layout: Side-by-Side on Desktop */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {locations.map((loc, index) => {
