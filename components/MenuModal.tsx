@@ -110,10 +110,14 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
     return () => observer.disconnect();
   }, [isOpen]);
 
-  // Auto-scroll active category pill into view in the horizontal pill bar
+  // Auto-scroll active category pill into view in the horizontal pill bar (only when overflowed)
   useEffect(() => {
     const activePill = document.getElementById(`cat-pill-${currentPage}`);
-    if (activePill && categoryBarRef.current) {
+    if (
+      activePill &&
+      categoryBarRef.current &&
+      categoryBarRef.current.scrollWidth > categoryBarRef.current.clientWidth
+    ) {
       activePill.scrollIntoView({
         behavior: "smooth",
         inline: "center",
@@ -222,11 +226,11 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
               </button>
             </div>
 
-            {/* Horizontal Category Navigation (Text with Active Underline, No Pills) */}
+            {/* Horizontal Category Navigation (Centered on desktop, scrollable from left on mobile) */}
             <nav
               ref={categoryBarRef}
               aria-label="Menu Category Filter"
-              className="mt-3 px-4 sm:px-8 overflow-x-auto no-scrollbar flex items-center gap-6 sm:gap-8 md:gap-10 border-b border-[#E8DCCB]/60"
+              className="mt-3 px-4 sm:px-8 overflow-x-auto no-scrollbar flex items-center justify-start md:justify-center gap-6 sm:gap-7 md:gap-8 lg:gap-10 border-b border-[#E8DCCB]/60"
             >
               {categories.map((cat) => {
                 const isActive = activeCategory.label === cat.label;
