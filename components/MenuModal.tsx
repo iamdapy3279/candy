@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, X, Download, ChevronUp } from "lucide-react";
+import { ArrowLeft, X, ChevronUp } from "lucide-react";
 
 interface MenuModalProps {
   isOpen: boolean;
@@ -86,18 +86,8 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
               </span>
             </div>
 
-            {/* Right: Download PDF & Close Icon */}
-            <div className="flex items-center gap-2">
-              <a
-                href="/Menu.pdf"
-                download="XY-Bakehouse-Menu.pdf"
-                className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-navy-800/20 text-navy-900 font-sans text-xs uppercase tracking-wider font-semibold hover:bg-navy-900 hover:text-white transition-all shadow-2xs"
-                title="Download original PDF"
-              >
-                <Download size={14} />
-                <span>PDF</span>
-              </a>
-
+            {/* Right: Close Icon */}
+            <div className="flex items-center">
               <button
                 onClick={onClose}
                 className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-cream-200 hover:bg-cream-300 text-navy-900 flex items-center justify-center transition-colors active:scale-95"
@@ -160,3 +150,4 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
     </AnimatePresence>
   );
 }
+
