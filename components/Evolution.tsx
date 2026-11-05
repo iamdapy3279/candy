@@ -35,7 +35,7 @@ export default function Evolution() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-serif italic text-3xl sm:text-5xl font-medium text-navy-800 tracking-normal mb-3"
+            className="font-sans text-3xl sm:text-5xl font-semibold text-navy-800 tracking-tight mb-3"
           >
             {websiteContent.evolution.title}
           </motion.h2>
@@ -89,23 +89,23 @@ export default function Evolution() {
                       <span className="font-sans text-xs tracking-[0.2em] uppercase font-semibold text-gold-700 block mb-1">
                         {milestone.title}
                       </span>
-                      <h3 className="font-serif italic text-2xl sm:text-3xl font-medium text-navy-800 mb-2">
+                      <h3 className="font-sans text-xl sm:text-2xl font-semibold text-navy-800 mb-2">
                         {milestone.subtitle}
                       </h3>
 
                       {/* Desktop Description: Full editorial text */}
-                      <p className="hidden md:block font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed">
+                      <p className="hidden md:block font-sans text-xs sm:text-sm text-charcoal-800 leading-relaxed">
                         {milestone.description}
                       </p>
 
                       {/* Mobile Description: Maximum 2 lines */}
-                      <p className="md:hidden font-serif text-sm text-charcoal-800 leading-snug line-clamp-2">
+                      <p className="md:hidden font-sans text-xs text-charcoal-800 leading-relaxed line-clamp-2">
                         {milestone.mobileDescription || milestone.description}
                       </p>
 
                       {/* Quote (kept identical for both mobile and desktop) */}
                       {milestone.quote && (
-                        <p className="font-serif italic text-base sm:text-lg text-gold-700 font-medium mt-3">
+                        <p className="font-sans italic text-xs sm:text-sm text-gold-700 font-medium mt-2.5">
                           {milestone.quote}
                         </p>
                       )}

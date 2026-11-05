@@ -25,7 +25,7 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <span className="font-serif text-2xl font-bold tracking-wider text-cream-50 uppercase block">
+                <span className="font-sans text-xl font-bold tracking-wider text-cream-50 uppercase block">
                   X&Y Bakehouse
                 </span>
                 <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-gold-500 font-semibold block">
@@ -33,7 +33,7 @@ export default function Footer() {
                 </span>
               </div>
             </div>
-            <p className="font-serif text-base text-cream-200/80 max-w-sm italic">
+            <p className="font-sans text-xs sm:text-sm text-cream-200/80 max-w-sm italic">
               “{websiteContent.footer.tagline}”
             </p>
           </div>
@@ -49,7 +49,7 @@ export default function Footer() {
                   <Link
                     href={item.href}
                     target={item.isExternal ? "_blank" : undefined}
-                    className="font-serif text-sm text-cream-200/70 hover:text-gold-500 transition-colors"
+                    className="font-sans text-xs text-cream-200/70 hover:text-gold-500 transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -119,7 +119,7 @@ export default function Footer() {
         {/* Bottom Credits & Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-cream-200/80 font-sans tracking-wider gap-4">
           <p>{websiteContent.footer.copyright}</p>
-          <p className="font-serif italic text-cream-200/75">
+          <p className="font-sans italic text-cream-200/75">
             Crafted for mornings, lingering lunches, and slow evenings.
           </p>
         </div>

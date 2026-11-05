@@ -98,7 +98,7 @@ export default function Philosophy() {
             <div className="h-[2px] w-16 bg-gold-500 mb-6" />
 
             {/* Quote (kept identical for both mobile and desktop) */}
-            <p className="font-serif italic font-medium text-lg sm:text-xl text-[#211714]">
+            <p className="font-sans italic font-medium text-base sm:text-lg text-[#211714]">
               “The best cafe is the one you never want to leave.”
             </p>
           </motion.div>

@@ -63,10 +63,10 @@ export default function Location() {
             <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-3">
               FIND OUR BAKEHOUSES
             </span>
-            <h2 className="font-serif italic text-4xl sm:text-5xl lg:text-6xl font-medium text-navy-800 tracking-normal leading-[1.05]">
+            <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-semibold text-navy-800 tracking-tight leading-[1.1]">
               Our Locations
             </h2>
-            <p className="font-serif text-base sm:text-lg text-charcoal-800/80 mt-3 leading-snug">
+            <p className="font-sans text-xs sm:text-sm text-charcoal-800/80 mt-2 sm:mt-3 leading-relaxed">
               Two neighbourhoods in Kolkata. The same X&amp;Y experience.
             </p>
           </div>
@@ -90,15 +90,15 @@ export default function Location() {
                   <span className="font-sans text-xs tracking-[0.2em] uppercase text-navy-800/80 font-semibold">
                     {currentLocation.area}
                   </span>
-                  <h3 className="font-serif italic text-3xl sm:text-4xl font-medium text-navy-800 mt-1 mb-4">
+                  <h3 className="font-sans text-2xl sm:text-3xl font-semibold text-navy-800 mt-1 mb-3">
                     {currentLocation.name}
                   </h3>
                   {/* Desktop Description */}
-                  <p className="hidden md:block font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed">
+                  <p className="hidden md:block font-sans text-xs sm:text-sm text-charcoal-800 leading-relaxed">
                     {currentLocation.description}
                   </p>
                   {/* Mobile Description: Maximum 2 lines */}
-                  <p className="md:hidden font-serif text-sm text-charcoal-800 leading-snug line-clamp-2">
+                  <p className="md:hidden font-sans text-xs text-charcoal-800 leading-relaxed line-clamp-2">
                     {currentLocation.mobileDescription || currentLocation.description}
                   </p>
                 </div>

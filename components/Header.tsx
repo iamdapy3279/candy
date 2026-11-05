@@ -65,7 +65,7 @@ export default function Header() {
               {/* Header inside menu card */}
               <div className="flex items-center justify-between pb-4 border-b border-[#E8DCCB]">
                 <div>
-                  <span className="font-serif italic text-2xl font-medium tracking-wide text-navy-800 block">
+                  <span className="font-sans text-xl font-bold tracking-wide text-navy-800 block">
                     X&amp;Y Bakehouse
                   </span>
                   <span className="font-sans text-[9px] tracking-[0.25em] uppercase text-gold-700 font-semibold block mt-0.5">
@@ -96,7 +96,7 @@ export default function Header() {
               </div>
 
               {/* Subtle Tagline */}
-              <p className="font-serif italic text-xs text-charcoal-800/70 pt-4 mt-2 border-t border-cream-200/80 text-center">
+              <p className="font-sans italic text-xs text-charcoal-800/70 pt-4 mt-2 border-t border-cream-200/80 text-center">
                 “Where every table is yours.”
               </p>
             </motion.div>

@@ -230,12 +230,12 @@ export default function FoodAndDrinks() {
                 </span>
 
                 {/* 2. Dish Title */}
-                <h3 className="font-serif italic text-3xl sm:text-4xl lg:text-5xl font-medium text-navy-800 leading-[1.05] tracking-[-0.02em] mb-4">
+                <h3 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-navy-800 leading-snug tracking-tight mb-3">
                   {currentDish.name}
                 </h3>
 
                 {/* 3. Description */}
-                <p className="font-serif text-base sm:text-lg text-charcoal-800 leading-relaxed mb-6">
+                <p className="font-sans text-xs sm:text-sm text-charcoal-800 leading-relaxed mb-6">
                   {currentDish.description}
                 </p>
 
@@ -243,12 +243,12 @@ export default function FoodAndDrinks() {
                 <div className="w-full">
                   <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-0" />
 
-                  <p className="font-serif italic text-base sm:text-lg font-medium text-navy-800 leading-relaxed mb-3">
+                  <p className="font-sans italic text-xs sm:text-sm font-semibold text-navy-800 leading-relaxed mb-2.5">
                     “{currentDish.doodleCaption ||
                       "Every noodle is infused with house-smoked chilli oil and rich aromatics."}”
                   </p>
 
-                  <p className="font-serif text-sm sm:text-base text-charcoal-800/80 leading-relaxed">
+                  <p className="font-sans text-xs sm:text-sm text-charcoal-800/80 leading-relaxed">
                     Every morning, our pastry and culinary team prepares each component from scratch using heirloom techniques and zero shortcuts.
                   </p>
                 </div>
