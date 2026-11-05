@@ -3,16 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowLeft,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  ChevronDown,
-  Maximize2,
-  Minimize2,
-  Download,
-} from "lucide-react";
+import { ArrowLeft, X } from "lucide-react";
 
 interface MenuModalProps {
   isOpen: boolean;
@@ -48,12 +39,9 @@ const categories = [
 ];
 
 export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
-  const modalContainerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const categoryBarRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
-  const [isPageDropdownOpen, setIsPageDropdownOpen] = useState<boolean>(false);
 
   // Lock background scroll when open & handle Escape key
   useEffect(() => {
@@ -116,29 +104,6 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
     if (target) {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    setIsPageDropdownOpen(false);
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      scrollToPage(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < menuPages.length) {
-      scrollToPage(currentPage + 1);
-    }
-  };
-
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      modalContainerRef.current?.requestFullscreen?.();
-      setIsFullscreen(true);
-    } else {
-      document.exitFullscreen?.();
-      setIsFullscreen(false);
-    }
   };
 
   // Find active category
@@ -149,7 +114,6 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          ref={modalContainerRef}
           key="menu-modal"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -276,7 +240,7 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
             ref={scrollContainerRef}
             className="flex-1 overflow-y-auto overscroll-contain px-4 sm:px-6 py-4 sm:py-6"
           >
-            <div className="max-w-md sm:max-w-xl md:max-w-2xl mx-auto flex flex-col items-center gap-5 sm:gap-6 pb-28">
+            <div className="max-w-md sm:max-w-xl md:max-w-2xl mx-auto flex flex-col items-center gap-5 sm:gap-6 pb-12">
               {menuPages.map((page, index) => (
                 <div
                   key={page.id}
@@ -299,90 +263,6 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
                   </span>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* BOTTOM FLOATING CONTROL DOCK (<  01 / 12 ⌵  |  ⛶  ↓) */}
-          <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 select-none">
-            <div className="relative">
-              {/* Page Selector Popup Dropdown */}
-              <AnimatePresence>
-                {isPageDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute bottom-14 left-1/2 -translate-x-1/2 bg-[#F8F3ED] border border-[#E8DCCB] shadow-2xl rounded-2xl p-2.5 w-60 max-h-64 overflow-y-auto no-scrollbar grid grid-cols-4 gap-1.5"
-                  >
-                    {menuPages.map((p) => (
-                      <button
-                        key={p.id}
-                        onClick={() => scrollToPage(p.id)}
-                        className={`py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
-                          currentPage === p.id
-                            ? "bg-[#9B7043] text-white"
-                            : "bg-cream-200/70 hover:bg-cream-300 text-navy-900"
-                        }`}
-                      >
-                        {String(p.id).padStart(2, "0")}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Floating Pill Dock */}
-              <div className="bg-[#EFE6DA]/90 backdrop-blur-md rounded-full px-4 sm:px-5 py-2 sm:py-2.5 flex items-center gap-3 sm:gap-4 shadow-xl border border-white/60 text-[#3A2E28]">
-                {/* Previous Page Button */}
-                <button
-                  onClick={handlePrevPage}
-                  disabled={currentPage <= 1}
-                  className="p-1 hover:text-navy-950 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
-                  aria-label="Previous page"
-                >
-                  <ChevronLeft size={18} />
-                </button>
-
-                {/* Page Indicator & Dropdown Trigger */}
-                <button
-                  onClick={() => setIsPageDropdownOpen((prev) => !prev)}
-                  className="flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold tracking-wide hover:text-navy-950 transition-colors cursor-pointer px-1 py-0.5 rounded"
-                  aria-label="Select page"
-                >
-                  <span>{String(currentPage).padStart(2, "0")} / 12</span>
-                  <ChevronDown
-                    size={14}
-                    className={`transition-transform duration-200 ${
-                      isPageDropdownOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                {/* Vertical Divider */}
-                <div className="w-[1px] h-4 bg-[#D6C7B2]" />
-
-                {/* Fullscreen / Fit Toggle Button */}
-                <button
-                  onClick={toggleFullscreen}
-                  className="p-1 hover:text-navy-950 transition-colors cursor-pointer"
-                  title="Toggle Fullscreen"
-                  aria-label="Toggle Fullscreen"
-                >
-                  {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-                </button>
-
-                {/* Download PDF Button */}
-                <a
-                  href="/Menu.pdf"
-                  download="XY_Bakehouse_Menu.pdf"
-                  className="p-1 hover:text-navy-950 transition-colors cursor-pointer flex items-center justify-center"
-                  title="Download Menu PDF"
-                  aria-label="Download Menu PDF"
-                >
-                  <Download size={16} />
-                </a>
-              </div>
             </div>
           </div>
         </motion.div>
