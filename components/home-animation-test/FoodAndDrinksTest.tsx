@@ -17,52 +17,67 @@ export default function FoodAndDrinksTest() {
 
   const lineRef = useRef<SVGPathElement>(null);
   const whiskRef = useRef<SVGGElement>(null);
+  const rollingPinRef = useRef<SVGGElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (lineRef.current) {
-      const len = lineRef.current.getTotalLength();
-      lineRef.current.style.strokeDasharray = `${len} ${len}`;
-      lineRef.current.style.strokeDashoffset = prefersReduced ? "0" : `${len}`;
-
-      if (!prefersReduced) {
-        gsap.to(lineRef.current, {
-          strokeDashoffset: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#food-drinks-test",
-            start: "top 80%",
-            end: "bottom 30%",
-            scrub: 0.8,
-          },
-        });
-      }
-    }
-
-    if (whiskRef.current) {
-      const paths = whiskRef.current.querySelectorAll<SVGPathElement>("path");
+    // Helper to init paths
+    const initPaths = (el: Element | null) => {
+      if (!el) return [];
+      const paths = Array.from(el.querySelectorAll<SVGPathElement>("path"));
       paths.forEach((p) => {
         const len = p.getTotalLength();
         p.style.strokeDasharray = `${len} ${len}`;
         p.style.strokeDashoffset = prefersReduced ? "0" : `${len}`;
       });
+      return paths;
+    };
 
-      if (!prefersReduced) {
-        gsap.to(paths, {
+    const rollingPinPaths = initPaths(rollingPinRef.current);
+    const whiskPaths = initPaths(whiskRef.current);
+
+    if (lineRef.current) {
+      const len = lineRef.current.getTotalLength();
+      lineRef.current.style.strokeDasharray = `${len} ${len}`;
+      lineRef.current.style.strokeDashoffset = prefersReduced ? "0" : `${len}`;
+    }
+
+    if (!prefersReduced) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#food-drinks-test",
+          start: "top 80%",
+          end: "bottom 30%",
+          scrub: 0.8,
+        },
+      });
+
+      // 1. Draw Rolling Pin on left
+      if (rollingPinPaths.length > 0) {
+        tl.to(rollingPinPaths, {
           strokeDashoffset: 0,
-          duration: 1,
+          duration: 1.0,
           stagger: 0.15,
           ease: "none",
-          scrollTrigger: {
-            trigger: "#food-drinks-test",
-            start: "top 70%",
-            end: "bottom 25%",
-            scrub: 0.8,
-          },
         });
+      }
+
+      // 2. Draw sweeping connecting line
+      if (lineRef.current) {
+        tl.to(lineRef.current, { strokeDashoffset: 0, duration: 1.2, ease: "none" }, "-=0.3");
+      }
+
+      // 3. Draw Whisk on right
+      if (whiskPaths.length > 0) {
+        tl.to(whiskPaths, {
+          strokeDashoffset: 0,
+          duration: 1.0,
+          stagger: 0.12,
+          ease: "none",
+        }, "-=0.2");
       }
     }
   }, []);
@@ -112,15 +127,29 @@ export default function FoodAndDrinksTest() {
       {/* 1. DEDICATED BACKGROUND SVG LAYER (BEHIND CONTENT, z-0)         */}
       {/* ============================================================== */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-visible select-none">
-        {/* Desktop Procedural Flowing Line (sweeps from left under dish towards whisk) */}
+        {/* Desktop Procedural Flowing Line + ROLLING PIN on left */}
         <svg
           className="hidden lg:block w-full h-full overflow-visible"
           viewBox="0 0 1440 650"
           fill="none"
         >
+          {/* ROLLING PIN (rolling-pin.svg) positioned on left framing card deck */}
+          <g
+            ref={rollingPinRef}
+            transform="translate(60, 60) scale(0.85) rotate(-16)"
+            stroke="#171717"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path id="barrel" d="M77 47 C94 33 223 33 240 47 L240 103 C222 117 95 117 77 103Z" />
+            <path id="left-neck" d="M77 57 C55 57 45 48 32 42 C21 37 12 44 14 55 L20 75 C22 83 34 87 45 81 L77 94" />
+            <path id="right-neck" d="M240 57 C262 57 272 48 285 42 C296 37 305 44 303 55 L297 75 C295 83 283 87 272 81 L240 94" />
+          </g>
+
           <path
             ref={lineRef}
-            d="M -30 220 C 180 230 320 440 540 450 C 760 460 920 380 1100 420 C 1220 440 1280 520 1380 540"
+            d="M 280 180 C 380 230 440 380 580 410 C 720 440 880 370 1050 390 C 1180 410 1260 480 1380 510"
             stroke="#171717"
             strokeWidth="2.2"
             strokeLinecap="round"
@@ -128,14 +157,27 @@ export default function FoodAndDrinksTest() {
           />
         </svg>
 
-        {/* Mobile Flowing Line */}
+        {/* Mobile Flowing Line + Mobile Rolling Pin */}
         <svg
           className="block lg:hidden w-full h-full overflow-visible"
           viewBox="0 0 390 650"
           fill="none"
         >
+          {/* Mobile Rolling Pin */}
+          <g
+            transform="translate(20, 20) scale(0.55) rotate(-12)"
+            stroke="#171717"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M77 47 C94 33 223 33 240 47 L240 103 C222 117 95 117 77 103Z" />
+            <path d="M77 57 C55 57 45 48 32 42 C21 37 12 44 14 55 L20 75 C22 83 34 87 45 81 L77 94" />
+            <path d="M240 57 C262 57 272 48 285 42 C296 37 305 44 303 55 L297 75 C295 83 283 87 272 81 L240 94" />
+          </g>
+
           <path
-            d="M 20 50 C 40 220 120 380 220 440 C 300 490 340 550 350 620"
+            d="M 180 70 C 190 200 130 360 210 430 C 270 480 320 540 340 610"
             stroke="#171717"
             strokeWidth="2.2"
             strokeLinecap="round"

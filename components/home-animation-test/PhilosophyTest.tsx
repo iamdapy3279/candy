@@ -11,50 +11,95 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default function PhilosophyTest() {
   const lineRef = useRef<SVGPathElement>(null);
   const mobileLineRef = useRef<SVGPathElement>(null);
+  const cupRef = useRef<SVGGElement>(null);
+  const steamRef = useRef<SVGGElement>(null);
+  const mobileCupRef = useRef<SVGGElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Desktop stroke animation
-    if (lineRef.current) {
-      const len = lineRef.current.getTotalLength();
-      lineRef.current.style.strokeDasharray = `${len} ${len}`;
-      lineRef.current.style.strokeDashoffset = prefersReduced ? "0" : `${len}`;
+    // Helper to init paths
+    const initPaths = (el: Element | null) => {
+      if (!el) return [];
+      const paths = Array.from(el.querySelectorAll<SVGPathElement>("path"));
+      paths.forEach((p) => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = `${len} ${len}`;
+        p.style.strokeDashoffset = prefersReduced ? "0" : `${len}`;
+      });
+      return paths;
+    };
 
-      if (!prefersReduced) {
-        gsap.to(lineRef.current, {
+    const desktopPaths = [
+      ...(lineRef.current ? [lineRef.current] : []),
+      ...initPaths(cupRef.current),
+      ...initPaths(steamRef.current),
+    ];
+
+    if (!prefersReduced && desktopPaths.length > 0) {
+      desktopPaths.forEach((p) => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = `${len} ${len}`;
+        p.style.strokeDashoffset = `${len}`;
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#philosophy-test",
+          start: "top 80%",
+          end: "bottom 30%",
+          scrub: 0.8,
+        },
+      });
+
+      if (lineRef.current) {
+        tl.to(lineRef.current, { strokeDashoffset: 0, duration: 1.2, ease: "none" });
+      }
+      if (steamRef.current) {
+        tl.to(steamRef.current.querySelectorAll("path"), {
           strokeDashoffset: 0,
+          duration: 0.8,
+          stagger: 0.15,
           ease: "none",
-          scrollTrigger: {
-            trigger: "#philosophy-test",
-            start: "top 80%",
-            end: "bottom 30%",
-            scrub: 0.8,
-          },
-        });
+        }, "-=0.3");
+      }
+      if (cupRef.current) {
+        tl.to(cupRef.current.querySelectorAll("path"), {
+          strokeDashoffset: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: "none",
+        }, "-=0.2");
       }
     }
 
     // Mobile stroke animation
-    if (mobileLineRef.current) {
-      const mLen = mobileLineRef.current.getTotalLength();
-      mobileLineRef.current.style.strokeDasharray = `${mLen} ${mLen}`;
-      mobileLineRef.current.style.strokeDashoffset = prefersReduced ? "0" : `${mLen}`;
+    const mobilePaths = [
+      ...(mobileLineRef.current ? [mobileLineRef.current] : []),
+      ...initPaths(mobileCupRef.current),
+    ];
 
-      if (!prefersReduced) {
-        gsap.to(mobileLineRef.current, {
-          strokeDashoffset: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#philosophy-test",
-            start: "top 85%",
-            end: "bottom 35%",
-            scrub: 0.8,
-          },
-        });
-      }
+    if (!prefersReduced && mobilePaths.length > 0) {
+      mobilePaths.forEach((p) => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = `${len} ${len}`;
+        p.style.strokeDashoffset = `${len}`;
+      });
+
+      gsap.to(mobilePaths, {
+        strokeDashoffset: 0,
+        duration: 1.2,
+        stagger: 0.12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#philosophy-test",
+          start: "top 85%",
+          end: "bottom 35%",
+          scrub: 0.8,
+        },
+      });
     }
   }, []);
 
@@ -67,21 +112,47 @@ export default function PhilosophyTest() {
       {/* 1. DEDICATED BACKGROUND SVG LAYER (BEHIND CONTENT, z-0)         */}
       {/* ============================================================== */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-visible select-none">
-        {/* Desktop Procedural SVG Flowing Line (hidden on mobile) */}
+        {/* Desktop Procedural SVG Flowing Line + COFFEE CUP WITH SAUCER & STEAM */}
         <svg
           className="hidden lg:block w-full h-full overflow-visible"
           viewBox="0 0 1440 700"
           fill="none"
         >
-          {/* 
-            Trajectory from reference mockup:
-            Enters from upper left margin -> curves down along left of cathedral arch ->
-            sweeps under arch and seal badge -> curves across whitespace under narrative ->
-            exits toward Locations section
-          */}
+          {/* Flowing Line */}
           <path
             ref={lineRef}
-            d="M -30 110 C 140 100 130 280 180 390 C 230 500 320 570 480 560 C 620 550 670 440 820 410 C 960 380 1120 460 1280 440 C 1370 430 1420 370 1490 380"
+            d="M -30 110 C 140 100 130 280 180 390 C 230 500 320 570 480 560 C 620 550 670 440 820 410 C 960 380 1040 340 1120 280 C 1170 240 1200 200 1220 160"
+            stroke="#171717"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* 
+            COFFEE CUP (cup.svg) + STEAM (steam.svg)
+            Positioned in the upper-right whitespace of Philosophy
+          */}
+          <g transform="translate(1080, 50) scale(0.95)">
+            {/* Steam Trails */}
+            <g ref={steamRef} stroke="#171717" strokeWidth="2.2" strokeLinecap="round">
+              <path id="steam-1" d="M75 55 C49 25 92 4 71 -27 C57 -47 59 -66 74 -87" />
+              <path id="steam-2" d="M116 55 C89 24 132 0 110 -32 C95 -54 102 -74 118 -93" />
+              <path id="steam-3" d="M157 55 C132 27 172 6 153 -22 C140 -41 145 -60 159 -76" />
+            </g>
+
+            {/* Coffee Cup with Saucer, Rim, Body, Handle & Coffee Surface */}
+            <g ref={cupRef} stroke="#171717" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path id="rim" d="M35 65 C72 48 183 48 220 65 C183 83 72 83 35 65Z"/>
+              <path id="coffee-surface" d="M57 66 C92 76 163 76 198 66"/>
+              <path id="body" d="M40 67 C45 110 56 153 78 169 C95 181 160 181 177 169 C199 153 210 110 215 67"/>
+              <path id="handle" d="M215 87 C252 77 264 100 253 128 C245 149 224 154 199 143"/>
+              <path id="saucer" d="M13 180 C66 197 194 197 247 180 C224 204 39 207 13 180Z"/>
+            </g>
+          </g>
+
+          {/* Continuation line exiting saucer base towards Locations */}
+          <path
+            d="M 1240 230 C 1280 270 1340 330 1480 340"
             stroke="#171717"
             strokeWidth="2.2"
             strokeLinecap="round"
@@ -89,7 +160,7 @@ export default function PhilosophyTest() {
           />
         </svg>
 
-        {/* Mobile Procedural SVG Line (mostly vertical, safe in margin) */}
+        {/* Mobile Procedural SVG Line + Compact Coffee Cup */}
         <svg
           className="block lg:hidden w-full h-full overflow-visible"
           viewBox="0 0 390 700"
@@ -97,12 +168,21 @@ export default function PhilosophyTest() {
         >
           <path
             ref={mobileLineRef}
-            d="M 15 30 C 35 150 25 320 85 430 C 135 520 220 560 280 610 C 320 640 335 670 345 720"
+            d="M 15 30 C 35 150 25 280 85 360 C 135 440 200 480 240 500"
             stroke="#171717"
             strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
+
+          {/* Mobile Coffee Cup */}
+          <g ref={mobileCupRef} transform="translate(210, 470) scale(0.65)" stroke="#171717" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M35 65 C72 48 183 48 220 65 C183 83 72 83 35 65Z"/>
+            <path d="M57 66 C92 76 163 76 198 66"/>
+            <path d="M40 67 C45 110 56 153 78 169 C95 181 160 181 177 169 C199 153 210 110 215 67"/>
+            <path d="M215 87 C252 77 264 100 253 128 C245 149 224 154 199 143"/>
+            <path d="M13 180 C66 197 194 197 247 180 C224 204 39 207 13 180Z"/>
+          </g>
         </svg>
       </div>
 

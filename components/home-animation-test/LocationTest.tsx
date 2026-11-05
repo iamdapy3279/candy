@@ -53,48 +53,85 @@ export default function LocationTest() {
   const locations = websiteContent.locations;
   const lineRef = useRef<SVGPathElement>(null);
   const mobileLineRef = useRef<SVGPathElement>(null);
+  const croissantRef = useRef<SVGGElement>(null);
+  const mobileCroissantRef = useRef<SVGGElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (lineRef.current) {
-      const len = lineRef.current.getTotalLength();
-      lineRef.current.style.strokeDasharray = `${len} ${len}`;
-      lineRef.current.style.strokeDashoffset = prefersReduced ? "0" : `${len}`;
+    // Helper to init paths
+    const initPaths = (el: Element | null) => {
+      if (!el) return [];
+      const paths = Array.from(el.querySelectorAll<SVGPathElement>("path"));
+      paths.forEach((p) => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = `${len} ${len}`;
+        p.style.strokeDashoffset = prefersReduced ? "0" : `${len}`;
+      });
+      return paths;
+    };
 
-      if (!prefersReduced) {
-        gsap.to(lineRef.current, {
+    const desktopPaths = [
+      ...(lineRef.current ? [lineRef.current] : []),
+      ...initPaths(croissantRef.current),
+    ];
+
+    if (!prefersReduced && desktopPaths.length > 0) {
+      desktopPaths.forEach((p) => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = `${len} ${len}`;
+        p.style.strokeDashoffset = `${len}`;
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#locations-test",
+          start: "top 80%",
+          end: "bottom 30%",
+          scrub: 0.8,
+        },
+      });
+
+      if (croissantRef.current) {
+        tl.to(croissantRef.current.querySelectorAll("path"), {
           strokeDashoffset: 0,
+          duration: 1.2,
+          stagger: 0.12,
           ease: "none",
-          scrollTrigger: {
-            trigger: "#locations-test",
-            start: "top 80%",
-            end: "bottom 30%",
-            scrub: 0.8,
-          },
         });
+      }
+
+      if (lineRef.current) {
+        tl.to(lineRef.current, { strokeDashoffset: 0, duration: 1.5, ease: "none" }, "-=0.3");
       }
     }
 
-    if (mobileLineRef.current) {
-      const mLen = mobileLineRef.current.getTotalLength();
-      mobileLineRef.current.style.strokeDasharray = `${mLen} ${mLen}`;
-      mobileLineRef.current.style.strokeDashoffset = prefersReduced ? "0" : `${mLen}`;
+    const mobilePaths = [
+      ...(mobileLineRef.current ? [mobileLineRef.current] : []),
+      ...initPaths(mobileCroissantRef.current),
+    ];
 
-      if (!prefersReduced) {
-        gsap.to(mobileLineRef.current, {
-          strokeDashoffset: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#locations-test",
-            start: "top 85%",
-            end: "bottom 35%",
-            scrub: 0.8,
-          },
-        });
-      }
+    if (!prefersReduced && mobilePaths.length > 0) {
+      mobilePaths.forEach((p) => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = `${len} ${len}`;
+        p.style.strokeDashoffset = `${len}`;
+      });
+
+      gsap.to(mobilePaths, {
+        strokeDashoffset: 0,
+        duration: 1.2,
+        stagger: 0.12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#locations-test",
+          start: "top 85%",
+          end: "bottom 35%",
+          scrub: 0.8,
+        },
+      });
     }
   }, []);
 
@@ -107,15 +144,36 @@ export default function LocationTest() {
       {/* 1. DEDICATED BACKGROUND SVG LAYER (BEHIND CONTENT, z-0)         */}
       {/* ============================================================== */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-visible select-none">
-        {/* Desktop Procedural Flowing Line (weaves behind the 2 location cards) */}
+        {/* Desktop Procedural Flowing Line + CROISSANT ILLUSTRATION */}
         <svg
           className="hidden lg:block w-full h-full overflow-visible"
           viewBox="0 0 1440 900"
           fill="none"
         >
+          {/* CROISSANT (croissant.svg) nestled in whitespace near top transition */}
+          <g
+            ref={croissantRef}
+            transform="translate(180, 20) scale(0.85)"
+            stroke="#171717"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path
+              id="outline"
+              d="M18 151 C36 111 61 72 99 51 C126 36 148 48 163 76 C182 41 210 17 245 21 C288 25 309 77 322 111 C333 137 343 151 351 160 C316 145 289 146 263 164 C235 183 210 197 185 184 C174 178 166 165 160 151 C140 179 113 190 86 177 C58 164 37 153 18 151Z"
+            />
+            <path id="fold-1" d="M99 51 C94 90 120 130 160 151" />
+            <path id="fold-2" d="M145 49 C132 90 150 133 178 177" />
+            <path id="fold-3" d="M163 76 C165 111 174 153 185 184" />
+            <path id="fold-4" d="M245 21 C216 66 219 119 239 177" />
+            <path id="fold-5" d="M290 63 C265 99 279 134 312 151" />
+          </g>
+
+          {/* Flowing Line weaving from croissant behind location cards */}
           <path
             ref={lineRef}
-            d="M 1480 30 C 1320 40 1180 120 980 110 C 820 100 680 180 580 250 C 470 320 370 290 260 360 C 150 430 80 550 110 660 C 140 760 300 810 500 790 C 700 770 910 820 1120 810 C 1290 800 1410 860 1490 890"
+            d="M 480 160 C 650 170 820 110 980 110 C 1120 110 1250 160 1320 220 C 1400 290 1380 390 1280 440 C 1180 490 1020 460 920 520 C 800 590 740 680 770 760 C 800 840 920 860 1080 840 C 1240 820 1380 870 1480 890"
             stroke="#171717"
             strokeWidth="2.2"
             strokeLinecap="round"
@@ -123,15 +181,34 @@ export default function LocationTest() {
           />
         </svg>
 
-        {/* Mobile Procedural Flowing Line */}
+        {/* Mobile Procedural Flowing Line + Mobile Croissant */}
         <svg
           className="block lg:hidden w-full h-full overflow-visible"
           viewBox="0 0 390 900"
           fill="none"
         >
+          {/* Mobile Croissant */}
+          <g
+            ref={mobileCroissantRef}
+            transform="translate(40, 30) scale(0.6)"
+            stroke="#171717"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path
+              d="M18 151 C36 111 61 72 99 51 C126 36 148 48 163 76 C182 41 210 17 245 21 C288 25 309 77 322 111 C333 137 343 151 351 160 C316 145 289 146 263 164 C235 183 210 197 185 184 C174 178 166 165 160 151 C140 179 113 190 86 177 C58 164 37 153 18 151Z"
+            />
+            <path d="M99 51 C94 90 120 130 160 151" />
+            <path d="M145 49 C132 90 150 133 178 177" />
+            <path d="M163 76 C165 111 174 153 185 184" />
+            <path d="M245 21 C216 66 219 119 239 177" />
+            <path d="M290 63 C265 99 279 134 312 151" />
+          </g>
+
           <path
             ref={mobileLineRef}
-            d="M 345 20 C 335 120 280 200 210 260 C 140 320 80 430 70 540 C 60 670 120 750 200 820 C 260 870 320 900 340 950"
+            d="M 240 120 C 300 160 330 220 310 300 C 280 390 190 440 150 520 C 110 610 120 720 180 790 C 230 840 310 880 340 940"
             stroke="#171717"
             strokeWidth="2.2"
             strokeLinecap="round"
