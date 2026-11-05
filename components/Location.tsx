@@ -125,12 +125,25 @@ export default function Location() {
                     </h3>
                   </div>
 
-                  {/* Right: Standalone Black Amenity Icon (55-70px, no container, no border, no background) */}
-                  <div className="shrink-0 pt-0.5" title={loc.amenity === "pet-friendly" ? "Pet-Friendly" : "Valet Parking"}>
+                  {/* Right: Standalone Black Amenity Icon with descriptive text below */}
+                  <div
+                    className="shrink-0 flex flex-col items-center text-center pt-0.5"
+                    title={loc.amenity === "pet-friendly" ? "Pet Friendly" : "Offers Valet"}
+                  >
                     {loc.amenity === "pet-friendly" ? (
-                      <PetFriendlyIcon className="w-14 h-14 sm:w-16 sm:h-16 lg:w-[66px] lg:h-[66px]" />
+                      <>
+                        <PetFriendlyIcon className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[60px] lg:h-[60px]" />
+                        <span className="font-sans text-[10px] sm:text-[11px] uppercase tracking-wider text-charcoal-800/80 font-semibold mt-1.5 whitespace-nowrap">
+                          Pet Friendly
+                        </span>
+                      </>
                     ) : (
-                      <ValetParkingIcon className="w-14 h-14 sm:w-16 sm:h-16 lg:w-[66px] lg:h-[66px]" />
+                      <>
+                        <ValetParkingIcon className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[60px] lg:h-[60px]" />
+                        <span className="font-sans text-[10px] sm:text-[11px] uppercase tracking-wider text-charcoal-800/80 font-semibold mt-1.5 whitespace-nowrap">
+                          Offers Valet
+                        </span>
+                      </>
                     )}
                   </div>
                 </div>
