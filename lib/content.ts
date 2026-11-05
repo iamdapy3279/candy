@@ -60,8 +60,11 @@ export const websiteContent = {
     headline: "Where every table is yours",
     subtext: "A bakehouse & bistro in the heart of Kolkata — made for mornings, lingering lunches, and slow evenings.",
     videoDesktop: "/videos/Desktop1.mp4",
+    videoDesktopWebm: "/videos/Desktop1.webm",
     videoMobile: "/videos/Mobile1-2.mp4",
-    posterImage: "/Hero.jpeg",
+    videoMobileWebm: "/videos/Mobile1-2.webm",
+    posterImage: "/Hero.webp",
+    posterImageMobile: "/Hero-mobile.webp",
     primaryCta: {
       label: "View Menu",
       href: "/Menu.pdf",

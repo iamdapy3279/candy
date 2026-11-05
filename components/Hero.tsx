@@ -24,21 +24,33 @@ export default function Hero({ onOpenMenu }: HeroProps = {}) {
 
   return (
     <section className="relative w-full h-screen min-h-[500px] flex items-center justify-center overflow-hidden bg-black">
-      {/* 1. Instant Fallback Image (No tint) */}
+      {/* 1. Instant Fallback Image (Zero-latency WebP Poster displayed immediately) */}
       <div className="absolute inset-0 z-0">
+        {/* Desktop Poster */}
         <Image
-          src={websiteContent.hero.posterImage}
+          src="/Hero.webp"
           alt="X&Y Bakehouse ambiance"
           fill
           priority
           sizes="100vw"
-          className={`object-cover object-center transition-opacity duration-700 ${
+          className={`hidden md:block object-cover object-center transition-opacity duration-700 ${
+            videoLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+        />
+        {/* Mobile-Optimized Portrait Poster */}
+        <Image
+          src="/Hero-mobile.webp"
+          alt="X&Y Bakehouse ambiance"
+          fill
+          priority
+          sizes="100vw"
+          className={`block md:hidden object-cover object-center transition-opacity duration-700 ${
             videoLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
           }`}
         />
       </div>
 
-      {/* 2. Seamless Autoplaying Video (Raw natural colors, zero blue tint) */}
+      {/* 2. Seamless Autoplaying Video (Optimized VP9 with H.264 FastStart fallback) */}
       <video
         ref={videoRef}
         autoPlay
@@ -51,7 +63,12 @@ export default function Hero({ onOpenMenu }: HeroProps = {}) {
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
       >
+        {/* Desktop Sources (>= 768px): VP9 Primary, H.264 Universal Fallback */}
+        <source src={websiteContent.hero.videoDesktopWebm} type="video/webm" media="(min-width: 768px)" />
         <source src={websiteContent.hero.videoDesktop} type="video/mp4" media="(min-width: 768px)" />
+
+        {/* Mobile Sources (< 768px): 720p VP9 Primary, 720p H.264 Universal Fallback */}
+        <source src={websiteContent.hero.videoMobileWebm} type="video/webm" media="(max-width: 767px)" />
         <source src={websiteContent.hero.videoMobile} type="video/mp4" />
       </video>
 
