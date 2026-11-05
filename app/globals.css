@@ -76,6 +76,27 @@ body {
   border-radius: 9999px 9999px 1.5rem 1.5rem;
 }
 
+/* Infinite Horizontal Auto-Scroll Marquee for Press Carousel */
+@keyframes infiniteMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-infinite-marquee {
+  display: flex;
+  width: max-content;
+  animation: infiniteMarquee 38s linear infinite;
+  will-change: transform;
+}
+
+.animate-infinite-marquee:hover {
+  animation-play-state: paused;
+}
+
 /* Subtle scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

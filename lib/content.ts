@@ -230,6 +230,57 @@ export const websiteContent = {
     },
   ],
 
+  press: {
+    tag: "IN THE PRESS",
+    title: "A Little Love From The Publications",
+    subtitle: "Features, stories and mentions from some of our favourite publications.",
+    ratings: [
+      {
+        platform: "Zomato",
+        score: "4.4 / 5",
+        color: "#E23744",
+      },
+      {
+        platform: "Swiggy",
+        score: "4.4 / 5",
+        logo: "/icons/SwiggyAppIcon.png",
+        color: "#FE5005",
+      },
+    ],
+    articles: [
+      {
+        id: "the-telegraph",
+        publication: "The Telegraph",
+        headline: "Café X & Y, the new bakehouse and all-day bistro, opens in Kolkata",
+        url: "https://www.telegraphindia.com/amp/my-kolkata/try-this/visit/cafe-x-y-the-new-bakehouse-and-all-day-bistro-opens-in-kolkata/cid/2002040",
+      },
+      {
+        id: "restaurant-india",
+        publication: "Restaurant India",
+        headline: "All-Day Bistro Café X & Y Launches in Kolkata",
+        url: "https://www.restaurantindia.in/news/all-day-bistro-caf-x-y-launches-in-kolkata.n11078",
+      },
+      {
+        id: "lbb",
+        publication: "LBB",
+        headline: "Café X & Y: A Parisian-inspired bakehouse in Kolkata",
+        url: "https://lbb.in/kolkata/the-green-house-8f4413/",
+      },
+      {
+        id: "hoteliers-web",
+        publication: "Hoteliers Web",
+        headline: "Café X & Y: The All-New Bakehouse and All-Day Bistro",
+        url: "https://hoteliersweb.com/News/articles/10877",
+      },
+      {
+        id: "hospitality-news",
+        publication: "Hospitalitynews.in",
+        headline: "Café X & Y Invites You to Experience Kolkata's Newest Bistro",
+        url: "https://hospitalitynews.in/news/cafe-x-y-invites-you-to-experience-kolkatas-newest-bistro",
+      },
+    ],
+  },
+
   footer: {
     tagline: "Where every table is yours.",
     copyright: `© ${new Date().getFullYear()} X&Y Bakehouse & Bistro. All rights reserved.`,

@@ -7,6 +7,7 @@ import Philosophy from "@/components/Philosophy";
 import FoodAndDrinks from "@/components/FoodAndDrinks";
 import Evolution from "@/components/Evolution";
 import Location from "@/components/Location";
+import Press from "@/components/Press";
 import Footer from "@/components/Footer";
 import MenuModal from "@/components/MenuModal";
 
@@ -40,7 +41,10 @@ export default function Home() {
       {/* 5. Our Evolution */}
       <Evolution />
 
-      {/* 6. Footer */}
+      {/* 6. In The Press (Infinite Auto-Scrolling Carousel) */}
+      <Press />
+
+      {/* 7. Footer */}
       <Footer />
 
       {/* 7. In-Page Interactive Menu Modal (Mobile-first, high-res fitted with back/close arrow) */}
