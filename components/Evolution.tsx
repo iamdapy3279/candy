@@ -44,7 +44,7 @@ export default function Evolution() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-sans text-xs sm:text-sm tracking-[0.22em] uppercase text-gold-700 font-semibold"
+            className="font-sans text-xs sm:text-sm tracking-[0.22em] uppercase text-[#293477] font-semibold"
           >
             {websiteContent.evolution.tag}
           </motion.p>
@@ -54,12 +54,12 @@ export default function Evolution() {
         <div className="relative">
           
           {/* Static Background Line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-navy-800/15 -translate-x-1/2" />
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-[#293477]/20 -translate-x-1/2" />
 
           {/* Animated Scroll-Progress Line */}
           <motion.div
             style={{ scaleY, originY: 0 }}
-            className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gold-500 -translate-x-1/2 z-10"
+            className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-[#293477] -translate-x-1/2 z-10"
           />
 
           {/* Milestones List */}
@@ -86,7 +86,7 @@ export default function Evolution() {
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <span className="font-sans text-xs tracking-[0.2em] uppercase font-semibold text-gold-700 block mb-1">
+                      <span className="font-sans text-xs tracking-[0.2em] uppercase font-semibold text-[#293477] block mb-1">
                         {milestone.title}
                       </span>
                       <h3 className="font-sans text-xl sm:text-2xl font-semibold text-navy-800 mb-2">
@@ -105,26 +105,27 @@ export default function Evolution() {
 
                       {/* Quote (kept identical for both mobile and desktop) */}
                       {milestone.quote && (
-                        <p className="font-sans italic text-xs sm:text-sm text-gold-700 font-medium mt-2.5">
+                        <p className="font-sans italic text-xs sm:text-sm text-[#293477]/80 font-medium mt-2.5">
                           {milestone.quote}
                         </p>
                       )}
                     </motion.div>
                   </div>
 
-                  {/* Center Badge (Reference Image 1: Rounded square pill with year number) */}
+                  {/* Center Badge (Squircle matching reference image) */}
                   <div className="absolute left-6 md:left-1/2 top-0 md:top-auto -translate-x-1/2 z-30">
                     <motion.div
                       initial={{ scale: 0.6, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0.1 }}
-                      className={`w-12 h-12 rounded-2xl flex items-center justify-center font-serif text-lg font-bold shadow-md transition-all duration-300 ${
-                        milestone.isLatest
-                          ? "bg-gold-500 text-navy-950 border-2 border-gold-600 scale-105"
-                          : idx === 1
-                          ? "bg-navy-800 text-white border-2 border-navy-900"
-                          : "bg-white text-navy-800 border-2 border-navy-800/30"
+                      style={{ fontVariantNumeric: "lining-nums", fontFeatureSettings: "'lnum' 1" }}
+                      className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center font-serif text-lg sm:text-xl font-normal transition-all duration-300 ${
+                        milestone.badge === "24"
+                          ? "bg-[#293477] text-white border-2 border-[#293477]"
+                          : milestone.isLatest
+                          ? "bg-[#f2ba1e] text-[#293477] border-2 border-[#f2ba1e]"
+                          : "bg-white text-[#293477] border-2 border-[#293477]"
                       }`}
                     >
                       {milestone.badge}
