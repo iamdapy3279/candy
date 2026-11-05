@@ -10,3 +10,8 @@ out
 /Mobile1-2.mp4
 public/videos/backup/
 
+# Lighthouse reports
+*.report.html
+*.report.json
+
+
