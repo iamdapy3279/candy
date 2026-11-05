@@ -38,62 +38,17 @@ const categories = [
   { label: "Drinks", page: 10 },
 ];
 
-// Signature dishes photo gallery with high-res photography
-const signatureDishes = [
-  {
-    id: "eggs-benedict",
-    name: "Eggs Benedict",
-    category: "Morning Classic",
-    image: "/dishes/Dish1.jpg",
-  },
-  {
-    id: "chilli-spaghetti",
-    name: "Burnt Chilli Oil Spaghetti",
-    category: "Bistro Signature",
-    image: "/dishes/Dish2.jpg",
-  },
-  {
-    id: "cheesecake",
-    name: "New York Cheesecake",
-    category: "Patisserie Pillar",
-    image: "/dishes/Dish3.jpg",
-  },
-  {
-    id: "croissant",
-    name: "Butter Croissant",
-    category: "Artisanal Bake",
-    image: "/dishes/Dish4.jpg",
-  },
-  {
-    id: "gourmet-burger",
-    name: "Gourmet Bistro Burger",
-    category: "Healthy Bites",
-    image: "/dishes/Dish5.jpg",
-  },
-  {
-    id: "truffle-pasta",
-    name: "Artisan Handcrafted Pasta",
-    category: "Chef's Special",
-    image: "/dishes/Dish7.jpg",
-  },
-  {
-    id: "fruit-tart",
-    name: "Seasonal Bakehouse Tart",
-    category: "Dessert Special",
-    image: "/dishes/Dish8.jpg",
-  },
-  {
-    id: "matcha-latte",
-    name: "Ceremonial Matcha Latte",
-    category: "Beverage",
-    image: "/dishes/Dish9.jpg",
-  },
-  {
-    id: "specialty-coffee",
-    name: "Specialty Espresso Roast",
-    category: "Coffee Bar",
-    image: "/dishes/Dish10.jpg",
-  },
+// Pure signature dish images (no text, no overlays)
+const dishImages = [
+  "/dishes/Dish1.jpg",
+  "/dishes/Dish2.jpg",
+  "/dishes/Dish3.jpg",
+  "/dishes/Dish4.jpg",
+  "/dishes/Dish5.jpg",
+  "/dishes/Dish7.jpg",
+  "/dishes/Dish8.jpg",
+  "/dishes/Dish9.jpg",
+  "/dishes/Dish10.jpg",
 ];
 
 export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
@@ -366,7 +321,7 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
             </button>
           </div>
 
-          {/* SMALLER POPUP: SIGNATURE DISHES ONLY PHOTO GALLERY WITH SWIPE-TO-SCROLL */}
+          {/* PURE PHOTO GALLERY POPUP (ONLY IMAGES, NO TEXT, NO OVERLAYS, NO DISH NAMES) */}
           <AnimatePresence>
             {isGalleryOpen && (
               <motion.div
@@ -374,111 +329,89 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="fixed inset-0 z-[120] bg-black/75 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+                className="fixed inset-0 z-[120] bg-black/85 backdrop-blur-md flex flex-col items-center justify-center p-4 sm:p-6"
                 onClick={() => setIsGalleryOpen(false)}
               >
-                {/* Popup Card Container */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.92, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.92, y: 15 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                  onClick={(e) => e.stopPropagation()}
-                  className="relative w-full max-w-sm sm:max-w-md bg-[#211714] rounded-3xl overflow-hidden shadow-2xl border border-white/15 flex flex-col text-white"
+                {/* Floating Minimal Close Button */}
+                <button
+                  onClick={() => setIsGalleryOpen(false)}
+                  className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-all active:scale-90 cursor-pointer z-30"
+                  aria-label="Close"
                 >
-                  {/* Gallery Header */}
-                  <div className="px-5 py-3.5 border-b border-white/10 flex items-center justify-between bg-navy-950/80 select-none">
-                    <div>
-                      <h2 className="font-serif text-lg font-medium tracking-wide text-cream-100 leading-tight">
-                        Signature Dishes
-                      </h2>
-                      <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-gold-400 font-semibold block">
-                        Swipe to Explore • {currentGalleryIndex + 1} of {signatureDishes.length}
-                      </span>
-                    </div>
+                  <X size={20} />
+                </button>
 
-                    <button
-                      onClick={() => setIsGalleryOpen(false)}
-                      className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
-                      aria-label="Close gallery"
-                    >
-                      <X size={16} />
-                    </button>
-                  </div>
-
-                  {/* Swipe-to-Scroll Horizontal Carousel Container */}
-                  <div className="relative w-full aspect-[4/5] bg-black overflow-hidden group">
-                    <div
-                      ref={galleryCarouselRef}
-                      onScroll={handleGalleryScroll}
-                      className="w-full h-full flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth"
-                    >
-                      {signatureDishes.map((dish, idx) => (
-                        <div
-                          key={dish.id}
-                          className="w-full h-full shrink-0 snap-center relative"
-                        >
-                          <Image
-                            src={dish.image}
-                            alt={dish.name}
-                            fill
-                            priority={idx === 0}
-                            className="object-cover"
-                            sizes="(max-width: 640px) 92vw, 448px"
-                          />
-
-                          {/* Subtle Bottom Vignette Gradient with Dish Name */}
-                          <div className="absolute inset-x-0 bottom-0 pt-16 pb-4 px-5 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex flex-col justify-end">
-                            <span className="font-sans text-[10px] tracking-[0.22em] uppercase text-gold-400 font-semibold block mb-0.5">
-                              {dish.category}
-                            </span>
-                            <h3 className="font-serif text-xl sm:text-2xl font-medium text-white tracking-wide leading-tight">
-                              {dish.name}
-                            </h3>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Left Chevron Button (Desktop & Click Navigation) */}
-                    {currentGalleryIndex > 0 && (
-                      <button
-                        onClick={() => scrollToGalleryIndex(currentGalleryIndex - 1)}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white flex items-center justify-center backdrop-blur-xs transition-all active:scale-90 cursor-pointer shadow-lg z-10 hidden sm:flex"
-                        aria-label="Previous dish"
-                      >
-                        <ChevronLeft size={20} />
-                      </button>
-                    )}
-
-                    {/* Right Chevron Button (Desktop & Click Navigation) */}
-                    {currentGalleryIndex < signatureDishes.length - 1 && (
-                      <button
-                        onClick={() => scrollToGalleryIndex(currentGalleryIndex + 1)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white flex items-center justify-center backdrop-blur-xs transition-all active:scale-90 cursor-pointer shadow-lg z-10 hidden sm:flex"
-                        aria-label="Next dish"
-                      >
-                        <ChevronRight size={20} />
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Carousel Dot Indicators */}
-                  <div className="py-3 px-4 bg-navy-950/90 flex items-center justify-center gap-1.5 select-none">
-                    {signatureDishes.map((_, idx) => (
-                      <button
+                {/* Pure Swipe-to-Scroll Image Carousel */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-black/40 border border-white/10"
+                >
+                  <div
+                    ref={galleryCarouselRef}
+                    onScroll={handleGalleryScroll}
+                    className="w-full h-full flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth"
+                  >
+                    {dishImages.map((src, idx) => (
+                      <div
                         key={idx}
-                        onClick={() => scrollToGalleryIndex(idx)}
-                        className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                          currentGalleryIndex === idx
-                            ? "w-6 bg-gold-400"
-                            : "w-1.5 bg-white/30 hover:bg-white/50"
-                        }`}
-                        aria-label={`Go to photo ${idx + 1}`}
-                      />
+                        className="w-full h-full shrink-0 snap-center relative"
+                      >
+                        <Image
+                          src={src}
+                          alt="Signature Dish"
+                          fill
+                          priority={idx === 0}
+                          className="object-cover"
+                          sizes="(max-width: 640px) 90vw, 448px"
+                        />
+                      </div>
                     ))}
                   </div>
+
+                  {/* Desktop Left / Right Navigation Arrows */}
+                  {currentGalleryIndex > 0 && (
+                    <button
+                      onClick={() => scrollToGalleryIndex(currentGalleryIndex - 1)}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center backdrop-blur-xs transition-all active:scale-90 cursor-pointer shadow-lg z-20 hidden sm:flex"
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft size={20} />
+                    </button>
+                  )}
+
+                  {currentGalleryIndex < dishImages.length - 1 && (
+                    <button
+                      onClick={() => scrollToGalleryIndex(currentGalleryIndex + 1)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center backdrop-blur-xs transition-all active:scale-90 cursor-pointer shadow-lg z-20 hidden sm:flex"
+                      aria-label="Next image"
+                    >
+                      <ChevronRight size={20} />
+                    </button>
+                  )}
                 </motion.div>
+
+                {/* Minimal Dots Indicator */}
+                <div className="mt-4 flex items-center gap-1.5 select-none z-20">
+                  {dishImages.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        scrollToGalleryIndex(idx);
+                      }}
+                      className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                        currentGalleryIndex === idx
+                          ? "w-5 bg-white"
+                          : "w-1.5 bg-white/30 hover:bg-white/50"
+                      }`}
+                      aria-label={`Photo ${idx + 1}`}
+                    />
+                  ))}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
