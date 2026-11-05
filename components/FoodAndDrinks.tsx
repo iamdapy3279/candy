@@ -230,7 +230,7 @@ export default function FoodAndDrinks() {
                 </span>
 
                 {/* 2. Dish Title */}
-                <h3 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-navy-800 leading-snug tracking-tight mb-3">
+                <h3 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#293477] leading-snug tracking-tight mb-3">
                   {currentDish.name}
                 </h3>
 

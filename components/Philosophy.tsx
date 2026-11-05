@@ -80,10 +80,10 @@ export default function Philosophy() {
             </span>
 
             {/* Section Headline: Desktop perfect original, Mobile max 5 words */}
-            <h2 className="hidden md:block philosophy-heading mb-6">
+            <h2 className="hidden md:block philosophy-heading text-[#293477] mb-6">
               {websiteContent.philosophy.title}
             </h2>
-            <h2 className="md:hidden philosophy-heading text-3xl leading-[1.08] mb-4">
+            <h2 className="md:hidden philosophy-heading text-[#293477] text-3xl leading-[1.08] mb-4">
               {websiteContent.philosophy.mobileTitle || "Food Made With Pure Intention"}
             </h2>
 

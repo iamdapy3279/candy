@@ -90,7 +90,7 @@ export default function Location() {
             <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-2 sm:mb-3">
               FIND OUR BAKEHOUSES
             </span>
-            <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-semibold text-navy-800 tracking-tight leading-[1.1]">
+            <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#293477] tracking-tight leading-[1.1]">
               Our Locations
             </h2>
             <p className="font-sans text-xs sm:text-sm text-charcoal-800/80 mt-2 sm:mt-3 leading-relaxed">

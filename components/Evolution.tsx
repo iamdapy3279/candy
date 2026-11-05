@@ -35,7 +35,7 @@ export default function Evolution() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-sans text-3xl sm:text-5xl font-semibold text-navy-800 tracking-tight mb-3"
+            className="font-sans text-3xl sm:text-5xl font-semibold text-[#293477] tracking-tight mb-3"
           >
             {websiteContent.evolution.title}
           </motion.h2>
