@@ -114,7 +114,7 @@ export default function Location() {
                       <span className="block font-sans text-xs uppercase tracking-wider text-charcoal-800/80 font-semibold mb-0.5">
                         Address
                       </span>
-                      <p className="font-serif text-sm sm:text-base text-navy-800 font-medium">
+                      <p className="font-sans text-xs sm:text-sm text-navy-800 font-medium leading-relaxed">
                         {currentLocation.address}
                       </p>
                     </div>
@@ -129,7 +129,7 @@ export default function Location() {
                       <span className="block font-sans text-xs uppercase tracking-wider text-charcoal-800/80 font-semibold mb-0.5">
                         Opening Hours
                       </span>
-                      <p className="font-serif text-sm sm:text-base text-navy-800 font-medium">
+                      <p className="font-sans text-xs sm:text-sm text-navy-800 font-medium tracking-wide">
                         {currentLocation.hours}
                       </p>
                     </div>
@@ -146,7 +146,7 @@ export default function Location() {
                       </span>
                       <a
                         href={`tel:${currentLocation.phone.replace(/\s+/g, "")}`}
-                        className="font-serif text-sm sm:text-base text-navy-800 font-medium hover:text-gold-700 transition-colors"
+                        className="font-sans text-xs sm:text-sm text-navy-800 font-medium tracking-wide hover:text-gold-700 transition-colors"
                       >
                         {currentLocation.displayPhone}
                       </a>
