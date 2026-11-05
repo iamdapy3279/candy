@@ -26,16 +26,16 @@ const menuPages = [
 ];
 
 const categories = [
-  { label: "All", page: 1 },
-  { label: "Salads", page: 2 },
-  { label: "Appetizers", page: 3 },
-  { label: "Sandwiches", page: 4 },
-  { label: "Burgers", page: 5 },
-  { label: "Pizza", page: 6 },
-  { label: "Mains", page: 7 },
-  { label: "Desserts", page: 8 },
-  { label: "Coffee", page: 9 },
-  { label: "Drinks", page: 10 },
+  { label: "ALL", page: 1 },
+  { label: "SALADS", page: 2 },
+  { label: "APPETIZERS", page: 3 },
+  { label: "SANDWICHES", page: 4 },
+  { label: "BURGERS", page: 5 },
+  { label: "PIZZA", page: 6 },
+  { label: "MAINS", page: 7 },
+  { label: "DESSERTS", page: 8 },
+  { label: "COFFEE", page: 9 },
+  { label: "BEVERAGES", page: 10 },
 ];
 
 // Pure signature dish images (no text, no overlays)
@@ -162,43 +162,71 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-[100] flex flex-col bg-[#F8F3ED] text-[#211714]"
+          className="fixed inset-0 z-[100] flex flex-col bg-[#F8F3ED] text-[#211714] no-scrollbar"
         >
           {/* Top Sticky Header */}
-          <header className="sticky top-0 z-50 bg-[#F8F3ED]/95 backdrop-blur-md pt-3 sm:pt-3.5 pb-2 border-b border-[#E8DCCB]/60 select-none">
-            {/* Top Row: Back button, Title "Menu", Close button */}
+          <header className="sticky top-0 z-50 bg-[#F8F3ED]/98 backdrop-blur-md pt-3.5 sm:pt-4 pb-0 select-none">
+            {/* Top Row: Back button (bare icon), Left line, Center Plaque, Right line, Close button (bare icon) */}
             <div className="px-4 sm:px-8 flex items-center justify-between">
-              {/* Back Button */}
+              {/* Back Button (bare icon, no circle) */}
               <button
                 onClick={onClose}
-                className="w-10 h-10 rounded-full bg-[#EFE6DA]/70 hover:bg-[#E2D5C3] text-navy-900 flex items-center justify-center transition-all active:scale-95 cursor-pointer shadow-2xs"
+                className="p-1 -ml-1 text-[#211714] hover:text-[#B9853D] transition-colors cursor-pointer shrink-0"
                 aria-label="Back to website"
               >
-                <ArrowLeft size={19} className="text-[#3A2E28]" />
+                <ArrowLeft size={22} strokeWidth={1.5} />
               </button>
 
-              {/* Center: Just the word "Menu" in bold font */}
-              <div className="text-center px-2 flex items-center justify-center">
-                <h1 className="font-sans text-lg sm:text-xl font-bold tracking-wider uppercase text-[#211714]">
-                  Menu
-                </h1>
+              {/* Left Fine Divider Line */}
+              <div className="flex-1 h-[1px] bg-[#3A2E28]/35 mx-3 sm:mx-6" />
+
+              {/* Center Vintage Cartouche Plaque */}
+              <div className="relative shrink-0 flex items-center justify-center">
+                <svg
+                  width="246"
+                  height="64"
+                  viewBox="0 0 246 64"
+                  fill="none"
+                  className="w-[170px] sm:w-[210px] md:w-[230px] h-auto"
+                >
+                  {/* Outer Scalloped Cartouche */}
+                  <path
+                    d="M 28 3 H 218 C 224 3 228 7 230 13 C 242 22 242 42 230 51 C 228 57 224 61 218 61 H 28 C 22 61 18 57 16 51 C 4 42 4 22 16 13 C 18 7 22 3 28 3 Z"
+                    stroke="#3A2E28"
+                    strokeWidth="1.3"
+                    fill="#F8F3ED"
+                  />
+                  {/* Inner Parallel Inset Line */}
+                  <path
+                    d="M 29 6.5 H 217 C 221.5 6.5 224.5 9.5 226 14 C 236 22.5 236 41.5 226 50 C 224.5 54.5 221.5 57.5 217 57.5 H 29 C 24.5 57.5 21.5 54.5 20 50 C 10 41.5 10 22.5 20 14 C 21.5 9.5 24.5 6.5 29 6.5 Z"
+                    stroke="#3A2E28"
+                    strokeWidth="0.8"
+                    fill="none"
+                  />
+                </svg>
+                <span className="absolute inset-0 flex items-center justify-center font-serif text-[14px] sm:text-[16px] md:text-[17px] tracking-[0.28em] text-[#211714] select-none font-normal">
+                  •&nbsp;&nbsp;M E N U&nbsp;&nbsp;•
+                </span>
               </div>
 
-              {/* Close Button */}
+              {/* Right Fine Divider Line */}
+              <div className="flex-1 h-[1px] bg-[#3A2E28]/35 mx-3 sm:mx-6" />
+
+              {/* Close Button (bare icon, no circle) */}
               <button
                 onClick={onClose}
-                className="w-10 h-10 rounded-full bg-[#EFE6DA]/70 hover:bg-[#E2D5C3] text-navy-900 flex items-center justify-center transition-all active:scale-95 cursor-pointer shadow-2xs"
+                className="p-1 -mr-1 text-[#211714] hover:text-[#B9853D] transition-colors cursor-pointer shrink-0"
                 aria-label="Close menu modal"
               >
-                <X size={19} className="text-[#3A2E28]" />
+                <X size={22} strokeWidth={1.5} />
               </button>
             </div>
 
-            {/* Horizontal Scrollable Category Filter Pills */}
+            {/* Horizontal Category Navigation (Text with Active Underline, No Pills) */}
             <nav
               ref={categoryBarRef}
               aria-label="Menu Category Filter"
-              className="mt-2.5 px-3 sm:px-6 overflow-x-auto no-scrollbar flex items-center gap-2 pb-1"
+              className="mt-3 px-4 sm:px-8 overflow-x-auto no-scrollbar flex items-center gap-6 sm:gap-8 md:gap-10 border-b border-[#E8DCCB]/60"
             >
               {categories.map((cat) => {
                 const isActive = activeCategory.label === cat.label;
@@ -207,10 +235,10 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
                     key={cat.label}
                     id={`cat-pill-${cat.page}`}
                     onClick={() => scrollToPage(cat.page)}
-                    className={`shrink-0 px-4 sm:px-5 py-1.5 rounded-full text-xs font-medium font-sans transition-all duration-200 cursor-pointer ${
+                    className={`shrink-0 pb-2.5 text-[11px] sm:text-xs tracking-[0.18em] uppercase transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? "bg-[#9B7043] text-white shadow-xs"
-                        : "bg-white/80 hover:bg-white text-[#5C4A3E] border border-[#E8DCCB] shadow-2xs"
+                        ? "font-semibold text-[#211714] border-b-2 border-[#211714]"
+                        : "font-medium text-[#7A6B63] hover:text-[#211714] border-b-2 border-transparent"
                     }`}
                   >
                     {cat.label}
@@ -267,7 +295,7 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
           {/* MAIN SCROLLABLE MENU CARDS CONTAINER */}
           <div
             ref={scrollContainerRef}
-            className="flex-1 overflow-y-auto overscroll-contain px-4 sm:px-6 py-4 sm:py-6"
+            className="flex-1 overflow-y-auto overscroll-contain no-scrollbar px-4 sm:px-6 py-4 sm:py-6"
           >
             <div className="max-w-md sm:max-w-xl md:max-w-2xl mx-auto flex flex-col items-center gap-5 sm:gap-6 pb-24">
               {menuPages.map((page, index) => (
