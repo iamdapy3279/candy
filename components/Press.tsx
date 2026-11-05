@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { websiteContent } from "@/lib/content";
 
@@ -46,14 +45,6 @@ export default function Press() {
 
                 {/* Swiggy Rating */}
                 <div className="inline-flex items-center gap-1.5">
-                  <div className="w-4 h-4 relative shrink-0">
-                    <Image
-                      src="/icons/SwiggyAppIcon.png"
-                      alt="Swiggy"
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
                   <span className="font-sans font-bold text-[#FE5005] text-sm">
                     Swiggy
                   </span>
@@ -83,14 +74,6 @@ export default function Press() {
             <div className="w-[1px] h-4 bg-[#211714]/20" />
 
             <div className="flex items-center gap-1.5">
-              <div className="w-3.5 h-3.5 relative shrink-0">
-                <Image
-                  src="/icons/SwiggyAppIcon.png"
-                  alt="Swiggy"
-                  fill
-                  className="object-contain"
-                />
-              </div>
               <span className="font-sans font-bold text-[#FE5005] text-xs">
                 Swiggy
               </span>
