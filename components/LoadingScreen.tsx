@@ -1,24 +1,124 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Critical homepage assets required immediately before dismissing the loading screen
+const CRITICAL_IMAGES = [
+  "/Hero.webp",
+  "/Hero-mobile.webp",
+  "/LoadingImage.png",
+  "/Logo.png",
+  "/locations/Allipore_Location.webp",
+  "/locations/KolkataMonumentTransparent.png",
+  "/locations/SALTLAKELOCATIONPIC.webp",
+  "/dishes/Dish1.webp",
+  "/dishes/Dish2.webp",
+  "/dishes/Dish3.webp",
+  "/dishes/Dish4.webp",
+  "/dishes/Dish7.webp",
+  "/icons/swiggy.png",
+  "/icons/zomato.png",
+  "/icons/instagram.png",
+];
+
+// Secondary assets preloaded immediately in background so Menu & Gallery open with 0ms latency
+const SECONDARY_IMAGES = [
+  "/menu/page-01.webp",
+  "/menu/page-02.webp",
+  "/menu/page-03.webp",
+  "/menu/page-04.webp",
+  "/menu/page-05.webp",
+  "/menu/page-06.webp",
+  "/menu/page-07.webp",
+  "/menu/page-08.webp",
+  "/menu/page-09.webp",
+  "/menu/page-10.webp",
+  "/menu/page-11.webp",
+  "/menu/page-12.webp",
+  "/dishes/Dish5.webp",
+  "/dishes/Dish8.webp",
+  "/dishes/Dish9.webp",
+  "/dishes/Dish10.webp",
+  "/locations/Allipore_Location2.webp",
+  "/locations/Saltlake_Location2.webp",
+];
+
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const isFinishedRef = useRef(false);
 
   useEffect(() => {
     // Lock scroll during loading
     document.body.style.overflow = "hidden";
 
-    // Snappy, polished entrance that dissolves smoothly once initial assets mount (~850ms)
-    const exitTimer = setTimeout(() => {
-      setIsLoading(false);
-      document.body.style.overflow = "unset";
-    }, 850);
+    let loadedCount = 0;
+    const totalCritical = CRITICAL_IMAGES.length;
+
+    const finishLoading = () => {
+      if (isFinishedRef.current) return;
+      isFinishedRef.current = true;
+      setProgress(100);
+      setTimeout(() => {
+        setIsLoading(false);
+        document.body.style.overflow = "unset";
+      }, 250);
+    };
+
+    // Helper to preload and decode an image into GPU/browser memory cache
+    const preloadImage = (src: string): Promise<void> => {
+      return new Promise((resolve) => {
+        if (typeof window === "undefined") {
+          resolve();
+          return;
+        }
+        const img = new window.Image();
+        img.src = src;
+
+        const onFinish = () => {
+          if ("decode" in img) {
+            img.decode().then(resolve).catch(resolve);
+          } else {
+            resolve();
+          }
+        };
+
+        if (img.complete) {
+          onFinish();
+        } else {
+          img.onload = onFinish;
+          img.onerror = () => resolve();
+        }
+      });
+    };
+
+    // 1. Preload all critical images with real progress tracking
+    CRITICAL_IMAGES.forEach((src) => {
+      preloadImage(src).then(() => {
+        if (isFinishedRef.current) return;
+        loadedCount += 1;
+        const currentPercent = Math.min(Math.round((loadedCount / totalCritical) * 100), 98);
+        setProgress(currentPercent);
+        if (loadedCount >= totalCritical) {
+          finishLoading();
+        }
+      });
+    });
+
+    // 2. Preload secondary images (Menu pages, extra dishes) simultaneously in background
+    SECONDARY_IMAGES.forEach((src) => {
+      preloadImage(src);
+    });
+
+    // 3. Fallback safety timer: ensures loading screen dismisses even on poor 3G networks (max 2.4s)
+    const safetyTimer = setTimeout(() => {
+      finishLoading();
+    }, 2400);
 
     return () => {
-      clearTimeout(exitTimer);
+      clearTimeout(safetyTimer);
       document.body.style.overflow = "unset";
     };
   }, []);
@@ -30,13 +130,13 @@ export default function LoadingScreen() {
           key="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="fixed inset-0 z-[9999] bg-[#fbf9f8] flex flex-col items-center justify-center p-6 select-none pointer-events-auto"
         >
           {/* Centered Transparent Illustration Container */}
           <div className="relative w-full max-w-[500px] h-72 sm:h-80 md:h-[380px] flex items-center justify-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
               className="relative flex items-center justify-center w-72 h-72 sm:w-[360px] sm:h-[360px] md:w-[420px] md:h-[420px]"
@@ -52,12 +152,12 @@ export default function LoadingScreen() {
             </motion.div>
           </div>
 
-          {/* Minimal Elegant Gold Progress Bar */}
+          {/* Minimal Elegant Gold Progress Bar Bound to Real Asset Load Progress */}
           <div className="w-48 sm:w-60 h-[2.5px] bg-navy-800/10 rounded-full mt-4 sm:mt-6 overflow-hidden relative">
             <motion.div
               initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
               className="absolute left-0 top-0 bottom-0 bg-gold-500 rounded-full"
             />
           </div>

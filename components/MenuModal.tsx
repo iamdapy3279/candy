@@ -40,15 +40,15 @@ const categories = [
 
 // Pure signature dish images (no text, no overlays)
 const dishImages = [
-  "/dishes/Dish1.jpg",
-  "/dishes/Dish2.jpg",
-  "/dishes/Dish3.jpg",
-  "/dishes/Dish4.jpg",
-  "/dishes/Dish5.jpg",
-  "/dishes/Dish7.jpg",
-  "/dishes/Dish8.jpg",
-  "/dishes/Dish9.jpg",
-  "/dishes/Dish10.jpg",
+  "/dishes/Dish1.webp",
+  "/dishes/Dish2.webp",
+  "/dishes/Dish3.webp",
+  "/dishes/Dish4.webp",
+  "/dishes/Dish5.webp",
+  "/dishes/Dish7.webp",
+  "/dishes/Dish8.webp",
+  "/dishes/Dish9.webp",
+  "/dishes/Dish10.webp",
 ];
 
 export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
