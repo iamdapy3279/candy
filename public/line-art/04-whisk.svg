@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 240" fill="none">
-<g stroke="#35251D" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
- <path d="M81 113 C80 151 80 187 80 222 C80 232 88 236 95 230 C100 226 98 217 98 208 L97 113"/>
- <path d="M81 115 C37 91 26 52 43 25 C57 2 79 14 89 39 C103 12 126 3 141 27 C158 54 142 92 97 115"/>
- <path d="M89 115 C59 81 58 43 77 19 C85 9 91 20 89 39"/>
- <path d="M97 115 C126 81 128 43 109 19 C101 9 95 20 97 39"/>
- <path d="M81 115 C70 75 75 44 89 39 C103 44 108 75 97 115"/>
-</g></svg>
