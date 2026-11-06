@@ -41,17 +41,17 @@ export default function HomeClientShell({ instagramPosts }: HomeClientShellProps
       {/* 3. Our Locations (Placed directly below Our Philosophy) */}
       <Location />
 
-      {/* 4. Food & Drinks */}
+      {/* 4. Instagram Media Carousel (Placed directly below Our Locations) */}
+      <InstagramCarousel posts={instagramPosts} />
+
+      {/* 5. Food & Drinks */}
       <FoodAndDrinks />
 
-      {/* 5. In The Press (Infinite Auto-Scrolling Carousel) */}
+      {/* 6. In The Press (Infinite Auto-Scrolling Carousel) */}
       <Press />
 
-      {/* 6. Our Evolution */}
+      {/* 7. Our Evolution */}
       <Evolution />
-
-      {/* 7. Instagram Media Carousel (Dedicated visual coverflow, no heading/title, links to Instagram profile) */}
-      <InstagramCarousel posts={instagramPosts} />
 
       {/* 8. Footer */}
       <Footer />
@@ -61,3 +61,4 @@ export default function HomeClientShell({ instagramPosts }: HomeClientShellProps
     </main>
   );
 }
+
