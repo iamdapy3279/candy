@@ -26,7 +26,7 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
   const total = items.length;
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isVisibleInViewport, setIsVisibleInViewport] = useState(true);
 
@@ -46,7 +46,7 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Viewport intersection observer to pause videos & auto-scroll when out of screen
+  // Viewport intersection observer: starts playing before scroll reaches section
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -55,42 +55,54 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
       ([entry]) => {
         setIsVisibleInViewport(entry.isIntersecting);
       },
-      { threshold: 0.15 }
+      { rootMargin: "150px 0px", threshold: 0 }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  // Navigation handlers
+  // Navigation handlers with timer restart for smooth UX
   const handleNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % total);
+    if (autoPlayTimerRef.current) {
+      clearInterval(autoPlayTimerRef.current);
+      autoPlayTimerRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % total);
+      }, 2800);
+    }
   }, [total]);
 
   const handlePrev = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + total) % total);
+    if (autoPlayTimerRef.current) {
+      clearInterval(autoPlayTimerRef.current);
+      autoPlayTimerRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % total);
+      }, 2800);
+    }
   }, [total]);
 
-  // Automatic scrolling loop (resumes after user interaction)
+  // Dedicated continuous automatic scrolling loop
   useEffect(() => {
-    // Respect prefers-reduced-motion
+    // Respect user's system reduced-motion preference
     const prefersReducedMotion =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (prefersReducedMotion || isPaused || !isVisibleInViewport || total <= 1) {
+    if (prefersReducedMotion || isDragging || !isVisibleInViewport || total <= 1) {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
       return;
     }
 
     autoPlayTimerRef.current = setInterval(() => {
-      handleNext();
-    }, 3800);
+      setCurrentIndex((prev) => (prev + 1) % total);
+    }, 2800);
 
     return () => {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
     };
-  }, [isPaused, isVisibleInViewport, total, handleNext]);
+  }, [isDragging, isVisibleInViewport, total]);
 
   // Pointer & touch swipe handling
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -100,7 +112,7 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
       time: Date.now(),
     };
     hasDraggedRef.current = false;
-    setIsPaused(true);
+    setIsDragging(true);
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
@@ -118,8 +130,8 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
       const deltaX = e.clientX - pointerStartRef.current.x;
       const deltaTime = Date.now() - pointerStartRef.current.time;
 
-      // Detect deliberate swipe (> 40px or fast flick)
-      if (Math.abs(deltaX) > 40 || (Math.abs(deltaX) > 20 && deltaTime < 250)) {
+      // Detect deliberate swipe (> 35px or quick flick)
+      if (Math.abs(deltaX) > 35 || (Math.abs(deltaX) > 15 && deltaTime < 250)) {
         if (deltaX < 0) {
           handleNext();
         } else {
@@ -129,10 +141,7 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
     }
 
     pointerStartRef.current = null;
-    // Resume auto-scroll after a short delay
-    setTimeout(() => {
-      setIsPaused(false);
-    }, 1500);
+    setIsDragging(false);
   };
 
   // Safe Instagram profile click handler (blocked if user was dragging/swiping)
@@ -157,9 +166,7 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
     <section
       ref={containerRef}
       aria-label="Instagram Carousel"
-      className="w-full py-12 md:py-20 overflow-hidden relative select-none bg-cream-100 flex flex-col items-center justify-center"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      className="w-full py-12 md:py-20 overflow-hidden relative select-none bg-cream-100 flex flex-col items-center justify-center cursor-grab active:cursor-grabbing"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
