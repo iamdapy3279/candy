@@ -316,24 +316,6 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
                   />
                 )}
 
-                {/* Top-Left Profile Badge Pill (Exact 1:1 match to design reference) */}
-                <div className="absolute top-3.5 left-3.5 z-20 pointer-events-none select-none">
-                  <div className="bg-white/95 backdrop-blur-md rounded-full pl-1.5 pr-3.5 py-1 flex items-center gap-2 shadow-sm border border-white/40">
-                    {/* Circular avatar with "xy." matching "es." in reference */}
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-black text-white flex items-center justify-center text-[10px] sm:text-[11px] font-bold tracking-tighter">
-                      xy.
-                    </div>
-                    <div className="flex flex-col text-left">
-                      <span className="text-[11px] sm:text-xs font-semibold text-neutral-900 leading-tight">
-                        xybakehouse
-                      </span>
-                      <span className="text-[9px] sm:text-[10px] text-neutral-400 font-medium leading-tight">
-                        instagram
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Top-Right Instagram Logo Glyph (Exact match to reference) */}
                 <div className="absolute top-3.5 right-3.5 z-20 pointer-events-none select-none">
                   <div className="p-1 rounded-full drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]">
