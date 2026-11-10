@@ -301,8 +301,9 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
                 {item.type === "video" ? (
                   <VideoCard
                     src={item.src}
+                    poster={item.poster}
                     isActive={isActive && isVisibleInViewport}
-                    isNearActive={Math.abs(diff) <= 1}
+                    isNearActive={Math.abs(diff) <= 2}
                   />
                 ) : (
                   <Image
@@ -310,8 +311,8 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
                     alt="X&Y Instagram Feed"
                     fill
                     sizes="(max-width: 768px) 250px, 300px"
-                    priority={Math.abs(diff) <= 1}
-                    loading={Math.abs(diff) <= 1 ? "eager" : "lazy"}
+                    unoptimized
+                    priority
                     className="object-cover w-full h-full pointer-events-none select-none transition-transform duration-500 group-hover:scale-105"
                   />
                 )}
@@ -336,46 +337,79 @@ export default function InstagramCarousel({ posts = [] }: InstagramCarouselProps
 
 /**
  * Dedicated Video Card Component
- * Handles autoplay when active & in view, silent playback, looping, and preloading only for nearby cards.
+ * Handles autoplay when active & in view, silent playback, looping,
+ * iOS Safari strict autoplay compatibility, and instant fallback poster.
  */
 function VideoCard({
   src,
+  poster,
   isActive,
   isNearActive,
 }: {
   src: string;
+  poster?: string;
   isActive: boolean;
   isNearActive: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
+    // Explicitly enforce iOS WebKit properties for mobile autoplay
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+
     if (isActive) {
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Auto-play was prevented; videos are muted so this rarely occurs
-        });
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch(() => {
+            // Autoplay delayed or restricted (e.g. iOS Low Power Mode); poster displays cleanly
+            setIsPlaying(false);
+          });
       }
     } else {
       video.pause();
+      setIsPlaying(false);
     }
   }, [isActive]);
 
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      muted
-      loop
-      playsInline
-      controls={false}
-      preload={isNearActive ? "metadata" : "none"}
-      className="object-cover w-full h-full pointer-events-none select-none"
-    />
+    <div className="relative w-full h-full overflow-hidden bg-neutral-900">
+      {/* 1. Instant Zero-Latency Poster Fallback */}
+      {poster && (
+        <Image
+          src={poster}
+          alt="Video Preview"
+          fill
+          unoptimized
+          priority
+          className={`object-cover w-full h-full pointer-events-none select-none transition-opacity duration-500 ${
+            isPlaying ? "opacity-0" : "opacity-100"
+          }`}
+        />
+      )}
+
+      {/* 2. Seamless HTML5 Video */}
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        muted
+        autoPlay
+        loop
+        playsInline
+        controls={false}
+        preload={isNearActive ? "auto" : "metadata"}
+        onPlaying={() => setIsPlaying(true)}
+        className="absolute inset-0 object-cover w-full h-full pointer-events-none select-none"
+      />
+    </div>
   );
 }
 
