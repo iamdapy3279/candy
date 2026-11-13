@@ -205,7 +205,7 @@ export const websiteContent = {
       area: "SALT LAKE — SECTOR II",
       landmark: "Just a 6-minute drive from Central Park.",
       address: "CG-220, Ground Floor, Sector 2, Salt Lake City, Kolkata – 700091",
-      hours: "12:00 PM – 11:30 PM",
+      hours: "11:00 AM – 11:00 PM",
       phone: "+91 82409 68898",
       displayPhone: "+91 82409 68898",
       image: "/locations/SALTLAKELOCATIONPIC.webp",
