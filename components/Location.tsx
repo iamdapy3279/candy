@@ -4,65 +4,6 @@ import Image from "next/image";
 import { Clock, MapPin, Phone, ExternalLink } from "lucide-react";
 import { websiteContent } from "@/lib/content";
 
-// 1. Standalone Black Line-Art Dog Illustration (Pet-friendly for Salt Lake)
-// Strict requirement: No circular border, no badge, no background, no enclosing shape, no gold outline.
-function PetFriendlyIcon({ className = "w-14 h-14 sm:w-16 sm:h-16" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 64 64"
-      fill="none"
-      stroke="#211714"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-label="Pet-friendly"
-      role="img"
-    >
-      {/* Editorial Dog Line-Art Illustration */}
-      <path d="M14 26c1-2 3-3 6-3h5c2-3 5-5 8-5s6 2 7 5c2 0 4 1 5 3" />
-      <path d="M25 21c-1 3-1 8-3 12c-1 2-2 3-4 2s-2-3-1-6c1-3 4-8 8-8z" />
-      <circle cx="21" cy="22" r="1" fill="#211714" />
-      <path d="M14 26c0 1.5.5 2.5 1.5 2.5s2-1 2.5-2.5" />
-      <path d="M18 28.5c2 4 4 8 4 13v13.5c0 1 1 2 2.5 2h2c1 0 1.5-.5 1.5-1.5V42" />
-      <path d="M28 44v11c0 1 1 2 2.5 2h1.5" />
-      <path d="M35 24c6 1 12 3 15 8c2 3 2 6 1 10" />
-      <path d="M50 32c3-4 6-7 9-7c.5 3-1 7-4 10" />
-      <path d="M48 42c3 3 4 8 4 13c0 1-.5 2-2 2h-2c-1.5 0-2-1-2.5-2.5L43 45" />
-      <path d="M28 42c4-1 9-1 15 3" />
-    </svg>
-  );
-}
-
-// 2. Standalone Black Line-Art Valet / Car Illustration (Valet parking for Alipore)
-// Strict requirement: No circular border, no badge, no background, no enclosing shape, no gold outline.
-function ValetParkingIcon({ className = "w-14 h-14 sm:w-16 sm:h-16" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 64 64"
-      fill="none"
-      stroke="#211714"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-label="Valet parking"
-      role="img"
-    >
-      {/* Editorial Valet / Car Line-Art Illustration */}
-      <path d="M14 36l5-12h18l7 12" />
-      <path d="M28 24v12" />
-      <path d="M7 44h4a5 5 0 0 1 10 0h14a5 5 0 0 1 10 0h8c2 0 4-1.5 4-4v-3c0-2-1.5-3.5-3.5-3.5H44L37 23c-.8-1.2-2.2-2-3.8-2H18.5c-1.6 0-3 .8-3.8 2L8 33.5C6.5 34 5 35.5 5 37.5V40c0 2.2 1.8 4 4 4h-2z" />
-      <circle cx="16" cy="44" r="3.5" />
-      <circle cx="45" cy="44" r="3.5" />
-      <path d="M6 38h3" />
-      <path d="M55 37h3" />
-      <path d="M48 14v6m-3-3h6" />
-      <path d="M56 12l2 2m-2 0l2-2" />
-    </svg>
-  );
-}
-
 export default function Location() {
   const locations = websiteContent.locations;
 
@@ -113,39 +54,14 @@ export default function Location() {
                     : "lg:pr-4"
                 }`}
               >
-                {/* 1. Header with Landmark Description & Standalone Amenity Icon */}
-                <div className="flex items-start justify-between gap-4">
-                  {/* Left: Location Label & Refined Serif Landmark Description */}
-                  <div className="flex-1 pr-2">
-                    <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-2">
-                      {loc.area}
-                    </span>
-                    <h3 className="font-serif italic text-2xl sm:text-[26px] lg:text-[28px] font-medium text-navy-800 leading-snug">
-                      {loc.landmark}
-                    </h3>
-                  </div>
-
-                  {/* Right: Standalone Black Amenity Icon with descriptive text below */}
-                  <div
-                    className="shrink-0 flex flex-col items-center text-center pt-0.5"
-                    title={loc.amenity === "pet-friendly" ? "Pet Friendly" : "Offers Valet"}
-                  >
-                    {loc.amenity === "pet-friendly" ? (
-                      <>
-                        <PetFriendlyIcon className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[60px] lg:h-[60px]" />
-                        <span className="font-sans text-[10px] sm:text-[11px] uppercase tracking-wider text-charcoal-800/80 font-semibold mt-1.5 whitespace-nowrap">
-                          Pet Friendly
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <ValetParkingIcon className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[60px] lg:h-[60px]" />
-                        <span className="font-sans text-[10px] sm:text-[11px] uppercase tracking-wider text-charcoal-800/80 font-semibold mt-1.5 whitespace-nowrap">
-                          Offers Valet
-                        </span>
-                      </>
-                    )}
-                  </div>
+                {/* 1. Location Header */}
+                <div>
+                  <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-1.5">
+                    {loc.area}
+                  </span>
+                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-[32px] font-semibold text-navy-900 leading-snug">
+                    {loc.name}
+                  </h3>
                 </div>
 
                 {/* 2. Photography Card */}
