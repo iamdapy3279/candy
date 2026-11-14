@@ -79,27 +79,21 @@ export default function Philosophy() {
               {websiteContent.philosophy.tag}
             </span>
 
-            {/* Section Headline: Desktop perfect original, Mobile max 5 words */}
-            <h2 className="hidden md:block philosophy-heading text-[#293477] mb-6">
+            {/* Section Headline */}
+            <h2 className="philosophy-heading text-[#293477] text-3xl sm:text-4xl lg:text-5xl leading-tight mb-5 sm:mb-6">
               {websiteContent.philosophy.title}
             </h2>
-            <h2 className="md:hidden philosophy-heading text-[#293477] text-3xl leading-[1.08] mb-4">
-              {websiteContent.philosophy.mobileTitle || "Food Made With Pure Intention"}
-            </h2>
 
-            {/* Philosophy Narrative: Desktop perfect original, Mobile max 2 lines */}
-            <p className="hidden md:block philosophy-body leading-relaxed mb-8">
+            {/* Philosophy Narrative */}
+            <p className="philosophy-body text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 text-charcoal-800/90">
               {websiteContent.philosophy.description}
-            </p>
-            <p className="md:hidden philosophy-body text-base sm:text-lg leading-snug line-clamp-2 mb-6">
-              {websiteContent.philosophy.mobileDescription || "Authentic Italian cuisine crafted with passion, tradition, and the finest ingredients."}
             </p>
 
             <div className="h-[2px] w-16 bg-gold-500 mb-6" />
 
-            {/* Quote (kept identical for both mobile and desktop) */}
+            {/* Quote */}
             <p className="font-sans italic font-medium text-base sm:text-lg text-[#211714]">
-              “The best cafe is the one you never want to leave.”
+              {websiteContent.philosophy.quote || '“It started with the oven. The rest of the café grew around it.”'}
             </p>
           </motion.div>
 

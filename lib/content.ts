@@ -77,12 +77,13 @@ export const websiteContent = {
 
   philosophy: {
     tag: "OUR PHILOSOPHY",
-    title: "Food made with intention. A place built with love.",
-    mobileTitle: "Food Made With Pure Intention",
+    title: "Bakehouse first. Everything else follows.",
+    mobileTitle: "Bakehouse first. Everything else follows.",
     description:
-      "At the heart of our restaurant is a deep love for authentic Italian cuisine, crafted with passion, tradition, and the finest ingredients. We believe in creating more than just meals — we create experiences filled with warmth, soul, and the joy of sharing. Every dish tells a story, honoring culinary heritage while embracing the spirit of modern dining.",
+      "Everything at X&Y starts at the oven. The bread, the pastry and the base of every plate come from our bakehouse, and the bistro is built around it, not the other way round. We keep the menu focused and make what’s on it properly, so the food on your table is the food we’d want on ours.",
     mobileDescription:
-      "Authentic Italian cuisine crafted with passion, tradition, and the finest ingredients.",
+      "Everything at X&Y starts at the oven. The bread, the pastry and the base of every plate come from our bakehouse, and the bistro is built around it, not the other way round. We keep the menu focused and make what’s on it properly, so the food on your table is the food we’d want on ours.",
+    quote: '“It started with the oven. The rest of the café grew around it.”',
     image: "/locations/Allipore_Location.webp",
     badgeLabel: "X&Y BAKEHOUSE",
     values: [
