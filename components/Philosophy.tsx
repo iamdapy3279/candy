@@ -33,9 +33,9 @@ export default function Philosophy() {
                 <div className="relative w-full h-full overflow-hidden bg-cream-200">
                   <Image
                     src={websiteContent.philosophy.image}
-                    alt="X&Y Bakehouse Warm Interior"
+                    alt="X&Y Bakehouse - Chef at the oven"
                     fill
-                    className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                    className="object-cover object-[center_20%] transition-transform duration-700 hover:scale-105"
                     priority
                     sizes="(max-width: 768px) 100vw, 460px"
                   />

@@ -84,7 +84,7 @@ export const websiteContent = {
     mobileDescription:
       "Everything at X&Y starts at the oven. The bread, the pastry and the base of every plate come from our bakehouse, and the bistro is built around it, not the other way round. We keep the menu focused and make what’s on it properly, so the food on your table is the food we’d want on ours.",
     quote: '“It started with the oven. The rest of the café grew around it.”',
-    image: "/locations/Allipore_Location.webp",
+    image: "/Chef_BTS.webp",
     badgeLabel: "X&Y BAKEHOUSE",
     values: [
       {
