@@ -119,7 +119,7 @@ export const websiteContent = {
         description: "Spaghetti tossed in chilli oil, garlic and Parmesan, with nothing else on the plate.",
         quote: "CHILLI OIL TAKEN TO THE EDGE OF BURNT, WHERE THE SMOKE STARTS.",
         story: "The oil is cooked dark until it turns smoky and deep, then tossed through the pasta with garlic and finished with Parmesan. Three ingredients, and no room to hide behind any of them.",
-        image: "/dishes/Dish6.webp",
+        image: "/dishes/burnt-chilli-oil-spaghetti.webp",
         doodle: "/artwork/Doodle2.png",
       },
       {
@@ -129,7 +129,7 @@ export const websiteContent = {
         description: "Wok-tossed vegetables in a glossy, savoury sauce, over your choice of noodles or rice.",
         quote: "HIGH HEAT, BIG FLAVOUR, ONE BOWL.",
         story: "Everything hits the wok hot and fast, so the vegetables stay crisp and the sauce clings to every strand or grain. It’s a full meal in a single bowl, built for days when you want something that fills you up.",
-        image: "/dishes/MongolianBowl.webp",
+        image: "/dishes/mongolian-bowl.webp",
         doodle: "/artwork/Doodle5.png",
       },
       {
@@ -139,7 +139,7 @@ export const websiteContent = {
         description: "Creamy burrata on a blistered crust, in whichever base you choose.",
         quote: "PICK YOUR CRUST. THE BURRATA DOES THE REST.",
         story: "Choose Neapolitan, sourdough or sourdough thin crust. Burrata melts into the hot base and adds a cool, milky richness to every slice.",
-        image: "/dishes/Dish5.webp",
+        image: "/dishes/burrata-pizza.webp",
         doodle: "/artwork/Doodle1.png",
       },
       {
@@ -149,7 +149,7 @@ export const websiteContent = {
         description: "House-made tortilla chips piled high with queso, zesty salsa and refried beans.",
         quote: "BUILT TO BE SHARED. HARD TO ACTUALLY SHARE.",
         story: "The chips are made in-house, so they hold up under the queso instead of going soft. For more, add peri peri chicken and make it a meal.",
-        image: "/dishes/Dish1.webp",
+        image: "/dishes/loaded-nachos.webp",
         doodle: "/artwork/Doodle1.png",
       },
       {
@@ -159,7 +159,7 @@ export const websiteContent = {
         description: "Stewed apples, cinnamon and a hint of spice under a crumble topping.",
         quote: "ADD THE SOFTIE. WE WON’T JUDGE.",
         story: "The apples are stewed down with cinnamon and warming spice, then topped with a buttery crumble. Add a vanilla softie for ₹105 and you get hot and cold in the same spoonful.",
-        image: "/dishes/Dish9.webp",
+        image: "/dishes/apple-pie.webp",
         doodle: "/artwork/Doodle3.png",
       },
       {
@@ -169,7 +169,7 @@ export const websiteContent = {
         description: "Delicate choux filled with Venezuelan chocolate cream, under a shiny chocolate glaze.",
         quote: "A LIGHT SHELL. A DEEP CHOCOLATE CENTRE.",
         story: "The choux stays delicate, the cream is properly chocolatey, and the glaze gives it a clean snap on the first bite. It’s a small dessert that finishes a meal well.",
-        image: "/dishes/ChocolateEclair.webp",
+        image: "/dishes/chocolate-eclair.webp",
         doodle: "/artwork/Doodle3.png",
       },
       {
@@ -179,7 +179,7 @@ export const websiteContent = {
         description: "Dense, set slow and served plain.",
         quote: "WHEN SOMETHING IS RIGHT, IT DOESN’T NEED ANYTHING ELSE.",
         story: "Cooled overnight and never rushed, on a biscuit base that holds its ground. No toppings, no distractions.",
-        image: "/dishes/Dish2.webp",
+        image: "/dishes/new-york-cheesecake.webp",
         doodle: "/artwork/Doodle3.png",
       },
       {
@@ -189,7 +189,7 @@ export const websiteContent = {
         description: "A loaf made for people who want their bread to work as hard as they do.",
         quote: "BREAD THAT ACTUALLY KEEPS YOU GOING.",
         story: "Baked in our bakehouse for people who train, work long days or just want more from a slice. 62g protein per loaf without losing the crust or the flavour of a proper loaf.",
-        image: "/dishes/ProteinBread.webp",
+        image: "/dishes/protein-bread.webp",
         doodle: "/artwork/Doodle6.png",
       },
       {
@@ -199,7 +199,7 @@ export const websiteContent = {
         description: "The quiet backbone of the whole menu.",
         quote: "THE QUIET BACKBONE OF THE WHOLE MENU.",
         story: "Sourdough is the bun on our burgers, the pita under our dips, the ciabatta in our sandwiches and one of the bases for our pizzas. Slow-fermented dough gives each of them a better chew, a deeper flavour and a crust that stands up to whatever goes on it.",
-        image: "/dishes/Dish4.webp",
+        image: "/dishes/sourdoughs.webp",
         doodle: "/artwork/Doodle6.png",
       },
       {
@@ -209,7 +209,7 @@ export const websiteContent = {
         description: "Flaky, buttery and made fresh every day.",
         quote: "YOU’LL HEAR IT BEFORE YOU TASTE IT.",
         story: "Made before sunrise, with layers that shatter when you tear into them and a soft, honeyed centre. Best with a coffee, and good enough to eat plain.",
-        image: "/dishes/Croissants.webp",
+        image: "/dishes/croissants.webp",
         doodle: "/artwork/Doodle6.png",
       },
     ],
