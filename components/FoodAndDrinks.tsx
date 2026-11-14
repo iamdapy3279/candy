@@ -199,7 +199,7 @@ export default function FoodAndDrinks() {
 
               {/* Progress counter */}
               <span className="font-sans text-xs font-semibold text-navy-800 tracking-widest px-2 select-none">
-                0{currentIndex + 1} / 0{dishes.length}
+                {String(currentIndex + 1).padStart(2, "0")} / {String(dishes.length).padStart(2, "0")}
               </span>
 
               <button
@@ -244,12 +244,12 @@ export default function FoodAndDrinks() {
                   <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-0" />
 
                   <p className="font-sans italic text-xs sm:text-sm font-semibold text-navy-800 leading-relaxed mb-2.5">
-                    “{currentDish.doodleCaption ||
-                      "Every noodle is infused with house-smoked chilli oil and rich aromatics."}”
+                    “{currentDish.quote || ""}”
                   </p>
 
                   <p className="font-sans text-xs sm:text-sm text-charcoal-800/80 leading-relaxed">
-                    Every morning, our pastry and culinary team prepares each component from scratch using heirloom techniques and zero shortcuts.
+                    {currentDish.story ||
+                      "Every morning, our pastry and culinary team prepares each component from scratch using heirloom techniques and zero shortcuts."}
                   </p>
                 </div>
               </motion.div>
