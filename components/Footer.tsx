@@ -47,9 +47,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Giant Cut-Off Brand Name at Bottom */}
-      <div className="w-full flex justify-center mt-10 sm:mt-14 md:mt-16 overflow-hidden pointer-events-none select-none">
-        <span className="font-sans font-bold text-[17vw] sm:text-[18vw] leading-[0.72] tracking-[0.02em] uppercase text-[#E8DCCB] whitespace-nowrap translate-y-[22%] sm:translate-y-[25%] block">
+      {/* Giant Cut-Off Brand Name at Bottom (with generous left and right margins) */}
+      <div className="w-full max-w-[1400px] mx-auto px-8 sm:px-14 md:px-20 lg:px-28 flex justify-center mt-10 sm:mt-14 md:mt-16 overflow-hidden pointer-events-none select-none">
+        <span className="font-sans font-bold text-[10vw] sm:text-[10.5vw] md:text-[11vw] lg:text-[130px] xl:text-[145px] leading-[0.72] tracking-[0.03em] sm:tracking-[0.05em] uppercase text-[#E8DCCB] whitespace-nowrap translate-y-[22%] sm:translate-y-[25%] block text-center">
           X &amp; Y Cafe
         </span>
       </div>
