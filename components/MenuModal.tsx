@@ -40,15 +40,16 @@ const categories = [
 
 // Pure signature dish images (no text, no overlays)
 const dishImages = [
-  "/dishes/Dish1.webp",
-  "/dishes/Dish2.webp",
-  "/dishes/Dish3.webp",
-  "/dishes/Dish4.webp",
-  "/dishes/Dish5.webp",
-  "/dishes/Dish7.webp",
-  "/dishes/Dish8.webp",
-  "/dishes/Dish9.webp",
-  "/dishes/Dish10.webp",
+  "/dishes/burnt-chilli-oil-spaghetti.webp",
+  "/dishes/mongolian-bowl.webp",
+  "/dishes/burrata-pizza.webp",
+  "/dishes/loaded-nachos.webp",
+  "/dishes/apple-pie.webp",
+  "/dishes/chocolate-eclair.webp",
+  "/dishes/new-york-cheesecake.webp",
+  "/dishes/protein-bread.webp",
+  "/dishes/sourdoughs.webp",
+  "/dishes/croissants.webp",
 ];
 
 export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
