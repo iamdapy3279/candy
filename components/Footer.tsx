@@ -5,7 +5,7 @@ import Link from "next/link";
 import { websiteContent } from "@/lib/content";
 
 export default function Footer() {
-  const instagramUrl = websiteContent.footer?.instagram?.url || "https://www.instagram.com";
+  const instagramUrl = websiteContent.footer?.instagram?.url || "https://www.instagram.com/xandy.india/";
 
   return (
     <footer

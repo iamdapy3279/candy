@@ -347,8 +347,8 @@ export const websiteContent = {
     tagline: "Where every table is yours.",
     copyright: `© ${new Date().getFullYear()} X&Y Bakehouse & Bistro. All rights reserved.`,
     instagram: {
-      handle: "@xybakehouse",
-      url: "https://instagram.com",
+      handle: "@xandy.india",
+      url: "https://www.instagram.com/xandy.india/",
       icon: "/icons/instagram.png",
     },
     deliveryPartners: [

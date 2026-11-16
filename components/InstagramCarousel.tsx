@@ -9,7 +9,7 @@ import type { InstagramMediaItem } from "@/lib/getInstagramPosts";
  * Single configurable Instagram profile URL
  * Clicking any item in the carousel opens this profile in a new tab.
  */
-export const INSTAGRAM_PROFILE_URL = "https://www.instagram.com/xybakehouse";
+export const INSTAGRAM_PROFILE_URL = "https://www.instagram.com/xandy.india/";
 
 interface InstagramCarouselProps {
   posts?: InstagramMediaItem[];
