@@ -355,12 +355,12 @@ export const websiteContent = {
       {
         name: "Swiggy",
         icon: "/icons/swiggy.png",
-        url: "https://www.swiggy.com",
+        url: "https://www.swiggy.com/city/kolkata/x-and-y-bakehouse-konark-garden-alipore-rest826056",
       },
       {
         name: "Zomato",
         icon: "/icons/zomato.png",
-        url: "https://www.zomato.com",
+        url: "https://www.zomato.com/kolkata/x-y-bakehouse-bistro-1-alipore",
       },
     ],
   },

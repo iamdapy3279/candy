@@ -35,7 +35,7 @@ export default function Footer() {
             Instagram
           </a>
           <a
-            href="https://www.zomato.com"
+            href="https://www.zomato.com/kolkata/x-y-bakehouse-bistro-1-alipore"
             target="_blank"
             rel="noopener noreferrer"
             className="px-3.5 py-1.5 sm:px-4 sm:py-1.5 rounded-full border border-[#211714]/25 hover:border-[#211714] bg-transparent hover:bg-[#211714] text-[#211714] hover:text-white font-sans text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all duration-200 active:scale-95 cursor-pointer"
@@ -43,7 +43,7 @@ export default function Footer() {
             Zomato
           </a>
           <a
-            href="https://www.swiggy.com"
+            href="https://www.swiggy.com/city/kolkata/x-and-y-bakehouse-konark-garden-alipore-rest826056"
             target="_blank"
             rel="noopener noreferrer"
             className="px-3.5 py-1.5 sm:px-4 sm:py-1.5 rounded-full border border-[#211714]/25 hover:border-[#211714] bg-transparent hover:bg-[#211714] text-[#211714] hover:text-white font-sans text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all duration-200 active:scale-95 cursor-pointer"

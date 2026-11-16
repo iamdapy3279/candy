@@ -33,7 +33,13 @@ export default function Press() {
               <div className="hidden sm:inline-flex items-center gap-4 pl-1">
                 <div className="w-[1px] h-6 bg-[#211714]/20" />
                 {/* Zomato Rating */}
-                <div className="inline-flex items-center gap-2">
+                <a
+                  href="https://www.zomato.com/kolkata/x-y-bakehouse-bistro-1-alipore"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="View X&Y on Zomato"
+                  className="inline-flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+                >
                   <div className="relative w-5 h-5 shrink-0">
                     <Image
                       src="/icons/zomato.png"
@@ -48,12 +54,18 @@ export default function Press() {
                   <span className="font-sans font-bold text-navy-900 text-sm">
                     4.4 / 5
                   </span>
-                </div>
+                </a>
 
                 <div className="w-[1px] h-5 bg-[#211714]/20" />
 
                 {/* Swiggy Rating */}
-                <div className="inline-flex items-center gap-2">
+                <a
+                  href="https://www.swiggy.com/city/kolkata/x-and-y-bakehouse-konark-garden-alipore-rest826056"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="View X&Y on Swiggy"
+                  className="inline-flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+                >
                   <div className="relative w-5 h-5 shrink-0">
                     <Image
                       src="/icons/swiggy.png"
@@ -68,7 +80,7 @@ export default function Press() {
                   <span className="font-sans font-bold text-navy-900 text-sm">
                     4.4 / 5
                   </span>
-                </div>
+                </a>
               </div>
             </div>
 
@@ -79,7 +91,13 @@ export default function Press() {
 
           {/* Mobile Ratings Badges (visible under 640px) */}
           <div className="flex sm:hidden items-center gap-3 pt-1 border-t border-[#211714]/10">
-            <div className="flex items-center gap-1.5">
+            <a
+              href="https://www.zomato.com/kolkata/x-y-bakehouse-bistro-1-alipore"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View X&Y on Zomato"
+              className="flex items-center gap-1.5 hover:opacity-80 transition-opacity cursor-pointer"
+            >
               <div className="relative w-4 h-4 shrink-0">
                 <Image
                   src="/icons/zomato.png"
@@ -94,11 +112,17 @@ export default function Press() {
               <span className="font-sans font-bold text-navy-900 text-xs">
                 4.4 / 5
               </span>
-            </div>
+            </a>
 
             <div className="w-[1px] h-4 bg-[#211714]/20" />
 
-            <div className="flex items-center gap-1.5">
+            <a
+              href="https://www.swiggy.com/city/kolkata/x-and-y-bakehouse-konark-garden-alipore-rest826056"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View X&Y on Swiggy"
+              className="flex items-center gap-1.5 hover:opacity-80 transition-opacity cursor-pointer"
+            >
               <div className="relative w-4 h-4 shrink-0">
                 <Image
                   src="/icons/swiggy.png"
@@ -113,7 +137,7 @@ export default function Press() {
               <span className="font-sans font-bold text-navy-900 text-xs">
                 4.4 / 5
               </span>
-            </div>
+            </a>
           </div>
         </div>
       </div>

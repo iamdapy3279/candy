@@ -260,7 +260,7 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
           >
             {/* Swiggy Button */}
             <a
-              href="https://www.swiggy.com"
+              href="https://www.swiggy.com/city/kolkata/x-and-y-bakehouse-konark-garden-alipore-rest826056"
               target="_blank"
               rel="noopener noreferrer"
               title="Order on Swiggy"
@@ -277,7 +277,7 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
 
             {/* Zomato Button */}
             <a
-              href="https://www.zomato.com"
+              href="https://www.zomato.com/kolkata/x-y-bakehouse-bistro-1-alipore"
               target="_blank"
               rel="noopener noreferrer"
               title="Order on Zomato"
