@@ -11,12 +11,18 @@ export default function Footer() {
       aria-label="Footer"
       className="bg-cream-100 pt-14 sm:pt-16 md:pt-20 pb-8 sm:pb-12 md:pb-14 select-none transition-colors w-full flex flex-col items-center justify-between"
     >
-      {/* Top Centered Content: Description Text & Tiny Buttons */}
+      {/* Top Centered Content: Tag, Headline & Tiny Buttons */}
       <div className="max-w-2xl mx-auto px-6 flex flex-col items-center text-center relative z-10">
-        {/* Brand Description */}
-        <p className="font-sans text-xs sm:text-sm text-charcoal-800/80 leading-relaxed max-w-xl mx-auto">
-          Where every table is yours. An artisanal bakehouse &amp; bistro in Kolkata crafted for mornings, lingering lunches, and slow evenings.
-        </p>
+        {/* Eyebrow Tag */}
+        <span className="font-sans text-xs sm:text-[13px] tracking-[0.25em] uppercase text-gold-700 font-semibold block mb-2 sm:mb-3">
+          FOLLOW YOUR HEART
+        </span>
+
+        {/* Headline */}
+        <h2 className="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#211714] tracking-tight leading-[1.18] max-w-md sm:max-w-lg text-center">
+          Coffee tastes better <br className="hidden sm:inline" />
+          with two.
+        </h2>
 
         {/* Tiny Buttons in Words (Instagram, Zomato, Swiggy) */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mt-6 sm:mt-7">
@@ -47,7 +53,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Full Brand Name at Bottom (Entire text fully visible, not cut off) */}
+      {/* Full Brand Name at Bottom */}
       <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 md:px-16 flex justify-center mt-10 sm:mt-12 md:mt-14 pointer-events-none select-none">
         <span className="font-sans font-bold text-[9vw] sm:text-[9.5vw] md:text-[10vw] lg:text-[120px] xl:text-[135px] leading-none tracking-[0.03em] sm:tracking-[0.05em] uppercase text-[#E8DCCB] whitespace-nowrap block text-center">
           X &amp; Y Cafe
