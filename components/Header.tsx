@@ -80,9 +80,15 @@ export default function Header() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    target={item.isExternal ? "_blank" : undefined}
-                    rel={item.isExternal ? "noopener noreferrer" : undefined}
-                    onClick={() => setMenuOpen(false)}
+                    target={item.isExternal && item.label !== "MENU" ? "_blank" : undefined}
+                    rel={item.isExternal && item.label !== "MENU" ? "noopener noreferrer" : undefined}
+                    onClick={(e) => {
+                      setMenuOpen(false);
+                      if (item.label === "MENU") {
+                        e.preventDefault();
+                        window.dispatchEvent(new CustomEvent("open-menu-modal"));
+                      }
+                    }}
                     className={`font-sans text-xs tracking-[0.22em] uppercase font-semibold py-3 px-2 rounded-lg flex items-center justify-between transition-colors border-b border-cream-200/80 last:border-b-0 hover:bg-cream-200/50 ${
                       item.isHighlighted
                         ? "text-gold-700 font-bold"
