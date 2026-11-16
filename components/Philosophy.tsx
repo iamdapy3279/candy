@@ -92,7 +92,7 @@ export default function Philosophy() {
             <div className="h-[2px] w-16 bg-gold-500 mb-6" />
 
             {/* Quote */}
-            <p className="font-sans italic font-medium text-base sm:text-lg text-[#211714]">
+            <p className="font-sans italic font-medium text-base sm:text-lg text-gold-500">
               {websiteContent.philosophy.quote || '“It started with the oven. The rest of the café grew around it.”'}
             </p>
           </motion.div>

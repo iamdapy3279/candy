@@ -105,7 +105,7 @@ export default function Evolution() {
 
                       {/* Quote (kept identical for both mobile and desktop) */}
                       {milestone.quote && (
-                        <p className="font-sans italic text-xs sm:text-sm text-[#293477]/80 font-medium mt-2.5">
+                        <p className="font-sans italic text-xs sm:text-sm text-gold-500 font-medium mt-2.5">
                           {milestone.quote}
                         </p>
                       )}

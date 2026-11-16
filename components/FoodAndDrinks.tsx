@@ -243,7 +243,7 @@ export default function FoodAndDrinks() {
                 <div className="w-full">
                   <div className="h-[2px] w-14 bg-gold-500 mb-6 mx-0" />
 
-                  <p className="font-sans italic text-xs sm:text-sm font-semibold text-navy-800 leading-relaxed mb-2.5">
+                  <p className="font-sans italic text-xs sm:text-sm font-semibold text-gold-500 leading-relaxed mb-2.5">
                     “{currentDish.quote || ""}”
                   </p>
 
