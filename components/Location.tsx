@@ -8,36 +8,21 @@ export default function Location() {
   const locations = websiteContent.locations;
 
   return (
-    <section id="locations" className="py-12 md:py-16 bg-cream-100 relative overflow-hidden">
+    <section id="locations" className="py-10 sm:py-14 md:py-16 bg-cream-100 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        {/* Section Heading & Kolkata Architectural Illustration (Preserved) */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 md:mb-14 pb-6 border-b border-[#211714]/10 gap-6 lg:gap-8">
-          {/* Kolkata Architectural Illustration (Above header on mobile, spanning full width with breathing room, centered) */}
-          <div className="order-1 lg:order-2 w-full flex justify-center items-center my-3 mb-6 sm:my-5 sm:mb-8 lg:my-0 lg:w-auto lg:ml-auto shrink-0">
-            <div className="relative w-full max-w-[480px] sm:max-w-[560px] lg:max-w-[640px] xl:max-w-[680px] aspect-[1024/436] pointer-events-none select-none">
-              <Image
-                src="/locations/KolkataMonumentTransparent.png"
-                alt="Two neighbourhoods in Kolkata — Salt Lake and Alipore"
-                fill
-                className="object-contain object-center lg:object-right-bottom"
-                priority
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 560px, 680px"
-              />
-            </div>
-          </div>
-
-          {/* Section Titles */}
-          <div className="order-2 lg:order-1 shrink-0 max-w-sm lg:max-w-md">
-            <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-2 sm:mb-3">
+        {/* Section Heading */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-10 md:mb-12 pb-5 sm:pb-6 border-b border-[#211714]/10 gap-3 sm:gap-6">
+          <div>
+            <span className="font-sans text-xs tracking-[0.22em] uppercase text-gold-700 font-semibold block mb-1.5 sm:mb-2">
               FIND OUR BAKEHOUSES
             </span>
             <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#293477] tracking-tight leading-[1.1]">
               Our Locations
             </h2>
-            <p className="font-sans text-xs sm:text-sm text-charcoal-800/80 mt-2 sm:mt-3 leading-relaxed">
-              Two neighbourhoods in Kolkata. The same X&amp;Y experience.
-            </p>
           </div>
+          <p className="font-sans text-xs sm:text-sm text-charcoal-800/80 leading-relaxed max-w-md sm:text-right">
+            Two neighbourhoods in Kolkata. The same X&amp;Y experience.
+          </p>
         </div>
 
         {/* 2-Column Locations Layout: Side-by-Side on Desktop, Distinct with Subtle Separators */}

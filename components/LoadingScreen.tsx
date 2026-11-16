@@ -11,7 +11,6 @@ const CRITICAL_IMAGES = [
   "/LoadingImage.png",
   "/Logo.png",
   "/locations/Allipore_Location.webp",
-  "/locations/KolkataMonumentTransparent.png",
   "/locations/SALTLAKELOCATIONPIC.webp",
   "/dishes/burnt-chilli-oil-spaghetti.webp",
   "/dishes/mongolian-bowl.webp",
