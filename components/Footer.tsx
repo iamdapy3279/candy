@@ -7,6 +7,12 @@ export default function Footer() {
   const instagramUrl =
     websiteContent.footer?.instagram?.url || "https://www.instagram.com/xandy.india/";
 
+  const handleOpenMenu = () => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("open-menu-modal"));
+    }
+  };
+
   return (
     <footer
       aria-label="Footer"
@@ -54,12 +60,13 @@ export default function Footer() {
               Philosophy
             </Link>
 
-            <a
-              href="#locations"
-              className="inline-block bg-[#211714] hover:bg-gold-500 hover:text-[#211714] text-white font-serif font-bold text-base lg:text-[17px] px-6 py-2.5 transition-colors duration-200 cursor-pointer shadow-xs"
+            <button
+              type="button"
+              onClick={handleOpenMenu}
+              className="inline-flex items-center justify-center rounded-full bg-[#211714] text-cream-100 hover:bg-gold-500 hover:text-navy-950 px-6 py-2.5 sm:px-7 sm:py-3 font-sans text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300 shadow-sm active:scale-95 cursor-pointer"
             >
               Order Catering
-            </a>
+            </button>
           </div>
         </div>
 
@@ -107,12 +114,13 @@ export default function Footer() {
 
           {/* Order Catering Button */}
           <div className="w-full flex justify-center pt-1">
-            <a
-              href="#locations"
-              className="inline-block bg-[#211714] hover:bg-gold-500 hover:text-[#211714] text-white font-serif font-bold text-base px-8 py-2.5 transition-colors duration-200 cursor-pointer shadow-xs text-center"
+            <button
+              type="button"
+              onClick={handleOpenMenu}
+              className="inline-flex items-center justify-center rounded-full bg-[#211714] text-cream-100 hover:bg-gold-500 hover:text-navy-950 px-8 py-3 font-sans text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300 shadow-sm active:scale-95 cursor-pointer text-center"
             >
               Order Catering
-            </a>
+            </button>
           </div>
         </div>
       </div>
