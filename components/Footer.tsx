@@ -10,17 +10,17 @@ export default function Footer() {
   return (
     <footer
       aria-label="Footer"
-      className="bg-cream-100 py-6 sm:py-8 border-t border-[#211714]/15 select-none transition-colors"
+      className="bg-cream-100 py-6 sm:py-8 select-none transition-colors w-full"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        {/* Desktop View: Left Instagram Icon, Right Links & Order Catering Button */}
-        <div className="hidden md:flex items-center justify-between gap-6">
-          {/* Left: Instagram Icon */}
+      <div className="w-full px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20">
+        {/* Desktop / Tablet View (Spread edge-to-edge: Instagram on far left, Links & Button on far right) */}
+        <div className="hidden sm:flex items-center justify-between w-full gap-6">
+          {/* Far Left: Instagram Icon */}
           <a
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram"
+            aria-label="Follow us on Instagram"
             className="w-9 h-9 rounded-full bg-[#211714] text-white hover:bg-gold-500 hover:text-[#211714] flex items-center justify-center transition-colors duration-200 active:scale-95 cursor-pointer shrink-0"
           >
             <svg
@@ -39,37 +39,19 @@ export default function Footer() {
             </svg>
           </a>
 
-          {/* Right: Editorial Links & Order Catering Button */}
-          <div className="flex items-center gap-6 lg:gap-8">
-            <Link
-              href="#philosophy"
-              className="font-serif font-bold text-base lg:text-[17px] text-[#211714] hover:text-gold-700 transition-colors tracking-tight"
-            >
-              Join the Flock
-            </Link>
-            <Link
-              href="#evolution"
-              className="font-serif font-bold text-base lg:text-[17px] text-[#211714] hover:text-gold-700 transition-colors tracking-tight"
-            >
-              Blogs
-            </Link>
+          {/* Far Right: Location, Philosophy & Order Catering */}
+          <div className="flex items-center gap-6 lg:gap-8 shrink-0">
             <Link
               href="#locations"
               className="font-serif font-bold text-base lg:text-[17px] text-[#211714] hover:text-gold-700 transition-colors tracking-tight"
             >
-              Contact Us
+              Location
             </Link>
             <Link
-              href="#press"
+              href="#philosophy"
               className="font-serif font-bold text-base lg:text-[17px] text-[#211714] hover:text-gold-700 transition-colors tracking-tight"
             >
-              Press
-            </Link>
-            <Link
-              href="#"
-              className="font-serif font-bold text-base lg:text-[17px] text-[#211714] hover:text-gold-700 transition-colors tracking-tight"
-            >
-              Accessibility
+              Philosophy
             </Link>
 
             <a
@@ -81,14 +63,14 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Mobile View: Centered Instagram, Wrapped Links, Order Catering Button */}
-        <div className="flex md:hidden flex-col items-center gap-5 py-2">
+        {/* Mobile View: Centered Instagram, Links & Button */}
+        <div className="flex sm:hidden flex-col items-center gap-5 py-2">
           {/* Centered Instagram Icon */}
           <a
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram"
+            aria-label="Follow us on Instagram"
             className="w-9 h-9 rounded-full bg-[#211714] text-white hover:bg-gold-500 hover:text-[#211714] flex items-center justify-center transition-colors duration-200 active:scale-95 cursor-pointer shrink-0"
           >
             <svg
@@ -108,44 +90,26 @@ export default function Footer() {
           </a>
 
           {/* Links Row */}
-          <div className="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-6 gap-y-2.5 text-center">
-            <Link
-              href="#philosophy"
-              className="font-serif font-bold text-sm sm:text-base text-[#211714] hover:text-gold-700 transition-colors"
-            >
-              Join the Flock
-            </Link>
-            <Link
-              href="#evolution"
-              className="font-serif font-bold text-sm sm:text-base text-[#211714] hover:text-gold-700 transition-colors"
-            >
-              Blogs
-            </Link>
+          <div className="flex items-center justify-center gap-6 text-center">
             <Link
               href="#locations"
-              className="font-serif font-bold text-sm sm:text-base text-[#211714] hover:text-gold-700 transition-colors"
+              className="font-serif font-bold text-base text-[#211714] hover:text-gold-700 transition-colors"
             >
-              Contact Us
+              Location
             </Link>
             <Link
-              href="#press"
-              className="font-serif font-bold text-sm sm:text-base text-[#211714] hover:text-gold-700 transition-colors"
+              href="#philosophy"
+              className="font-serif font-bold text-base text-[#211714] hover:text-gold-700 transition-colors"
             >
-              Press
-            </Link>
-            <Link
-              href="#"
-              className="font-serif font-bold text-sm sm:text-base text-[#211714] hover:text-gold-700 transition-colors"
-            >
-              Accessibility
+              Philosophy
             </Link>
           </div>
 
           {/* Order Catering Button */}
-          <div className="w-full flex justify-center sm:justify-end pt-1">
+          <div className="w-full flex justify-center pt-1">
             <a
               href="#locations"
-              className="inline-block bg-[#211714] hover:bg-gold-500 hover:text-[#211714] text-white font-serif font-bold text-base px-7 py-2.5 transition-colors duration-200 cursor-pointer shadow-xs text-center"
+              className="inline-block bg-[#211714] hover:bg-gold-500 hover:text-[#211714] text-white font-serif font-bold text-base px-8 py-2.5 transition-colors duration-200 cursor-pointer shadow-xs text-center"
             >
               Order Catering
             </a>
